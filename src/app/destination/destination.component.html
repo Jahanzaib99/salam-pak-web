@@ -1,562 +1,677 @@
 <!-- ============================
         Slider
     ============================== -->
-<section
-  id="page-title"
-  class="page-title-layout4 text-center bg-overlay bg-parallax slider"
->
-  <div class="bg-img">
-    <img
-      class="header-image"
-      [src]="location?.photos[0] || 'assets/images/backgrounds/what-to-do.png'"
-      onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
-      alt="background"
-    />
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-8 page">
-        <div class="slide__content">
-          <h2 class="slide__title">{{ location.alias }}</h2>
-          <p class="slide__desc">
-            {{ location.description }}
-          </p>
-
-          <!-- <a href="#" class="fa fa-facebook-f"></a> -->
-          <!-- <a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook-f"></i></a>
-          <a href="https://www.twitter.com" target="_blank"><i class="fa fa-twitter"></i></a>
-          <a href="https://www.google.com" target="_blank"><i class="fa fa-google"></i></a> -->
-
-          <div class="details-review">
-            <!-- <span class="stars align-listing">
-              <span [ngStyle]="{ width: getRatingStars(location?.ratingAverage || 0) }"></span>
-            </span>
-
-            <span class="stars2" style="display: inline-table">
-              <span [ngStyle]="{ width: getRatingStars(5.0) }"></span>
-            </span> -->
-
-            <!-- <span class="font-regular">({{ location.reviews ? location.reviews : 0 }}) reviews</span> -->
-
-            <!-- <share-buttons
-              [theme]="'material-dark'"
-              [include]="['facebook', 'twitter', 'linkedin']"
-              [show]="9"
-              [size]="1"
-              [url]="redirectUrl"
-              [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
-              [autoSetMeta]="false"
-            >
-            </share-buttons> -->
-          </div>
-
-          <a
-            *ngIf="!isInPlan()"
-            (click)="addToPlan()"
-            style="cursor: pointer !important"
-            class="btn btn__primary btn__hover2 mr-30 planbtn"
-            ><i class="fa fa-plus"></i>{{ planBtnText }}</a
-          >
-
-          <a
-            *ngIf="isInPlan()"
-            (click)="removeFromPlan()"
-            class="btn btn__primary btn__hover2 mr-30"
-            style="
-              width: 180px !important;
-              background-color: #ff5959 !important;
-              border-color: #ff5959 !important;
-            "
-            ><i class="fa fa-minus"></i>remove from plan</a
-          >
-
-          <a
-            *ngIf="!isInWishlist()"
-            (click)="addToWishlist()"
-            class="btn btn__white"
-            style="cursor: pointer !important"
-            ><i class="fa fa-heart"></i>add to wishlist</a
-          >
-          <a
-            *ngIf="isInWishlist()"
-            (click)="removeFromWishlist()"
-            class="btn btn__white"
-            style="
-              width: 180px !important;
-              background-color: #ff5959 !important;
-              border-color: #ff5959 !important;
-            "
-            ><i class="fa fa-heart"></i>remove from wishlist</a
-          >
-        </div>
-        <!-- /.slide-content -->
-      </div>
-      <!-- /.col-lg-8 -->
-    </div>
-    <!-- /.row -->
-  </div>
-
-  <!-- /.container -->
-</section>
-<!-- /.page-title -->
-<div>
-  <a
-    *ngIf="weatherApi"
-    class="weatherwidget-io"
-    href="{{ weatherApi }}"
-    data-label_2="WEATHER"
-    data-font="Roboto"
-    data-icons="Climacons Animated"
-    data-theme="weather_one"
-    >WEATHER</a
+    <section
+    id="page-title"
+    class="page-title-layout4 text-center bg-overlay bg-parallax slider"
   >
-</div>
-<!-- ========================
-              Services
-          =========================== -->
-<section id="services" class="services">
-  <div class="container">
-    <div class="row heading heading-2 mb-40">
-      <div class="col-sm-12 col-md-8 col-lg-8 mx-auto text-center">
-        <p [innerHTML]="sanitizeHtml(location.longDescription)" class="heading__desc">
-        </p>
-      </div>
-      <!-- /.col-lg-5 -->
-      <!-- <div class="col-sm-12 col-md-12 col-lg-6">
-        <img
-          src="{{ location.photos[0] }}"
-          onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
-        />
-      </div> -->
-      <!-- /.col-lg-6 -->
+    <div class="bg-img">
+      <img
+        class="header-image"
+        [src]="location?.photos[0] || 'assets/images/backgrounds/what-to-do.png'"
+        onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
+        alt="background"
+      />
     </div>
-    <!-- /.row -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8 page">
+          <div class="slide__content">
+            <h2 class="slide__title">{{ location.alias }}</h2>
+            <p class="slide__desc">
+              {{ location.description }}
+            </p>
+  
+            <!-- <a href="#" class="fa fa-facebook-f"></a> -->
+            <!-- <a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook-f"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.google.com" target="_blank"><i class="fa fa-google"></i></a> -->
+  
+            <div class="details-review">
+              <!-- <span class="stars align-listing">
+                <span [ngStyle]="{ width: getRatingStars(location?.ratingAverage || 0) }"></span>
+              </span>
+  
+              <span class="stars2" style="display: inline-table">
+                <span [ngStyle]="{ width: getRatingStars(5.0) }"></span>
+              </span> -->
+  
+              <!-- <span class="font-regular">({{ location.reviews ? location.reviews : 0 }}) reviews</span> -->
+  
+              <!-- <share-buttons
+                [theme]="'material-dark'"
+                [include]="['facebook', 'twitter', 'linkedin']"
+                [show]="9"
+                [size]="1"
+                [url]="redirectUrl"
+                [image]="'https://www.eduforbetterment.com/wp-content/uploads/2020/08/qrcode.jpg'"
+                [autoSetMeta]="false"
+              >
+              </share-buttons> -->
+            </div>
+  
+            <a
+              *ngIf="!isInPlan()"
+              (click)="addToPlan()"
+              style="cursor: pointer !important"
+              class="btn btn__primary btn__hover2 mr-30 planbtn"
+              ><i class="fa fa-plus"></i>{{ planBtnText }}</a
+            >
+  
+            <a
+              *ngIf="isInPlan()"
+              (click)="removeFromPlan()"
+              class="btn btn__primary btn__hover2 mr-30"
+              style="
+                width: 180px !important;
+                background-color: #ff5959 !important;
+                border-color: #ff5959 !important;
+              "
+              ><i class="fa fa-minus"></i>remove from plan</a
+            >
+  
+            <a
+              *ngIf="!isInWishlist()"
+              (click)="addToWishlist()"
+              class="btn btn__white"
+              style="cursor: pointer !important"
+              ><i class="fa fa-heart"></i>add to wishlist</a
+            >
+            <a
+              *ngIf="isInWishlist()"
+              (click)="removeFromWishlist()"
+              class="btn btn__white"
+              style="
+                width: 180px !important;
+                background-color: #ff5959 !important;
+                border-color: #ff5959 !important;
+              "
+              ><i class="fa fa-heart"></i>remove from wishlist</a
+            >
+          </div>
+          <!-- /.slide-content -->
+        </div>
+        <!-- /.col-lg-8 -->
+      </div>
+      <!-- /.row -->
+    </div>
+  
+    <!-- /.container -->
+  </section>
+  <!-- /.page-title -->
+  <div>
+    <a
+      *ngIf="weatherApi"
+      class="weatherwidget-io"
+      href="{{ weatherApi }}"
+      data-label_2="WEATHER"
+      data-font="Roboto"
+      data-icons="Climacons Animated"
+      data-theme="weather_one"
+      >WEATHER</a
+    >
   </div>
-</section>
-<!-- /.Services -->
-
-<!--======-->
-<div class="container-fluid seasons">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <span class="heading__subtitle">{{ location.slug }}</span>
-        <h2 class="heading__title">Images</h2>
-      </div>
-      <div class="col-md-4 show-all-btn">
-        <!-- <a>show all<i class="icon-arrow-right"></i></a> -->
-      </div>
-    </div>
-    <div class="masonry-wrapper masonry-style-2">
-      <div class="masonry-container" data-column-width=".col-md-4">
-        <div
-          *ngIf="location?.photos[0]"
-          class="masonry-item col-md-8 col-sm-6 col-xs-12 web"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location.photos[0]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(0)"
-              >
-                <img
-                  class="gallery-img"
-                  src="{{ location.photos[0] }}"
-                  alt=""
-                />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
+  <!-- ========================
+                Services
+            =========================== -->
+  <section id="services" class="services">
+    <div class="container">
+      <div class="row heading heading-2 mb-40">
+        <header>
+          <div id="booking-tabs">
+            <ul class="col-md-12">
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 1"
+                  id="tab1-tab"
+                  rel="#tab1"
+                  [ngClass]="{ ' active': tab === 1 }"
+                  >Welcome</a
+                >
+                <!-- islamabad -->
+              </li>
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 2"
+                  id="tab2-tab"
+                  rel="#tab2"
+                  [ngClass]="{ ' active': tab === 2 }"
+                  >Getting There</a
+                >
+                <!-- Pakistan -->
+              </li>
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 3"
+                  id="tab3-tab"
+                  rel="#tab3"
+                  [ngClass]="{ ' active': tab === 3 }"
+                  >What to Do</a
+                >
+              </li>
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 4"
+                  id="tab4-tab"
+                  rel="#tab4"
+                  [ngClass]="{ ' active': tab === 4 }"
+                  >Best Time to Visit
+                  </a
+                >
+              </li>
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 5"
+                  id="tab5-tab"
+                  rel="#tab5"
+                  [ngClass]="{ ' active': tab === 5 }"
+                  >Where to Stay
+                  </a
+                >
+              </li>
+              <li class="col-md-2 pointer">
+                <a
+                  (click)="tab = 6"
+                  id="tab6-tab"
+                  rel="#tab6"
+                  [ngClass]="{ ' active': tab === 6 }"
+                  >Additional Information
+                  </a
+                >
+              </li>
+            </ul>
+            <span class="yellow-bar"></span>
           </div>
-        </div>
-        <div
-          *ngIf="location?.photos[1]"
-          class="masonry-item col-md-4 col-sm-6 col-xs-12 web"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location.photos[1]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(1)"
-              >
-                <img
-                  class="gallery-img"
-                  src="{{ location.photos[1] }}"
-                  alt=""
-                />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
-          </div>
-        </div>
-        <div
-          *ngIf="location?.photos[2]"
-          class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location?.photos[2]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(2)"
-              >
-                <img
-                  class="gallery-img"
-                  src="{{ location?.photos[2] }}"
-                  alt=""
-                />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
-          </div>
-        </div>
-        <div
-          *ngIf="location?.photos[3]"
-          class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location?.photos[3]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(3)"
-              >
-                <img
-                  class="gallery-img"
-                  src="{{ location?.photos[3] }}"
-                  alt=""
-                />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
-          </div>
-        </div>
-        <div
-          *ngIf="location?.photos[4]"
-          class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location?.photos[4]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(4)"
-              >
-                <img
-                  class="gallery-img"
-                  src="{{ location?.photos[4] }}"
-                  alt=""
-                />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
-          </div>
-        </div>
-        <div
-          *ngIf="location?.photos[5]"
-          class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
-        >
-          <div class="masonry-image-item item-h-4 hover-zoom">
-            <a class="ajax-link">
-              <div
-                class="item-image bg-image-holder pointer"
-                style="
-                  background-image: url('location?.photos[5]');
-                  background-size: cover;
-                "
-                (click)="showCarousel(5)"
-              >
-                <img class="gallery-img" src="location?.photos[5]" alt="" />
-              </div>
-              <div class="item-overlay overlay-alt"></div>
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- .masonry-container end -->
-    </div>
-  </div>
-</div>
-
-<!-- ======================
-                 places Carousel
-            ========================= -->
-<section id="placeCarousel" class="place-carousel">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8">
-        <span class="heading__subtitle">{{ location.slug }}</span>
-        <h2 class="heading__title">Discover the surroundings</h2>
-      </div>
-    </div>
-    <!-- /.row -->
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <!-- <div class="col-sm-12 col-md-3 col-lg-3 whattodo-sidebar p-0">
-          <aside class="whattodo-sidebar mb-30">
-            <div class="whattodo-widget whattodo-widget-categories">
-              <div class="widget-content">
-                <ul class="list-unstyled whattodo-menu" *ngFor="let surrounding of surroundings">
-                  <li
-                    style="cursor: pointer"
-                    (click)="navigateOnClick(surrounding)"
-                    [ngClass]="{ displayBold: selectedSur == surrounding.name }"
-                  >
-                    <a>
-                      <img
-                        src="../../../assets/images/icons/{{ surrounding.iconName }}"
-                        onerror="this.onerror=null;this.src='assets/images/icons/hotel.svg';"
-                      />{{ surrounding.name }}
-                    </a>
-                  </li>
-                </ul>
+        </header>
+        <div class="col-12 col-md-12">
+          <div class="tab-content">
+            <div
+              *ngIf="tab === 1"
+              id="tab1"
+              class="frame-one"
+              [ngClass]="{ ' active': tab === 1 }"
+            >
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center" >
+                <p [innerHTML]="sanitizeHtml(location.longDescription)">
+                </p>
+              </div>  
+            </div>
+    
+            <div *ngIf="tab === 2" id="tab2" [ngClass]="{ active: tab === 2 }">
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center">
+                <p [innerHTML]="location.gettingThere ? sanitizeHtml(location.gettingThere) : ''">
+                </p>
               </div>
             </div>
-          </aside>
+    
+            <div *ngIf="tab === 3" id="tab3" [ngClass]="{ active: tab === 3 }">
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center">
+                <p [innerHTML]="location.whatToDo ? sanitizeHtml(location.whatToDo): ''">
+                </p>
+              </div>
+            </div>
+    
+            <div *ngIf="tab === 4" id="tab4" [ngClass]="{ active: tab === 4 }">
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center">
+                <p [innerHTML]="location.whatToDo ? sanitizeHtml(location.timeToVisit): ''">
+                </p>
+              </div>  
+            </div>
+            <div *ngIf="tab === 5" id="tab5" [ngClass]="{ active: tab === 5 }">
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center">
+                <p [innerHTML]="location.whereToStay ? sanitizeHtml(location.whereToStay): ''">
+                </p>
+              </div>  
+            </div>
+            <div *ngIf="tab === 6" id="tab6" [ngClass]="{ active: tab === 6 }">
+              <div class="col-sm-12 col-md-12 col-lg-12 mx-auto text-center">
+                <p [innerHTML]="location.additionalInformation ? sanitizeHtml(location.additionalInformation): ''">
+                </p>
+              </div>  
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-12 col-md-8 col-lg-8 mx-auto text-center">
+          <p [innerHTML]="sanitizeHtml(location.longDescription)" class="heading__desc">
+          </p>
         </div> -->
-        <!-- /.col-lg-4 -->
-        <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="!show">
-          <div id="whattodo-map">
-            <!--*ngIf="show"-->
-            <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
-              <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
-            </agm-map>      *ngIf="!surroundingMakers"      -->
-            <agm-map
-              [zoom]="12"
-              [latitude]="
-                surroundingMakers.location?.location.coordinates[1] ||
-                center?.lat
-              "
-              [longitude]="
-                surroundingMakers.location?.location.coordinates[0] ||
-                center?.lng
-              "
-            >
-              <!--  -->
-
-              <!-- true -->
-              <agm-marker
-                [latitude]="this.location?.location.coordinates[1]"
-                [longitude]="this.location?.location.coordinates[0]"
-              >
-                <agm-info-window [disableAutoPan]="true">
-                  <a>
-                    <div>
-                      <img class="info-img" src="{{ infoWondowData?.photo }}" />
-                      <b class="mx-3 d-inline info-desc">{{
-                        infoWondowData?.alias
-                      }}</b>
-                    </div>
-                  </a>
-                </agm-info-window>
-              </agm-marker>
-
-              <!-- <agm-marker 
-              *ngIf="surroundingMakers"
-                [latitude]="this.location?.location.coordinates[0] "
-                [longitude]="this.location?.location.coordinates[1]"
-              ></agm-marker> -->
-            </agm-map>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-9 col-lg-9 pl-80" *ngIf="show">
-          <div id="whattodo-map">
-            <!--*ngIf="show"-->
-            <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
-              <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
-            </agm-map>      *ngIf="!surroundingMakers"      -->
-            <agm-map
-              [zoom]="12"
-              [latitude]="
-                surroundingMakers[0]?.location?.coordinates[1] || center?.lat
-              "
-              [longitude]="
-                surroundingMakers[0]?.location?.coordinates[0] || center?.lng
-              "
-            >
-              <agm-marker
-                *ngFor="let item of surroundingMakers"
-                [latitude]="item?.location?.coordinates[1]"
-                [longitude]="item?.location?.coordinates[0]"
-                [iconUrl]="{
-                  url: item.icon,
-                  scaledSize: {
-                    width: 25,
-                    height: 25
-                  }
-                }"
-              >
-                <agm-info-window [disableAutoPan]="true">
-                  <a>
-                    <div>
-                      <a href="{{ getHref(item) }}" target="_blank"
-                        ><b class="mx-3 d-inline info-desc">{{
-                          item?.name
-                        }}</b></a
-                      >
-                    </div>
-                  </a>
-                </agm-info-window>
-              </agm-marker>
-
-              <!-- <agm-marker 
-              *ngIf="surroundingMakers"
-                [latitude]="this.location?.location.coordinates[0] "
-                [longitude]="this.location?.location.coordinates[1]"
-              ></agm-marker> -->
-            </agm-map>
-          </div>
-        </div>
-      </div>
-
-      <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container -->
-</section>
-<!-- /.posts-carousel -->
-
-<!-- ======================
-                 Places Feedback
-            ========================= -->
-
-<!-- ======================
-                 places Carousel
-            ========================= -->
-<section id="placeCarousel" class="place-carousel">
-  <div class="px-5">
-    <!--pl-300-->
-    <div class="row">
-      <h2 class="heading__title">
-        Top Tourist Destinations near {{ location.alias }}
-      </h2>
-    </div>
-    <!-- /.row -->
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-12">
-        <ngx-slick-carousel
-          class="carousel"
-          #slickModal="slick-carousel"
-          [config]="slideConfig"
-        >
-          <div
-            ngxSlickItem
-            *ngFor="let location of locations"
-            class="post-item places-item carousel-cell pr-15"
-          >
-            <a
-              [routerLink]="[
-                '/where-to-go/category/cities/location',
-                location.slug
-              ]"
-            >
-              <div class="places__img" style="height: unset !important">
-                <img
-                  [src]="location.thumbnail"
-                  onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
-                  alt="post img"
-                />
-              </div>
-            </a>
-            <a
-              [routerLink]="[
-                '/where-to-go/category/cities/location',
-                location.slug
-              ]"
-            >
-              <div class="places__content">
-                <h6 class="places_sub">{{ location.alias }}</h6>
-                <h4 class="places__title">
-                  <!-- <a>{{ location.description }}</a> -->
-                </h4>
-                <!-- <span class="stars align-listing">
-                  <span [ngStyle]="{ width: getRatingStars(location?.ratingAverage || 0) }"></span>
-                </span>
-                <span class="stars2" style="display: inline-table">
-                  <span [ngStyle]="{ width: getRatingStars(5.0) }"></span>
-                </span> -->
-                <!-- <span class="font-regular"> ({{ location.reviews ? location.reviews : 0 }}) reviews</span> -->
-                <!-- <a href="#" class="btn btn__secondary btn__link">
-                <span>More info</span><i class="icon-arrow-right"></i>
-              </a> -->
-              </div>
-            </a>
-          </div>
-        </ngx-slick-carousel>
-        <!-- /.carousel -->
-      </div>
-      <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-  </div>
-  <!-- /.container -->
-</section>
-<!-- /.posts-carousel -->
-
-<app-vendor-section></app-vendor-section>
-
-<ngx-smart-modal #feedbackModal identifier="feedbackModal" escapable="true">
-  <div class="row">
-    <div
-      class="col-10 col-sm-10 col-md-12 col-lg-12 p-5 visa-popup__main text-center"
-      style="margin-top: 9.5em; margin-left: 35px"
-    >
-      <h1><i class="fa fa-check-circle" style="color: #8cc63e"></i></h1>
-      <h5>Your review has been submitted and is pending approval</h5>
-    </div>
-  </div>
-</ngx-smart-modal>
-
-<ngx-smart-modal
-  #carouselModal
-  identifier="carouselModal"
-  escapable="true"
-  class="mt-5 scatter image__Slider"
-  (onClose)="hideCarousel()"
-  (onDismiss)="hideCarousel()"
->
-  <div *ngIf="showImgs" class="imageViewer__container">
-    <carousel [isAnimated]="true">
-      <slide *ngFor="let img of localImageArray; let i = index">
-        <img
-          src="{{ img }}"
-          alt="first slide"
-          style="display: block; width: 100%"
-        />
-      </slide>
-      <!-- <slide>
-      <img src="{{ location.photos[1] }}" alt="second slide" style="display: block; width: 100%;">
-    </slide>
-    <slide>
-      <img src="{{ location.photos[2] }}" alt="third slide" style="display: block; width: 100%;">
-    </slide> -->
-    </carousel>
-    <!-- <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="imageSliderConfig">
-    <div ngxSlickItem *ngFor="let location of locations" class="post-item places-item carousel-cell pr-15">
+        <!-- /.col-lg-5 -->
+        <!-- <div class="col-sm-12 col-md-12 col-lg-6">
           <img
-            [src]="location.thumbnail"
-            onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
-            alt="post img"
+            src="{{ location.photos[0] }}"
+            onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
           />
+        </div> -->
+        <!-- /.col-lg-6 -->
+      </div>
+      <!-- /.row -->
     </div>
-  </ngx-slick-carousel> -->
+  </section>
+  <!-- /.Services -->
+  
+  <!--======-->
+  <div class="container-fluid seasons">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <span class="heading__subtitle">{{ location.slug }}</span>
+          <h2 class="heading__title">Images</h2>
+        </div>
+        <div class="col-md-4 show-all-btn">
+          <!-- <a>show all<i class="icon-arrow-right"></i></a> -->
+        </div>
+      </div>
+      <div class="masonry-wrapper masonry-style-2">
+        <div class="masonry-container" data-column-width=".col-md-4">
+          <div
+            *ngIf="location?.photos[0]"
+            class="masonry-item col-md-8 col-sm-6 col-xs-12 web"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location.photos[0]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(0)"
+                >
+                  <img
+                    class="gallery-img"
+                    src="{{ location.photos[0] }}"
+                    alt=""
+                  />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="location?.photos[1]"
+            class="masonry-item col-md-4 col-sm-6 col-xs-12 web"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location.photos[1]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(1)"
+                >
+                  <img
+                    class="gallery-img"
+                    src="{{ location.photos[1] }}"
+                    alt=""
+                  />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="location?.photos[2]"
+            class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location?.photos[2]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(2)"
+                >
+                  <img
+                    class="gallery-img"
+                    src="{{ location?.photos[2] }}"
+                    alt=""
+                  />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="location?.photos[3]"
+            class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location?.photos[3]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(3)"
+                >
+                  <img
+                    class="gallery-img"
+                    src="{{ location?.photos[3] }}"
+                    alt=""
+                  />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="location?.photos[4]"
+            class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location?.photos[4]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(4)"
+                >
+                  <img
+                    class="gallery-img"
+                    src="{{ location?.photos[4] }}"
+                    alt=""
+                  />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+          <div
+            *ngIf="location?.photos[5]"
+            class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
+          >
+            <div class="masonry-image-item item-h-4 hover-zoom">
+              <a class="ajax-link">
+                <div
+                  class="item-image bg-image-holder pointer"
+                  style="
+                    background-image: url('location?.photos[5]');
+                    background-size: cover;
+                  "
+                  (click)="showCarousel(5)"
+                >
+                  <img class="gallery-img" src="location?.photos[5]" alt="" />
+                </div>
+                <div class="item-overlay overlay-alt"></div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- .masonry-container end -->
+      </div>
+    </div>
   </div>
-</ngx-smart-modal>
+  
+  <!-- ======================
+                   places Carousel
+              ========================= -->
+  <section id="placeCarousel" class="place-carousel">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <span class="heading__subtitle">{{ location.slug }}</span>
+          <h2 class="heading__title">Discover the surroundings</h2>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <!-- <div class="col-sm-12 col-md-3 col-lg-3 whattodo-sidebar p-0">
+            <aside class="whattodo-sidebar mb-30">
+              <div class="whattodo-widget whattodo-widget-categories">
+                <div class="widget-content">
+                  <ul class="list-unstyled whattodo-menu" *ngFor="let surrounding of surroundings">
+                    <li
+                      style="cursor: pointer"
+                      (click)="navigateOnClick(surrounding)"
+                      [ngClass]="{ displayBold: selectedSur == surrounding.name }"
+                    >
+                      <a>
+                        <img
+                          src="../../../assets/images/icons/{{ surrounding.iconName }}"
+                          onerror="this.onerror=null;this.src='assets/images/icons/hotel.svg';"
+                        />{{ surrounding.name }}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </aside>
+          </div> -->
+          <!-- /.col-lg-4 -->
+          <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="!show">
+            <div id="whattodo-map">
+              <!--*ngIf="show"-->
+              <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
+                <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
+              </agm-map>      *ngIf="!surroundingMakers"      -->
+              <agm-map
+                [zoom]="12"
+                [latitude]="
+                  surroundingMakers.location?.location.coordinates[1] ||
+                  center?.lat
+                "
+                [longitude]="
+                  surroundingMakers.location?.location.coordinates[0] ||
+                  center?.lng
+                "
+              >
+                <!--  -->
+  
+                <!-- true -->
+                <agm-marker
+                  [latitude]="this.location?.location.coordinates[1]"
+                  [longitude]="this.location?.location.coordinates[0]"
+                >
+                  <agm-info-window [disableAutoPan]="true">
+                    <a>
+                      <div>
+                        <img class="info-img" src="{{ infoWondowData?.photo }}" />
+                        <b class="mx-3 d-inline info-desc">{{
+                          infoWondowData?.alias
+                        }}</b>
+                      </div>
+                    </a>
+                  </agm-info-window>
+                </agm-marker>
+  
+                <!-- <agm-marker 
+                *ngIf="surroundingMakers"
+                  [latitude]="this.location?.location.coordinates[0] "
+                  [longitude]="this.location?.location.coordinates[1]"
+                ></agm-marker> -->
+              </agm-map>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-9 col-lg-9 pl-80" *ngIf="show">
+            <div id="whattodo-map">
+              <!--*ngIf="show"-->
+              <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
+                <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
+              </agm-map>      *ngIf="!surroundingMakers"      -->
+              <agm-map
+                [zoom]="12"
+                [latitude]="
+                  surroundingMakers[0]?.location?.coordinates[1] || center?.lat
+                "
+                [longitude]="
+                  surroundingMakers[0]?.location?.coordinates[0] || center?.lng
+                "
+              >
+                <agm-marker
+                  *ngFor="let item of surroundingMakers"
+                  [latitude]="item?.location?.coordinates[1]"
+                  [longitude]="item?.location?.coordinates[0]"
+                  [iconUrl]="{
+                    url: item.icon,
+                    scaledSize: {
+                      width: 25,
+                      height: 25
+                    }
+                  }"
+                >
+                  <agm-info-window [disableAutoPan]="true">
+                    <a>
+                      <div>
+                        <a href="{{ getHref(item) }}" target="_blank"
+                          ><b class="mx-3 d-inline info-desc">{{
+                            item?.name
+                          }}</b></a
+                        >
+                      </div>
+                    </a>
+                  </agm-info-window>
+                </agm-marker>
+  
+                <!-- <agm-marker 
+                *ngIf="surroundingMakers"
+                  [latitude]="this.location?.location.coordinates[0] "
+                  [longitude]="this.location?.location.coordinates[1]"
+                ></agm-marker> -->
+              </agm-map>
+            </div>
+          </div>
+        </div>
+  
+        <!-- /.col-lg-12 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </section>
+  <!-- /.posts-carousel -->
+  
+  <!-- ======================
+                   Places Feedback
+              ========================= -->
+  
+  <!-- ======================
+                   places Carousel
+              ========================= -->
+  <section id="placeCarousel" class="place-carousel">
+    <div class="px-5">
+      <!--pl-300-->
+      <div class="row">
+        <h2 class="heading__title">
+          Top Tourist Destinations near {{ location.alias }}
+        </h2>
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <ngx-slick-carousel
+            class="carousel"
+            #slickModal="slick-carousel"
+            [config]="slideConfig"
+          >
+            <div
+              ngxSlickItem
+              *ngFor="let location of locations"
+              class="post-item places-item carousel-cell pr-15"
+            >
+              <a
+                [routerLink]="[
+                  '/where-to-go/category/cities/location',
+                  location.slug
+                ]"
+              >
+                <div class="places__img" style="height: unset !important">
+                  <img
+                    [src]="location.thumbnail"
+                    onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+                    alt="post img"
+                  />
+                </div>
+              </a>
+              <a
+                [routerLink]="[
+                  '/where-to-go/category/cities/location',
+                  location.slug
+                ]"
+              >
+                <div class="places__content">
+                  <h6 class="places_sub">{{ location.alias }}</h6>
+                  <h4 class="places__title">
+                    <!-- <a>{{ location.description }}</a> -->
+                  </h4>
+                  <!-- <span class="stars align-listing">
+                    <span [ngStyle]="{ width: getRatingStars(location?.ratingAverage || 0) }"></span>
+                  </span>
+                  <span class="stars2" style="display: inline-table">
+                    <span [ngStyle]="{ width: getRatingStars(5.0) }"></span>
+                  </span> -->
+                  <!-- <span class="font-regular"> ({{ location.reviews ? location.reviews : 0 }}) reviews</span> -->
+                  <!-- <a href="#" class="btn btn__secondary btn__link">
+                  <span>More info</span><i class="icon-arrow-right"></i>
+                </a> -->
+                </div>
+              </a>
+            </div>
+          </ngx-slick-carousel>
+          <!-- /.carousel -->
+        </div>
+        <!-- /.col-lg-12 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container -->
+  </section>
+  <!-- /.posts-carousel -->
+  
+  <app-vendor-section></app-vendor-section>
+  
+  <ngx-smart-modal #feedbackModal identifier="feedbackModal" escapable="true">
+    <div class="row">
+      <div
+        class="col-10 col-sm-10 col-md-12 col-lg-12 p-5 visa-popup__main text-center"
+        style="margin-top: 9.5em; margin-left: 35px"
+      >
+        <h1><i class="fa fa-check-circle" style="color: #8cc63e"></i></h1>
+        <h5>Your review has been submitted and is pending approval</h5>
+      </div>
+    </div>
+  </ngx-smart-modal>
+  
+  <ngx-smart-modal
+    #carouselModal
+    identifier="carouselModal"
+    escapable="true"
+    class="mt-5 scatter image__Slider"
+    (onClose)="hideCarousel()"
+    (onDismiss)="hideCarousel()"
+  >
+    <div *ngIf="showImgs" class="imageViewer__container">
+      <carousel [isAnimated]="true">
+        <slide *ngFor="let img of localImageArray; let i = index">
+          <img
+            src="{{ img }}"
+            alt="first slide"
+            style="display: block; width: 100%"
+          />
+        </slide>
+        <!-- <slide>
+        <img src="{{ location.photos[1] }}" alt="second slide" style="display: block; width: 100%;">
+      </slide>
+      <slide>
+        <img src="{{ location.photos[2] }}" alt="third slide" style="display: block; width: 100%;">
+      </slide> -->
+      </carousel>
+      <!-- <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="imageSliderConfig">
+      <div ngxSlickItem *ngFor="let location of locations" class="post-item places-item carousel-cell pr-15">
+            <img
+              [src]="location.thumbnail"
+              onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+              alt="post img"
+            />
+      </div>
+    </ngx-slick-carousel> -->
+    </div>
+  </ngx-smart-modal>
+  

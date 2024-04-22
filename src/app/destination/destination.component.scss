@@ -99,3 +99,35 @@
   }
 }
 
+
+.booking-home {
+  ul {
+    // justify-content: space-evenly !important;
+  }
+}
+
+iframe {
+  width: 100% !important;
+  height: 600px;
+}
+
+.tab-content > div {
+  background: url("/../../../assets/images/backgrounds/loading-buffering.gif")
+    center center no-repeat;
+}
+.zoom-out-frame {
+  width: 300px; /* Adjust the width of the iframe as needed */
+  height: 200px; /* Adjust the height of the iframe as needed */
+}
+
+.zoom-out-frame img {
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+@media screen and (max-width: 767px) {
+  iframe {
+    height: 300px;
+  }
+}
+
+
