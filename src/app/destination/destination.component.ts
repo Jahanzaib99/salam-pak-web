@@ -137,7 +137,7 @@ export class DestinationComponent implements OnInit, AfterViewInit {
   };
 
   planBtnText = 'Add to plan';
-
+  tab: Number = 1;
   constructor(
     private readonly eventService: EventService,
     private readonly route: ActivatedRoute,
