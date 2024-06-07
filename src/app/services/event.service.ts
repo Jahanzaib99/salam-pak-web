@@ -373,7 +373,13 @@ export class EventService {
       .then(function (response) {
         // handle success
         // console.log(response.data.data);
-        return response.data.data;
+        // handle success
+        // console.log(response.data.data);
+        var locations = response.data.data;
+
+        locations = locations.sort((a: any, b: any) => parseInt(b.order) - parseInt(a.order));
+
+        return locations;
       })
       .catch(function (error) {
         // handle error
