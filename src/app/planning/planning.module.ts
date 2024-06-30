@@ -18,7 +18,7 @@ import { PlanListingComponent } from './plan-listing/plan-listing.component';
     SortableModule,
     PlanningRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPhOFre2UhYgZPRNw_qD8CaGQ36pUqaQA',
+      apiKey: 'AIzaSyD46iP7ge4FBUCIAk1SUUMAW5iJvjbBbcE',
     }),
   ],
 })

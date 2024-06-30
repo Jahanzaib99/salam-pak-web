@@ -22,7 +22,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     PTDCCommonModule,
     RouterModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPhOFre2UhYgZPRNw_qD8CaGQ36pUqaQA',
+      apiKey: 'AIzaSyD46iP7ge4FBUCIAk1SUUMAW5iJvjbBbcE',
     }),
   ],
   exports: [DestinationComponent],

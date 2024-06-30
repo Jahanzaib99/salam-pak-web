@@ -18,7 +18,7 @@ import { ListingComponent } from './listing/listing.component';
     WhatToDoRoutingModule,
     DestinationModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPhOFre2UhYgZPRNw_qD8CaGQ36pUqaQA',
+      apiKey: 'AIzaSyD46iP7ge4FBUCIAk1SUUMAW5iJvjbBbcE',
     }),
   ],
 })
