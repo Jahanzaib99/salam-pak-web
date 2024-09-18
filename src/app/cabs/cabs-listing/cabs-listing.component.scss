@@ -1,0 +1,81 @@
+/* PLAN */
+.bg-overlay {
+    background-size: cover;
+  }
+  
+  .bg-img {
+    top: -120px !important;
+  }
+  
+  .edit-plan {
+    background: #8cc63e;
+    color: #fff;
+    padding: 12px;
+    margin-top: 27px;
+  }
+  
+  .plan-box {
+    border: 1px solid #8cc63e;
+    padding: 16px;
+    border-radius: 10px;
+    margin: 5px;
+  }
+  
+  .plan-detail-bottom {
+    margin-bottom: 16px;
+  }
+  
+  .plan-name-link {
+    font-size: 24px;
+    color: #000;
+    font-family: Byom-Bold !important;
+  }
+  
+  .plan-box:hover {
+    box-shadow: 4px 4px 15px #dcdcdc;
+  }
+  
+  .plan-delete {
+    background: #eee;
+    padding: 5px;
+    text-align: center;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .plan-delete:hover {
+    background: #e63434;
+    padding: 5px;
+    text-align: center;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+  }
+  
+  .page-title {
+    background-image: url("/../../../assets/images/plan/travel-guide-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    margin-bottom: 8.5rem;
+  }
+  
+  .post-item {
+    margin-bottom: 60px;
+  }
+  
+  .post-image {
+    height: 280px;
+  }
+  
+  .post-content {
+    height: 160px !important;
+  }
+  
+  .btn__primary {
+    text-transform: none;
+  }
+  
+  /* PLAN */
+  

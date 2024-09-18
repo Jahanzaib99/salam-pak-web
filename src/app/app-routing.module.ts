@@ -98,6 +98,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'cabs',
+    loadChildren: () =>
+      import('./cabs/cabs.module').then(
+        (m) => m.CabsModule
+      ),
+  },
+  {
     path: 'explore-pakistan', component: ExplorePakistanComponent
   },
 
