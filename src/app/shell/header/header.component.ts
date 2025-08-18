@@ -145,17 +145,28 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterContentChecked {
   }
 
   getProvinces() {
+    // this.shellService.getProvinces().then((data: any) => {
+    //   console.log('header component', data);
+    //   this.provinces = data;
+    //   this.isLoading = false;
+    //   console.log(this.provinces);
+    //   // debugger;
+    //   this.provinces.filter((province: any, index: number) => {
+    //     //   if (!category.thumbnail) {
+    //     // category.thumbnail = this.images[index];
+    //     //   }
+    //   });
+    // });
     this.shellService.getProvinces().then((data: any) => {
       console.log('header component', data);
-      this.provinces = data;
+    
+      // Sort alphabetically by name (case-insensitive)
+      this.provinces = data.sort((a: any, b: any) => {
+        return a.name.localeCompare(b.name);
+      });
+    
       this.isLoading = false;
       console.log(this.provinces);
-      // debugger;
-      this.provinces.filter((province: any, index: number) => {
-        //   if (!category.thumbnail) {
-        // category.thumbnail = this.images[index];
-        //   }
-      });
     });
 
     // .subscribe((data: any) => {

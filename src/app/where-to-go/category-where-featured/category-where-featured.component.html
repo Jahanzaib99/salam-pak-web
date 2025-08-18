@@ -13,7 +13,7 @@
       <img
         class="header-image"
         [src]="
-          category.thumbnail || 'assets/images/backgrounds/trip-detail.png'
+          category.thumbnails[0] || 'assets/images/backgrounds/trip-detail.png'
         "
         onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
         alt="background"
@@ -42,7 +42,7 @@
       <div class="row">
         <div class="col-md-8">
           <span class="heading__subtitle">places</span>
-          <h2 class="heading__title">{{ category.name }}</h2>
+          <h2 class="heading__title">Top Tourist Destinations of {{ category.name }}</h2>
         </div>
         <div class="col-md-4 show-all-btn">
           <!-- <a href="#">show all<i class="icon-arrow-right"></i></a> -->
@@ -58,12 +58,12 @@
             class="col-md-4 post-item p-4"
           >
             <a
-                [routerLink]="
-                category.slug === 'top-tourist-destinations'
-                  ? ['/where-to-go/location', location.slug, 'featured']
-                  : ['/where-to-go/category', category.slug, 'location', location.slug]
-              "
-              [queryParams]="category.slug === 'top-tourist-destinations' ? { parentCategoryId: parentCategoryId } : null"
+              [routerLink]="[
+                  '/where-to-go/category',
+                  slug,
+                  'location',
+                  location.slug
+                ]"
             >
               <div class="post__img">
                 <img
@@ -103,11 +103,27 @@
     <h2 *ngIf="!featuredCategories.length" class="text-center text-muted d-block">
       No featured {{ category.name }} found!
     </h2>
+    
   </div>
   
   <!-- new all grid here... -->
   
-  
+  <section id="placeCarousel" class="place-carousel">
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-8 browse-btn category-btn">
+          <a [routerLink]="['/where-to-go/locations', category.slug]"
+            >Show All
+            <img
+              class="browse-btn"
+              src="assets/images/icons/left-arrow-green.svg"
+            />
+            <!-- <i class="icon-arrow-right"></i> -->
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>    
   <!-- ======================
                places Carousel
           ========================= -->

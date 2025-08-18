@@ -46,20 +46,20 @@ const responsiveSettings = [
 ];
 
 @Component({
-  selector: 'app-category-where',
-  templateUrl: './category-where.component.html',
-  styleUrls: ['./category-where.component.scss'],
+  selector: 'app-category-where-fe-all',
+  templateUrl: './category-where-fe-all.component.html',
+  styleUrls: ['./category-where-fe-all.component.scss'],
 })
-export class CategoryWhereComponent
+export class CategoryWhereFeAllComponent
   implements OnInit, AfterViewInit, AfterContentChecked {
   @ViewChild('slickModal') slickModal: SlickCarouselComponent;
-  category: any;
+  location: any;
   p: number = 1;
   q: number = 1;
   locations: any = [];
   categories: any = [];
   slideConfig = {
-    slidesToShow: 7.5, //4.5
+    slidesToShow: 4.5, //4.5
     slidesToScroll: 4,
     arrows: true,
     infinite: false,
@@ -67,21 +67,17 @@ export class CategoryWhereComponent
   };
   images = [defaultImage1, defaultImage2, defaultImage3];
   featuredCategories: any = [];
-  parentCategoryId: any;
   constructor(
     private readonly shellService: Shell,
     private readonly route: ActivatedRoute,
     private readonly eventService: EventService,
     private readonly homeService: HomeService
   ) {
-    this.category = this.route.snapshot.data.category;
-    if (this.category.slug == 'top-tourist-destinations')
-    {
-      this.getProvinces();
-    } else {
-      this.getCategoryLocations(this.category._id);
-    }
-    this.parentCategoryId = this.category._id;
+    this.location = this.route.snapshot.data.location;
+    console.log(this.location);
+    
+    this.getCategoryLocations(this.location._id);
+    // this.getProvinces();
     // debugger;
   }
 
@@ -120,13 +116,8 @@ export class CategoryWhereComponent
 
   getProvinces() {
     this.shellService.getProvinces().then((data: any) => {
-      const sorted = data.sort((a: any, b: any) =>
-        a.name.localeCompare(b.name)
-      );
-    
-      this.locations = sorted;
-    
-      console.log('category where component', this.locations);
+      console.log('category where component', data);
+      this.locations = data;
     });
   }
 
@@ -149,7 +140,7 @@ export class CategoryWhereComponent
       this.featuredCategories = this.locations.filter((i: any) => {
         return (i.isFeatured = true);
       });
-      // this.featuredCategories = this.featuredCategories.slice(0, 5);
+      this.featuredCategories = this.featuredCategories.slice(0, 5);
       //  console.log('sjdkf: ',this.featuredCategories);
     }
   }

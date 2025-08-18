@@ -1,0 +1,315 @@
+<!-- ============================
+        Slider
+    ============================== -->
+<section
+  id="page-title"
+  class="page-title-layout4 text-center bg-overlay slider"
+>
+  <!-- [ngStyle]="{'background-image': 'url(' + category.photos[0] + ')'}" style="background-repeat: 'no-repeat';
+  background-position: 'center bottom'" -->
+  <div class="bg-img">
+    <!-- class="header-image" -->
+    <!-- category.photos[0] ||  -->
+    <img
+      class="header-image"
+      [src]="
+        category.thumbnails[0] || 'assets/images/backgrounds/trip-detail.png'
+      "
+      onerror="this.onerror=null;this.src='assets/images/backgrounds/what-to-do.png';"
+      alt="background"
+    />
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-8 page">
+        <div class="slide__content">
+          <h2 class="slide__title">{{ category.name }}</h2>
+          <p class="slide__desc">{{ category.description }}</p>
+        </div>
+        <!-- /.slide-content -->
+      </div>
+      <!-- /.col-lg-8 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /.page-title -->
+
+<!--======-->
+<div class="container-fluid seasons">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <span class="heading__subtitle">places</span>
+        <h2 class="heading__title">featured {{ category.name }}</h2>
+      </div>
+      <div class="col-md-4 show-all-btn">
+        <!-- <a href="#">show all<i class="icon-arrow-right"></i></a> -->
+      </div>
+    </div>
+    <div class="masonry-wrapper masonry-style-2">
+      <div class="row blog-container" data-column-width=".col-md-4">
+        <div
+          *ngFor="
+            let location of featuredCategories
+              | paginate: { itemsPerPage: 9, currentPage: p }
+          "
+          class="col-md-4 post-item p-4"
+        >
+          <a
+            [routerLink]="[
+              '/where-to-go/category',
+              category.slug,
+              'location',
+              location.slug
+            ]"
+          >
+            <div class="post__img">
+              <img
+                [src]="location.thumbnail"
+                onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+                alt="post img"
+              />
+            </div>
+            <!-- /.post-img -->
+            <div class="post__content">
+              <h4 class="post__title">{{ location.alias }}</h4>
+              <p class="post__desc">
+                {{ location.description.substring(0, 100) }}
+                {{ location.description.length > 100 ? '...' : '' }}
+              </p>
+            </div>
+            <!-- /.post-content -->
+          </a>
+        </div>
+        <!-- /.post-item -->
+      </div>
+      <!-- .masonry-container end -->
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div *ngIf="featuredCategories?.length > 9">
+          <pagination-controls
+            class="my-pagination"
+            (pageChange)="p = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 *ngIf="!featuredCategories.length" class="text-center text-muted d-block">
+    No featured {{ category.name }} found!
+  </h2>
+</div>
+
+<!-- new all grid here... -->
+
+<div class="container-fluid seasons">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="heading__title">all {{ category.name }}</h2>
+      </div>
+      <div class="col-md-4 show-all-btn">
+        <!-- <a href="#">show all<i class="icon-arrow-right"></i></a> -->
+      </div>
+    </div>
+    <div class="masonry-wrapper masonry-style-2">
+      <div
+        *ngFor="
+          let location of locations
+            | paginate: { itemsPerPage: 12, currentPage: q }
+        "
+        class="blog-container"
+        data-column-width=".col-md-4"
+      >
+        <div class="col-md-4 post-item">
+          <a
+            [routerLink]="[
+              '/where-to-go/category',
+              category.slug,
+              'location',
+              location.slug
+            ]"
+          >
+            <div class="post__img">
+              <img
+                [src]="location.thumbnail"
+                alt="post img"
+                onerror="this.onerror=null;this.src='assets/images/wheretogo/cities.png';"
+              />
+            </div>
+
+            <!-- /.post-img -->
+
+            <div class="post__content">
+              <h4 class="post__title">{{ location.alias }}</h4>
+              <p class="post__desc">
+                {{ location.description.substring(0, 100) }}
+                {{ location.description.length > 100 ? '...' : '' }}
+              </p>
+            </div>
+
+            <!-- /.post-content -->
+          </a>
+        </div>
+
+        <!-- /.post-item -->
+      </div>
+
+      <!-- .masonry-container end -->
+    </div>
+  </div>
+
+  <div *ngIf="locations.length" class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div>
+          <pagination-controls
+            class="my-pagination"
+            (pageChange)="q = $event"
+          ></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h2 *ngIf="!locations.length" class="text-center text-muted d-block">
+    No locations found!
+  </h2>
+</div>
+
+<!-- ======================
+             places Carousel
+        ========================= -->
+<section id="placeCarousel" class="place-carousel d-none">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-8">
+        <h2 class="heading__title pl-5">all {{ category.name }}</h2>
+      </div>
+
+      <div class="col-md-4 show-all-btn">
+        <a [routerLink]="['/where-to-go/category', category.slug, 'listing']"
+          >show all
+          <img
+            class="iconArrowRightTop"
+            src="assets/images/icons/left-arrow-green.svg"
+          />
+          <!-- <i class="icon-arrow-right"></i> -->
+        </a>
+        <!--target="_blank"-->
+      </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <!--style="float: left;" pr-1-->
+        <ngx-slick-carousel
+          class="carousel pl-4"
+          #slickModal="slick-carousel"
+          [config]="slideConfig"
+        >
+          <!--style="padding: 0 0px 0 14px;"-->
+          <div
+            ngxSlickItem
+            *ngFor="let location of locations"
+            class="post-item places-item carousel-cell pr-15"
+          >
+            <a
+              [routerLink]="[
+                '/where-to-go/category',
+                category.slug,
+                'location',
+                location.slug
+              ]"
+            >
+              <div class="places__img">
+                <img
+                  [src]="location.thumbnail"
+                  onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+                  alt="post img"
+                />
+              </div>
+              <div class="places__content">
+                <h6 class="places_sub" style="font-size: 18px">
+                  {{ location.alias }}
+                </h6>
+                <!-- <h4 class="places__title" style="font-size: 13px">
+                  <a> {{ location.description }}</a>
+                </h4> -->
+                <!-- <span class="stars align-listing">
+                  <span [ngStyle]="{ width: getRatingStars(category?.ratingAverage || 0) }"></span>
+                </span>
+                <span class="stars2" style="display: inline-table">
+                  <span [ngStyle]="{ width: getRatingStars(5.0) }"></span>
+                </span>
+                <span class="font-regular"> ({{ location.reviews ? location.reviews : 0 }}) reviews</span> -->
+
+                <!-- <asty
+                href="/where-to-go/category/{{ category.slug }}/location/{{ location.slug }}"
+                class="btn btn__secondary btn__link"
+              >
+                <span>More info</span><i class="icon-arrow-right"></i>
+               </a> -->
+              </div>
+            </a>
+          </div>
+        </ngx-slick-carousel>
+        <!-- <button class="btn-next" (click)="next()">next</button>
+        <button class="btn-prev" (click)="prev()">prev</button> -->
+      </div>
+      <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</section>
+<!-- /.posts-carousel -->
+
+<!-- Category Filter-->
+<section class="browse-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <h2 class="heading__title">Browse {{ category.name }}</h2>
+          <form class="browse-form">
+            <input
+              type="text"
+              class="search__input"
+              placeholder="Type Words Then Enter"
+            />
+            <button class="module__search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+        </div>
+        <!-- /.col-lg-2 -->
+        <div class="col-sm-12 col-md-6 col-lg-6 btn-category">
+          <div class="col-md-12 p-0">
+            <h2 class="heading__title">Search by Category</h2>
+          </div>
+
+          <div class="browse-btn-1">
+            <span class="browse-btn category-btn"
+              ><a href="/where-to-go">All</a></span
+            >
+            <span *ngFor="let category of categories" class="browse-btn">
+              <a
+                *ngIf="category.type === 'category'"
+                class="category-btn"
+                href="/where-to-go/category/{{ category.slug }}"
+              >
+                {{ category.name }}
+              </a>
+            </span>
+          </div>
+        </div>
+        <!-- /.col-lg-2 -->
+      </div>
+    </div>
+  </div>
+</section>

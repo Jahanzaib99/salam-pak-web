@@ -46,20 +46,20 @@ const responsiveSettings = [
 ];
 
 @Component({
-  selector: 'app-category-where',
-  templateUrl: './category-where.component.html',
-  styleUrls: ['./category-where.component.scss'],
+  selector: 'app-category-where-all',
+  templateUrl: './category-where-all.component.html',
+  styleUrls: ['./category-where-all.component.scss'],
 })
-export class CategoryWhereComponent
+export class CategoryWhereAllComponent
   implements OnInit, AfterViewInit, AfterContentChecked {
   @ViewChild('slickModal') slickModal: SlickCarouselComponent;
-  category: any;
+  location: any;
   p: number = 1;
   q: number = 1;
   locations: any = [];
   categories: any = [];
   slideConfig = {
-    slidesToShow: 7.5, //4.5
+    slidesToShow: 4.5, //4.5
     slidesToScroll: 4,
     arrows: true,
     infinite: false,
@@ -67,21 +67,24 @@ export class CategoryWhereComponent
   };
   images = [defaultImage1, defaultImage2, defaultImage3];
   featuredCategories: any = [];
-  parentCategoryId: any;
+  slug = '';
   constructor(
     private readonly shellService: Shell,
     private readonly route: ActivatedRoute,
     private readonly eventService: EventService,
     private readonly homeService: HomeService
   ) {
-    this.category = this.route.snapshot.data.category;
-    if (this.category.slug == 'top-tourist-destinations')
-    {
-      this.getProvinces();
-    } else {
-      this.getCategoryLocations(this.category._id);
-    }
-    this.parentCategoryId = this.category._id;
+    this.location = this.route.snapshot.data.location;
+    this.slug = this.route.snapshot.params.slug;
+    this.route.data.subscribe((res: any) => {
+      this.locations = res.trip;
+      // this.extractFeaturedItems(this.locations);
+    });
+    console.log(this.locations);
+    
+    // this.getCategoryLocations(this.location._id);
+    // this.getFeaturedEvents();
+    // this.getProvinces();
     // debugger;
   }
 
@@ -114,19 +117,14 @@ export class CategoryWhereComponent
       // });
       this.locations = locs;
       // debugger;
-      // console.log('locationsssss', locations);
+      console.log('locationsssss', this.locations);
     });
   }
 
   getProvinces() {
     this.shellService.getProvinces().then((data: any) => {
-      const sorted = data.sort((a: any, b: any) =>
-        a.name.localeCompare(b.name)
-      );
-    
-      this.locations = sorted;
-    
-      console.log('category where component', this.locations);
+      console.log('category where component', data);
+      this.locations = data;
     });
   }
 
@@ -144,14 +142,29 @@ export class CategoryWhereComponent
     });
   }
 
-  ngAfterContentChecked(): void {
-    if (this.locations.length > 0) {
-      this.featuredCategories = this.locations.filter((i: any) => {
-        return (i.isFeatured = true);
+  getFeaturedEvents() {
+    this.eventService
+      .getFetrauredEvents(this.location.slug)
+      .then((data: any) => {
+        console.log('trips component', data);
+        this.locations = data;
+        // this.extractFeaturedItems(this.locations);
       });
-      // this.featuredCategories = this.featuredCategories.slice(0, 5);
-      //  console.log('sjdkf: ',this.featuredCategories);
-    }
+
+    // .subscribe((data: any) => {
+    //   this.locations = data.data;
+    //   this.extractFeaturedItems(this.locations);
+    // });
+  }
+
+  ngAfterContentChecked(): void {
+    // if (this.locations.length > 0) {
+    //   this.featuredCategories = this.locations.filter((i: any) => {
+    //     return (i.isFeatured = true);
+    //   });
+    //   this.featuredCategories = this.featuredCategories.slice(0, 5);
+    //   //  console.log('sjdkf: ',this.featuredCategories);
+    // }
   }
 
   next() {

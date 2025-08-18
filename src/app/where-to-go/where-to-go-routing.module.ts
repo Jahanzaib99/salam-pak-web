@@ -11,6 +11,9 @@ import { TripsResolveService } from './trips/trips-resolve.service';
 import { TripsComponent } from './trips/trips.component';
 
 import { WhereToGoComponent } from './where-to-go.component';
+import { CategoryWhereFeaturedComponent } from './category-where-featured/category-where-featured.component';
+import { CategoryWhereAllComponent } from './category-where-all/category-where-all.component';
+import { CategoryWhereFeAllComponent } from './category-where-fe-all/category-where-fe-all.component';
 
 const routes: Routes = [
   { path: '', component: WhereToGoComponent },
@@ -22,7 +25,24 @@ const routes: Routes = [
       category: CategoryResolveService,
     },
   },
-
+  {
+    path: 'location/:slug/featured',
+    component: CategoryWhereFeaturedComponent,
+    resolve: {
+      location: LocationResolveService,
+      trip: TripsResolveService,
+      category: CategoryResolveService
+    },
+  },
+  {
+    path: 'location/:slug/all',
+    component: CategoryWhereAllComponent,
+    resolve: {
+      location: LocationResolveService,
+      trip: TripsResolveService,
+      
+    },
+  },
   {
     path: 'category/:slug/listing',
     component: CategoryListingComponent,
@@ -30,10 +50,9 @@ const routes: Routes = [
       category: CategoryResolveService,
     },
   },
-
   {
-    path: 'location/:slug/listing',
-    component: CategoryListingComponent,
+    path: 'location/:slug/featured-all',
+    component: CategoryWhereFeAllComponent,
     resolve: {
       location: LocationResolveService,
     },

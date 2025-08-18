@@ -75,9 +75,18 @@ export class HomeService {
     return axios
       .get(`${environment.serverUrl}/` + routes.categories(params))
       .then(function (response) {
-        // handle success
-        // console.log(response.data.data);
-        return response.data.data;
+          let data = response.data.data;
+
+          // Move item with slug 'top-tourist-destinations' to the top
+          const prioritizedSlug = 'top-tourist-destinations';
+        
+          data.sort((a: any, b: any) => {
+            if (a.slug === prioritizedSlug) return -1;
+            if (b.slug === prioritizedSlug) return 1;
+            return 0; // keep original order for others
+          });
+          
+          return data;
       })
       .catch(function (error) {
         // handle error

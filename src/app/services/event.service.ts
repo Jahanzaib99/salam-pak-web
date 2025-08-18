@@ -28,6 +28,23 @@ const routes = {
   singleAccomodationCategory: (id: string) => `/category/detail?id=${id}`,
   room: (id: string) => `/accommodations/${id}`,
   getTrips: (slug?: string) => `/location?parentProvince=${slug}&pageSize=0`,
+  // getTopTrips: (slug?: string, parentCategoryIds: string[] = []) =>
+  //   `/location?parentProvince=${slug || ''}&parentCategories=${encodeURIComponent(JSON.stringify(parentCategoryIds))}&pageSize=0`,
+  getTopTrips: (slug?: string, parentCategoryIds: string[] = []) => {
+    const params = new URLSearchParams();
+  
+    if (slug) {
+      params.append('parentProvince', slug);
+    }
+  
+    if (parentCategoryIds.length > 0) {
+      params.append('parentCategories', JSON.stringify(parentCategoryIds));
+    }
+  
+    params.append('pageSize', '0');
+  
+    return `/location?${params.toString()}`;
+  },  
   getDestinationFilters: () => `/category?categoryType=destination`,
   getRelatedEvents: (id?: string) => `/events?status=published&city=${id}`,
   getNews: () => `/news`,
@@ -373,13 +390,7 @@ export class EventService {
       .then(function (response) {
         // handle success
         // console.log(response.data.data);
-        // handle success
-        // console.log(response.data.data);
-        var locations = response.data.data;
-
-        locations = locations.sort((a: any, b: any) => parseInt(b.order) - parseInt(a.order));
-
-        return locations;
+        return response.data.data;
       })
       .catch(function (error) {
         // handle error
@@ -391,6 +402,20 @@ export class EventService {
     // return this.httpClient.get(routes.getTrips(slug)).pipe(map((body: any) => body.data));
   }
 
+  getTopTrips(slug: string, parentCategoryIds: string[] = []) {
+    const url = `${environment.serverUrl}` + routes.getTopTrips(slug, parentCategoryIds);
+  
+    return axios
+      .get(url)
+      .then(function (response) {
+        return response.data.data;
+      })
+      .catch(function (error) {
+        console.error('Error fetching top trips:', error);
+        return []; // Return empty array on failure (optional)
+      });
+  }  
+  
   getAccomodationEvents(slug: any, pageSize = 10, skip = 0, filter: any = '') {
     return this.httpClient.get(
       `${environment.serverUrl}/accommodations/search?city=${slug}&skip=${skip}&pageSize=${pageSize}&filter=${filter}`
@@ -618,10 +643,10 @@ export class EventService {
   getEvents = (params: any) => {
     const _query = new URLSearchParams(params).toString();
     return axios
-      .get(`${environment.serverUrl}/trip?${_query}`)
+      .get(`${environment.serverUrl}/trip/search?${_query}`)
       .then(function (response) {
         // handle success
-        console.log(response.data.data);
+        // console.log(response.data.data);
         return response.data.data;
       })
       .catch(function (error) {
