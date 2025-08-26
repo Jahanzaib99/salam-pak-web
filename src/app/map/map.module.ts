@@ -13,7 +13,7 @@ import { ThreeDMapComponent } from './three-d-map/three-d-map.component';
     CommonModule,
     MapRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD46iP7ge4FBUCIAk1SUUMAW5iJvjbBbcE',
+      apiKey: 'AIzaSyDAtb_QnG0oEVgIEpkci40sTrCy6hQS834',
     }),
   ],
 })

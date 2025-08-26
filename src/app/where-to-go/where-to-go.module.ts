@@ -30,7 +30,7 @@ import { CategoryWhereFeaturedComponent } from './category-where-featured/catego
     WhereToGoRoutingModule,
     DestinationModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCPhOFre2UhYgZPRNw_qD8CaGQ36pUqaQA',
+      apiKey: 'AIzaSyDAtb_QnG0oEVgIEpkci40sTrCy6hQS834',
     }),
   ],
 })

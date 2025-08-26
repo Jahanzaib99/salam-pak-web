@@ -31,7 +31,7 @@ import { EventListingComponent } from './event-listing/event-listing.component';
     EventDetailRoutingModule,
     NgxPaginationModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyD46iP7ge4FBUCIAk1SUUMAW5iJvjbBbcE',
+      apiKey: 'AIzaSyDAtb_QnG0oEVgIEpkci40sTrCy6hQS834',
     }),
   ],
   exports: [],
