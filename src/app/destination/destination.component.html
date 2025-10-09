@@ -425,97 +425,297 @@
           </div> -->
           <!-- /.col-lg-4 -->
           <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="!show">
-            <div id="whattodo-map">
-              <!--*ngIf="show"-->
-              <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
-                <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
-              </agm-map>      *ngIf="!surroundingMakers"      -->
+            <div id="whattodo-map" style="position: relative;">
+              <!-- Map -->
               <agm-map
                 [zoom]="12"
-                [latitude]="
-                  surroundingMakers.location?.location.coordinates[1] ||
-                  center?.lat
-                "
-                [longitude]="
-                  surroundingMakers.location?.location.coordinates[0] ||
-                  center?.lng
-                "
+                [latitude]="surroundingMakers[0]?.location?.coordinates[1] || center?.lat"
+                [longitude]="surroundingMakers[0]?.location?.coordinates[0] || center?.lng"
+                style="height: 600px; width: 100%;"
               >
-                <!--  -->
-  
-                <!-- true -->
-                <agm-marker
-                  [latitude]="this.location?.location.coordinates[1]"
-                  [longitude]="this.location?.location.coordinates[0]"
-                >
+                <!-- Main City Marker -->
+                <agm-marker [latitude]="center?.lat" [longitude]="center?.lng">
                   <agm-info-window [disableAutoPan]="true">
-                    <a>
+                    <a [href]="infoWondowData.redirectLink">
                       <div>
                         <img class="info-img" src="{{ infoWondowData?.photo }}" />
-                        <b class="mx-3 d-inline info-desc">{{
-                          infoWondowData?.alias
-                        }}</b>
+                        <b class="mx-3 d-inline info-desc">
+                          {{ infoWondowData?.alias }}
+                        </b>
                       </div>
                     </a>
                   </agm-info-window>
                 </agm-marker>
-  
-                <!-- <agm-marker 
-                *ngIf="surroundingMakers"
-                  [latitude]="this.location?.location.coordinates[0] "
-                  [longitude]="this.location?.location.coordinates[1]"
-                ></agm-marker> -->
-              </agm-map>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-9 col-lg-9 pl-80" *ngIf="show">
-            <div id="whattodo-map">
-              <!--*ngIf="show"-->
-              <!-- <agm-map [zoom]="6" [latitude]="center?.lat" [longitude]="center?.lng" >
-                <agm-marker [latitude]="center?.lat" [longitude]="center?.lng"></agm-marker>
-              </agm-map>      *ngIf="!surroundingMakers"      -->
-              <agm-map
-                [zoom]="12"
-                [latitude]="
-                  surroundingMakers[0]?.location?.coordinates[1] || center?.lat
-                "
-                [longitude]="
-                  surroundingMakers[0]?.location?.coordinates[0] || center?.lng
-                "
-              >
+          
+                <!-- Other Markers -->
                 <agm-marker
                   *ngFor="let item of surroundingMakers"
                   [latitude]="item?.location?.coordinates[1]"
                   [longitude]="item?.location?.coordinates[0]"
                   [iconUrl]="{
-                    url: item.icon,
-                    scaledSize: {
-                      width: 25,
-                      height: 25
-                    }
+                    url: getMarkerIcon(item.type),
+                    scaledSize: { width: 30, height: 30 }
                   }"
                 >
                   <agm-info-window [disableAutoPan]="true">
-                    <a>
-                      <div>
-                        <a href="{{ getHref(item) }}" target="_blank"
-                          ><b class="mx-3 d-inline info-desc">{{
-                            item?.name
-                          }}</b></a
+                    <div style="max-width: 200px;">
+                      <h6 style="margin: 0 0 5px 0; font-weight: bold;">{{ item?.name }}</h6>
+                      <p style="margin: 0 0 5px 0; font-size: 12px; color: #666;">{{ item?.vicinity }}</p>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <a 
+                          [href]="getHref(item)" 
+                          target="_blank"
+                          style="
+                            background: #4285f4; 
+                            color: white; 
+                            padding: 4px 8px; 
+                            border-radius: 3px; 
+                            text-decoration: none; 
+                            font-size: 11px;
+                          "
                         >
+                          View on Maps
+                        </a>
+                        <span *ngIf="item?.rating" style="font-size: 11px; color: #666;">
+                          ⭐ {{ item.rating }}
+                        </span>
                       </div>
-                    </a>
+                    </div>
                   </agm-info-window>
                 </agm-marker>
-  
-                <!-- <agm-marker 
-                *ngIf="surroundingMakers"
-                  [latitude]="this.location?.location.coordinates[0] "
-                  [longitude]="this.location?.location.coordinates[1]"
-                ></agm-marker> -->
               </agm-map>
+          
+              <!-- Loading indicator -->
+              <div 
+                *ngIf="isLoading"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  background: rgba(255,255,255,0.9);
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  z-index: 1000;
+                "
+              >
+                <div style="text-align: center;">
+                  <div style="
+                    border: 3px solid #f3f3f3;
+                    border-top: 3px solid #007bff;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    animation: spin 1s linear infinite;
+                    margin: 0 auto 10px;
+                  "></div>
+                  <p style="margin: 0; color: #666; font-size: 14px;">Loading {{ selectedSurr }}...</p>
+                </div>
+              </div>
+          
+              <!-- No results message -->
+              <div 
+                *ngIf="selectedSurr && !isLoading && !hasError && surroundingMakers.length === 0"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  background: rgba(255,255,255,0.9);
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  z-index: 1000;
+                "
+              >
+                <div style="text-align: center;">
+                  <p style="margin: 0; color: #666; font-size: 14px;">No {{ selectedSurr }} found in this area</p>
+                </div>
+              </div>
+          
+              <!-- Error message -->
+              <div 
+                *ngIf="hasError"
+                style="
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  background: rgba(255,255,255,0.9);
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                  z-index: 1000;
+                "
+              >
+                <div style="text-align: center;">
+                  <p style="margin: 0; color: #dc3545; font-size: 14px;">Error loading {{ selectedSurr }}. Please try again.</p>
+                  <button 
+                    (click)="retrySurrounding()"
+                    style="
+                      margin-top: 10px;
+                      padding: 8px 16px;
+                      background: #007bff;
+                      color: white;
+                      border: none;
+                      border-radius: 4px;
+                      cursor: pointer;
+                    "
+                  >
+                    Retry
+                  </button>
+                </div>
+              </div>
+          
+              <!-- Overlay Filters -->
+              <div
+                class="map-controls"
+                style="
+                  position: absolute;
+                  top: 10px;
+                  left: 10px;
+                  z-index: 9999;
+                  background: white;
+                  padding: 8px;
+                  border-radius: 6px;
+                  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                "
+              >
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                  <button
+                    *ngFor="let s of surroundings"
+                    (click)="toggleFilter(s)"
+                    [class.active]="selectedSurr === s.name"
+                    class="filter-btn"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #ddd; 
+                      background: white; 
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      transition: all 0.3s ease;
+                    "
+                    [style.background]="selectedSurr === s.name ? '#007bff' : 'white'"
+                    [style.color]="selectedSurr === s.name ? 'white' : '#333'"
+                    [style.border-color]="selectedSurr === s.name ? '#007bff' : '#ddd'"
+                  >
+                    {{ s.name }}
+                  </button>
+                  <button
+                    *ngIf="selectedSurr"
+                    (click)="clearFilters()"
+                    class="clear-btn"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #dc3545; 
+                      background: #dc3545; 
+                      color: white;
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      transition: all 0.3s ease;
+                    "
+                    onmouseover="this.style.background='#c82333'"
+                    onmouseout="this.style.background='#dc3545'"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+          
+          <div class="col-sm-12 col-md-9 col-lg-9 pl-80" *ngIf="show">
+            <div id="whattodo-map">
+              <div class="filters">
+                <div style="display: flex; flex-wrap: wrap; align-items: center;">
+                  <button
+                    *ngFor="let s of surroundings"
+                    (click)="toggleFilter(s)"
+                    [class.active]="selectedSurr === s.name"
+                    class="filter-btn"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #ddd; 
+                      background: white; 
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      transition: all 0.3s ease;
+                    "
+                    [style.background]="selectedSurr === s.name ? '#007bff' : 'white'"
+                    [style.color]="selectedSurr === s.name ? 'white' : '#333'"
+                    [style.border-color]="selectedSurr === s.name ? '#007bff' : '#ddd'"
+                  >
+                    {{ s.name }}
+                  </button>
+                  <button
+                    *ngIf="selectedSurr"
+                    (click)="clearFilters()"
+                    class="clear-btn"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #dc3545; 
+                      background: #dc3545; 
+                      color: white;
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      transition: all 0.3s ease;
+                    "
+                    onmouseover="this.style.background='#c82333'"
+                    onmouseout="this.style.background='#dc3545'"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </div>
+              <agm-map
+                [zoom]="12"
+                [latitude]="surroundingMakers[0]?.location?.coordinates[1] || center?.lat"
+                [longitude]="surroundingMakers[0]?.location?.coordinates[0] || center?.lng"
+              >
+                <!-- Surrounding Places Markers -->
+                <agm-marker
+                  *ngFor="let item of surroundingMakers"
+                  [latitude]="item?.location?.coordinates[1]"
+                  [longitude]="item?.location?.coordinates[0]"
+                  [iconUrl]="{
+                    url: getMarkerIcon(item.type),
+                    scaledSize: { width: 25, height: 25 }
+                  }"
+                >
+                  <agm-info-window [disableAutoPan]="true">
+                    <div style="max-width: 200px;">
+                      <h6 style="margin: 0 0 5px 0; font-weight: bold;">{{ item?.name }}</h6>
+                      <p style="margin: 0 0 5px 0; font-size: 12px; color: #666;">{{ item?.vicinity }}</p>
+                      <div style="display: flex; align-items: center; gap: 10px;">
+                        <a 
+                          [href]="getHref(item)" 
+                          target="_blank"
+                          style="
+                            background: #4285f4; 
+                            color: white; 
+                            padding: 4px 8px; 
+                            border-radius: 3px; 
+                            text-decoration: none; 
+                            font-size: 11px;
+                          "
+                        >
+                          View on Maps
+                        </a>
+                        <span *ngIf="item?.rating" style="font-size: 11px; color: #666;">
+                          ⭐ {{ item.rating }}
+                        </span>
+                      </div>
+                    </div>
+                  </agm-info-window>
+                </agm-marker>
+              </agm-map>
+            </div>
+          </div>          
         </div>
   
         <!-- /.col-lg-12 -->

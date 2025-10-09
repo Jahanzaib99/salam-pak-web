@@ -30,7 +30,16 @@ export class MapComponent implements OnInit, AfterContentChecked {
   };
   locations: any = [];
   selectedLoc: any;
-  surroundings: any = [];
+  surroundings: any = [
+    { name: 'Restaurants', typeKey: 'restaurant' },
+    { name: 'Hotels', typeKey: 'lodging' },
+    { name: 'ATMs', typeKey: 'atm' },
+    { name: 'Fuel', typeKey: 'gas_station' },
+    { name: 'Pharmacies', typeKey: 'pharmacy' },
+    { name: 'Hospitals', typeKey: 'hospital' },
+    { name: 'Supermarkets', typeKey: 'supermarket' },
+    { name: 'Cafes', typeKey: 'cafe' },
+  ];
   selectedSurr: any;
   surroundingMakers: any = [];
 
@@ -40,6 +49,7 @@ export class MapComponent implements OnInit, AfterContentChecked {
     province: '',
     redirectLink: '',
   };
+  
 
   constructor(
     private shellService: Shell,
@@ -100,7 +110,7 @@ export class MapComponent implements OnInit, AfterContentChecked {
         lng: obj[0]?.location?.coordinates[0],
       };
       // });
-      this.surroundings = this.sortSurroundings(obj[0].surroundings);
+      // this.surroundings = this.sortSurroundings(obj[0].surroundings);
       this.infoWondowData.photo = obj[0].thumbnail;
       this.infoWondowData.alias = obj[0].alias;
       this.infoWondowData.redirectLink = `where-to-go/category/${obj[0].parentProvince}/${obj[0].type}/${obj[0].name}`;
@@ -125,7 +135,14 @@ export class MapComponent implements OnInit, AfterContentChecked {
     this.eventService
       .getSurroundings([this.center.lat, this.center.lng], data.typeKey)
       .then((data: any) => {
-        this.surroundingMakers = data.data;
+        this.surroundingMakers = data.data.map((place: any) => ({
+          lat: place.geometry.location.lat,
+          lng: place.geometry.location.lng,
+          name: place.name,
+          vicinity: place.vicinity,
+          type: data.typeKey,
+          icon: place.icon
+        }));
         // console.log(this.surroundingMakers);
       });
   };

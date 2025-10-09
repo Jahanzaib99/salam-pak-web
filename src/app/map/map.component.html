@@ -15,6 +15,15 @@
               ><img src="assets/images/icons/building.svg" />Cities</a
             >
           </div>
+          <div class="filters">
+            <button
+              *ngFor="let s of surroundings"
+              (click)="getSurrounding(s)"
+              [class.active]="selectedSurr === s.name"
+            >
+              {{ s.name }}
+            </button>
+          </div>
           <!-- /.accordion-item-header -->
           <div id="collapse1" class="collapse show" data-parent="#accordion">
             <div class="accordion__item-body">

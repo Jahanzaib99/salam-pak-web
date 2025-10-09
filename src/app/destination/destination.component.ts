@@ -23,6 +23,7 @@ import { CreatePlanComponent } from '../planning-popups/create-plan/create-plan.
 import { PlanListingComponent } from '../planning-popups/plan-listing/plan-listing.component';
 import { environment } from '../../environments/environment';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { GooglePlacesService } from '../services/google-places.service';
 
 const responsiveSettings = [
   {
@@ -68,7 +69,7 @@ export class DestinationComponent implements OnInit, AfterViewInit {
   loginForm!: FormGroup;
 
   surroundings: any = [];
-  show: boolean;
+  show: boolean = false;
   surroundingMakers: any = [];
   selectedSur: any;
   userId: any;
@@ -136,6 +137,23 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     redirectLink: '',
   };
 
+  map!: google.maps.Map;
+  markers: google.maps.Marker[] = [];
+  selectedSurr: string = '';
+  isLoading: boolean = false;
+  hasError: boolean = false;
+  filters = [
+    { name: 'Restaurants', typeKey: 'restaurant' },
+    { name: 'Hotels', typeKey: 'lodging' },
+    { name: 'Gas Stations', typeKey: 'gas_station' },
+    { name: 'ATMs', typeKey: 'atm' },
+    { name: 'Hospitals', typeKey: 'hospital' },
+    { name: 'Banks', typeKey: 'bank' },
+    { name: 'Cafes', typeKey: 'cafe' },
+    { name: 'Shopping', typeKey: 'shopping_mall' },
+    { name: 'Parks', typeKey: 'park' },
+    { name: 'Attractions', typeKey: 'tourist_attraction' },
+  ];
   planBtnText = 'Add to plan';
   tab: Number = 1;
   constructor(
@@ -149,7 +167,8 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     public routeLocation: Location,
     private authenticationService: AuthenticationService,
     private toastr: ToastrService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private googlePlacesService: GooglePlacesService
   ) {
 
     
@@ -171,7 +190,7 @@ export class DestinationComponent implements OnInit, AfterViewInit {
 
       // console.log(res);
       this.location = this.route.snapshot.data.location;
-      this.surroundings = this.location.surroundings;
+      this.surroundings = this.location.surroundings || this.filters;
 
       this.center = {
         lat: this.location?.location.coordinates[1],
@@ -200,6 +219,85 @@ export class DestinationComponent implements OnInit, AfterViewInit {
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
+
+  getMarkerIcon(type: string): string {
+    const icons: { [type: string]: string } = {
+      gas_station: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/gas_station-71.png',
+      atm: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/atm-71.png',
+      restaurant: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
+      lodging: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+      hospital: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png'
+    };
+    return icons[type] || 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png';
+  }
+  
+  getSurrounding(data: any) {
+    this.selectedSurr = data.name;
+    this.isLoading = true;
+    this.hasError = false;
+    
+    // Clear existing markers when switching filters
+    this.surroundingMakers = [];
+    
+    // Get Google Places type from our filter type
+    const googlePlaceType = this.googlePlacesService.getGooglePlaceType(data.typeKey);
+    
+    this.googlePlacesService
+      .getNearbyPlaces(this.center.lat, this.center.lng, googlePlaceType, 5000)
+      .subscribe({
+        next: (places: any[]) => {
+          this.isLoading = false;
+          this.surroundingMakers = places.map((place: any) => ({
+            location: {
+              coordinates: [place.geometry.location.lng, place.geometry.location.lat]
+            },
+            name: place.name,
+            vicinity: place.vicinity,
+            type: data.typeKey,
+            place_id: place.place_id,
+            rating: place.rating || 0,
+            price_level: place.price_level || 0
+          }));
+        },
+        error: (error) => {
+          console.error('Error fetching surroundings from Google Places:', error);
+          this.isLoading = false;
+          this.hasError = true;
+          this.surroundingMakers = [];
+          
+          // Show user-friendly error message
+          this.toastr.error('Unable to load nearby places. Please try again.', 'Error');
+        }
+      });
+  }
+
+  clearFilters() {
+    this.selectedSurr = '';
+    this.surroundingMakers = [];
+    this.isLoading = false;
+    this.hasError = false;
+  }
+
+  // Method to handle filter toggle (like Google Maps)
+  toggleFilter(data: any) {
+    if (this.selectedSurr === data.name) {
+      // If clicking the same filter, clear it
+      this.clearFilters();
+    } else {
+      // Otherwise, apply the filter
+      this.getSurrounding(data);
+    }
+  }
+
+  // Method to retry loading surroundings after an error
+  retrySurrounding() {
+    const selectedSurrounding = this.surroundings.find((s: any) => s.name === this.selectedSurr);
+    if (selectedSurrounding) {
+      this.getSurrounding(selectedSurrounding);
+    }
+  }
+
+  
 
   loadWeather(s: any, id: any) {
     var js,
@@ -470,26 +568,74 @@ export class DestinationComponent implements OnInit, AfterViewInit {
 
     return size + '%';
   }
-  navigateOnClick(surrounding: any) {
-    // debugger
-    this.selectedSur = surrounding.name;
-    // this.center = {
-    //   lat: this.location?.location.coordinates[0],
-    //   lng: this.location?.location.coordinates[1],
-    // };
+  // navigateOnClick(surrounding: any) {
+  //   // debugger
+  //   this.selectedSur = surrounding.name;
+  //   // this.center = {
+  //   //   lat: this.location?.location.coordinates[0],
+  //   //   lng: this.location?.location.coordinates[1],
+  //   // };
+  //   this.eventService
+  //     .getSurroundings(this.location?.location.coordinates, surrounding.typeKey)
+  //     .then((data: any) => {
+  //       this.surroundingMakers = data.data;
+  //       this.show = true;
+  //       // console.log(this.surroundingMakers);
+  //       // debugger;
+  //     });
+
+  //   // let url = `/map/cities/${surrounding.name}`;
+
+  //   // this.location.go(url);
+  // }
+
+  // navigateOnClick(surrounding: any) {
+  //   this.selectedSur = surrounding.name;
+  
+  //   this.eventService
+  //     .getSurroundings(this.location?.location.coordinates, surrounding.typeKey)
+  //     .then((data: any) => {
+  //       this.surroundingMakers = data.data;
+  //       this.show = true;
+  
+  //       // clear old markers
+  //       this.markers.forEach(m => m.setMap(null));
+  //       this.markers = [];
+  
+  //       // add new markers
+  //       this.surroundingMakers.forEach((place: any) => {
+  //         const marker = new google.maps.Marker({
+  //           position: {
+  //             lat: place.geometry.location.lat,
+  //             lng: place.geometry.location.lng,
+  //           },
+  //           map: this.map,
+  //           title: place.name,
+  //         });
+  
+  //         const infowindow = new google.maps.InfoWindow({
+  //           content: `<strong>${place.name}</strong><br/>${place.vicinity || ''}`
+  //         });
+  
+  //         marker.addListener('click', () => {
+  //           infowindow.open(this.map, marker);
+  //         });
+  
+  //         this.markers.push(marker);
+  //       });
+  //     });
+  // }
+
+  navigateOnClick(filter: any) {
+    this.selectedSur = filter.name;
     this.eventService
-      .getSurroundings(this.location?.location.coordinates, surrounding.typeKey)
+      .getSurroundings(this.location?.location.coordinates, filter.typeKey)
       .then((data: any) => {
         this.surroundingMakers = data.data;
         this.show = true;
-        // console.log(this.surroundingMakers);
-        // debugger;
       });
-
-    // let url = `/map/cities/${surrounding.name}`;
-
-    // this.location.go(url);
   }
+  
 
   hideCarousel() {
     this.showImgs = false;

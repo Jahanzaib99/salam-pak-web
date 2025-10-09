@@ -31,6 +31,7 @@ import { CategoryWhereFeaturedComponent } from './category-where-featured/catego
     DestinationModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDAtb_QnG0oEVgIEpkci40sTrCy6hQS834',
+      libraries: ['places'], // 👈 required for nearby places
     }),
   ],
 })

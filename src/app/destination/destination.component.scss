@@ -167,3 +167,78 @@ iframe {
   margin-top: 15px !important;
   font-size: 1.0rem !important;
 }
+
+// Map filter styles
+.map-controls {
+  .filter-btn {
+    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 500;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    &.active {
+      box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+    }
+  }
+  
+  .clear-btn {
+    transition: all 0.3s ease;
+    font-size: 12px;
+    font-weight: 500;
+    
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(220,53,69,0.3);
+    }
+  }
+}
+
+// Info window styles
+::ng-deep .agm-info-window {
+  .info-window-content {
+    max-width: 200px;
+    
+    h6 {
+      margin: 0 0 5px 0;
+      font-weight: bold;
+      color: #333;
+    }
+    
+    p {
+      margin: 0 0 5px 0;
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .view-maps-btn {
+      background: #4285f4;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 3px;
+      text-decoration: none;
+      font-size: 11px;
+      transition: background 0.2s ease;
+      
+      &:hover {
+        background: #3367d6;
+        text-decoration: none;
+        color: white;
+      }
+    }
+    
+    .rating {
+      font-size: 11px;
+      color: #666;
+    }
+  }
+}
+
+// Loading spinner animation
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

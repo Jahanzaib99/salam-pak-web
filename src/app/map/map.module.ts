@@ -14,6 +14,7 @@ import { ThreeDMapComponent } from './three-d-map/three-d-map.component';
     MapRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDAtb_QnG0oEVgIEpkci40sTrCy6hQS834',
+      libraries: ['places'], // 👈 required for nearby places
     }),
   ],
 })
