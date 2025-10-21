@@ -10,7 +10,7 @@ export class BookingRailwayComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    window.location.href = 'https://www.pakrail.gov.pk/';
+    window.location.href = 'https://pakrail.gov.pk/';
   }
 
 }

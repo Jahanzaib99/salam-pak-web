@@ -146,13 +146,32 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     { name: 'Restaurants', typeKey: 'restaurant' },
     { name: 'Hotels', typeKey: 'lodging' },
     { name: 'Gas Stations', typeKey: 'gas_station' },
+    { name: 'Fuel', typeKey: 'fuel' },
     { name: 'ATMs', typeKey: 'atm' },
     { name: 'Hospitals', typeKey: 'hospital' },
     { name: 'Banks', typeKey: 'bank' },
     { name: 'Cafes', typeKey: 'cafe' },
-    { name: 'Shopping', typeKey: 'shopping_mall' },
+    { name: 'Shopping Malls', typeKey: 'shopping_mall' },
     { name: 'Parks', typeKey: 'park' },
-    { name: 'Attractions', typeKey: 'tourist_attraction' },
+    { name: 'Tourist Attractions', typeKey: 'tourist_attraction' },
+    { name: 'Family Trip', typeKey: 'family_trip' },
+    { name: 'Sports & Adventures', typeKey: 'sports_and_adventures' },
+    { name: 'Pharmacies', typeKey: 'pharmacy' },
+    { name: 'Supermarkets', typeKey: 'supermarket' },
+    { name: 'Post Offices', typeKey: 'post_office' },
+    { name: 'Police Stations', typeKey: 'police' },
+    { name: 'Schools', typeKey: 'school' },
+    { name: 'Mosques', typeKey: 'mosque' },
+    { name: 'Movie Theaters', typeKey: 'movie_theater' },
+    { name: 'Museums', typeKey: 'museum' },
+    { name: 'Zoos', typeKey: 'zoo' },
+    { name: 'Amusement Parks', typeKey: 'amusement_park' },
+    { name: 'Gyms', typeKey: 'gym' },
+    { name: 'Stadiums', typeKey: 'stadium' },
+    { name: 'Sports Complexes', typeKey: 'sports_complex' },
+    { name: 'Campgrounds', typeKey: 'campground' },
+    { name: 'Airports', typeKey: 'airport' },
+    { name: 'Bakeries', typeKey: 'bakery' }
   ];
   planBtnText = 'Add to plan';
   tab: Number = 1;
@@ -191,6 +210,41 @@ export class DestinationComponent implements OnInit, AfterViewInit {
       // console.log(res);
       this.location = this.route.snapshot.data.location;
       this.surroundings = this.location.surroundings || this.filters;
+      
+      // Ensure all surroundings use correct Google Places types
+      this.surroundings = this.surroundings.map((surrounding: any) => {
+        // Replace "family tips" with "family trip" in the name
+        if (surrounding.name && surrounding.name.toLowerCase().includes('family tips')) {
+          surrounding.name = surrounding.name.replace(/family tips/gi, 'Family Trip');
+        }
+        
+        return {
+          ...surrounding,
+          typeKey: this.googlePlacesService.getGooglePlaceType(surrounding.typeKey || surrounding.name?.toLowerCase())
+        };
+      });
+
+      // Add essential filters if they don't exist in backend data
+      const essentialFilters = [
+        { name: 'Fuel', typeKey: 'fuel' },
+        { name: 'ATMs', typeKey: 'atm' },
+        { name: 'Gas Stations', typeKey: 'gas_station' },
+        { name: 'Hospitals', typeKey: 'hospital' },
+        { name: 'Banks', typeKey: 'bank' },
+        { name: 'Restaurants', typeKey: 'restaurant' },
+        { name: 'Hotels', typeKey: 'lodging' }
+      ];
+
+      essentialFilters.forEach(essentialFilter => {
+        const exists = this.surroundings.some((surrounding: any) => 
+          surrounding.name?.toLowerCase().includes(essentialFilter.name.toLowerCase()) ||
+          surrounding.typeKey === essentialFilter.typeKey
+        );
+        
+        if (!exists) {
+          this.surroundings.unshift(essentialFilter);
+        }
+      });
 
       this.center = {
         lat: this.location?.location.coordinates[1],
@@ -222,11 +276,68 @@ export class DestinationComponent implements OnInit, AfterViewInit {
 
   getMarkerIcon(type: string): string {
     const icons: { [type: string]: string } = {
-      gas_station: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/gas_station-71.png',
-      atm: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/atm-71.png',
-      restaurant: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
-      lodging: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-      hospital: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png'
+      // Food & Drink - Google Maps icons
+      'restaurant': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png',
+      'cafe': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/cafe-71.png',
+      'bar': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png',
+      'bakery': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bakery-71.png',
+      'meal_takeaway': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/meal_takeaway-71.png',
+      
+      // Accommodation - Google Maps icons
+      'lodging': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+      
+      // Transportation - Google Maps icons
+      'gas_station': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/gas_station-71.png',
+      'fuel': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/gas_station-71.png',
+      
+      // Financial - Google Maps icons
+      'atm': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/atm-71.png',
+      'bank': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bank-71.png',
+      
+      // Health - Google Maps icons
+      'hospital': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hospital-71.png',
+      'pharmacy': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/pharmacy-71.png',
+      
+      // Shopping - Google Maps icons
+      'shopping_mall': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/shopping_mall-71.png',
+      'store': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/store-71.png',
+      'supermarket': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/supermarket-71.png',
+      
+      // Recreation - Google Maps icons
+      'park': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/park-71.png',
+      'tourist_attraction': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/tourist_attraction-71.png',
+      'amusement_park': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/amusement_park-71.png',
+      'zoo': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/zoo-71.png',
+      'museum': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/museum-71.png',
+      
+      // Services - Google Maps icons
+      'post_office': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/post_office-71.png',
+      'police': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/police-71.png',
+      'fire_station': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/fire_station-71.png',
+      
+      // Education - Google Maps icons
+      'school': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/school-71.png',
+      'university': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/university-71.png',
+      
+      // Religious - Google Maps icons
+      'church': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/church-71.png',
+      'mosque': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/mosque-71.png',
+      'synagogue': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/synagogue-71.png',
+      'hindu_temple': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/hindu_temple-71.png',
+      
+      // Entertainment - Google Maps icons
+      'movie_theater': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/movie_theater-71.png',
+      'night_club': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/night_club-71.png',
+      
+      // Sports and Adventure - Google Maps icons
+      'gym': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/gym-71.png',
+      'fitness_center': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/fitness_center-71.png',
+      'stadium': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/stadium-71.png',
+      'sports_complex': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/sports_complex-71.png',
+      
+      // Outdoor activities - Google Maps icons
+      'campground': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/campground-71.png',
+      'airport': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/airport-71.png'
     };
     return icons[type] || 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/geocode-71.png';
   }
@@ -242,11 +353,14 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     // Get Google Places type from our filter type
     const googlePlaceType = this.googlePlacesService.getGooglePlaceType(data.typeKey);
     
+    console.log(`Searching for ${data.name} (${data.typeKey}) -> Google Places type: ${googlePlaceType}`);
+    
     this.googlePlacesService
       .getNearbyPlaces(this.center.lat, this.center.lng, googlePlaceType, 5000)
       .subscribe({
         next: (places: any[]) => {
           this.isLoading = false;
+          console.log(`Found ${places.length} places for ${data.name}`);
           this.surroundingMakers = places.map((place: any) => ({
             location: {
               coordinates: [place.geometry.location.lng, place.geometry.location.lat]
@@ -265,8 +379,14 @@ export class DestinationComponent implements OnInit, AfterViewInit {
           this.hasError = true;
           this.surroundingMakers = [];
           
-          // Show user-friendly error message
-          this.toastr.error('Unable to load nearby places. Please try again.', 'Error');
+          // Show user-friendly error message based on error type
+          if (error.includes('timeout')) {
+            this.toastr.error('Request timed out. Please check your internet connection and try again.', 'Timeout Error');
+          } else if (error.includes('not loaded')) {
+            this.toastr.error('Google Maps is not available. Please refresh the page and try again.', 'Maps Error');
+          } else {
+            this.toastr.error('Unable to load nearby places. Please try again.', 'Error');
+          }
         }
       });
   }

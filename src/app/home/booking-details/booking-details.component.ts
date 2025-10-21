@@ -324,7 +324,7 @@ export class BookingDetailsComponent implements OnInit {
 
   navigateToTrainBooking() {
     window.open(
-      `https://www.pakrail.gov.pk/PlanJourney.aspx?planFromStation=${this.tf[0].value}&planToStation=${this.tt[0].value}&planTripType=${this.trainTrip}`,
+      `https://pakrail.gov.pk/PlanJourney.aspx?planFromStation=${this.tf[0].value}&planToStation=${this.tt[0].value}&planTripType=${this.trainTrip}`,
       '_blank'
     );
   }
