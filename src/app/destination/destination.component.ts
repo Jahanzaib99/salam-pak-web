@@ -152,9 +152,11 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     { name: 'Banks', typeKey: 'bank' },
     { name: 'Cafes', typeKey: 'cafe' },
     { name: 'Shopping Malls', typeKey: 'shopping_mall' },
+    { name: 'Shops', typeKey: 'store' },
     { name: 'Parks', typeKey: 'park' },
+    { name: 'Hiking', typeKey: 'hiking' },
+    { name: 'Mountain Trail', typeKey: 'mountain_trail' },
     { name: 'Tourist Attractions', typeKey: 'tourist_attraction' },
-    { name: 'Family Trip', typeKey: 'family_trip' },
     { name: 'Sports & Adventures', typeKey: 'sports_and_adventures' },
     { name: 'Pharmacies', typeKey: 'pharmacy' },
     { name: 'Supermarkets', typeKey: 'supermarket' },
@@ -211,18 +213,21 @@ export class DestinationComponent implements OnInit, AfterViewInit {
       this.location = this.route.snapshot.data.location;
       this.surroundings = this.location.surroundings || this.filters;
       
-      // Ensure all surroundings use correct Google Places types
-      this.surroundings = this.surroundings.map((surrounding: any) => {
-        // Replace "family tips" with "family trip" in the name
-        if (surrounding.name && surrounding.name.toLowerCase().includes('family tips')) {
-          surrounding.name = surrounding.name.replace(/family tips/gi, 'Family Trip');
-        }
-        
-        return {
-          ...surrounding,
-          typeKey: this.googlePlacesService.getGooglePlaceType(surrounding.typeKey || surrounding.name?.toLowerCase())
-        };
-      });
+      // Filter out family_tips and ensure all surroundings use correct Google Places types
+      this.surroundings = this.surroundings
+        .filter((surrounding: any) => {
+          // Remove any family_tips or family tips references
+          const name = surrounding.name?.toLowerCase() || '';
+          const typeKey = surrounding.typeKey?.toLowerCase() || '';
+          return !name.includes('family tips') && !name.includes('family_tips') && 
+                 !typeKey.includes('family_tips') && !typeKey.includes('family tips');
+        })
+        .map((surrounding: any) => {
+          return {
+            ...surrounding,
+            typeKey: this.googlePlacesService.getGooglePlaceType(surrounding.typeKey || surrounding.name?.toLowerCase())
+          };
+        });
 
       // Add essential filters if they don't exist in backend data
       const essentialFilters = [
@@ -336,6 +341,8 @@ export class DestinationComponent implements OnInit, AfterViewInit {
       'sports_complex': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/sports_complex-71.png',
       
       // Outdoor activities - Google Maps icons
+      'hiking': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/park-71.png',
+      'mountain_trail': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/park-71.png',
       'campground': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/campground-71.png',
       'airport': 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/airport-71.png'
     };
@@ -353,25 +360,64 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     // Get Google Places type from our filter type
     const googlePlaceType = this.googlePlacesService.getGooglePlaceType(data.typeKey);
     
-    console.log(`Searching for ${data.name} (${data.typeKey}) -> Google Places type: ${googlePlaceType}`);
+    // Add keywords for hiking and mountain trails
+    let keyword: string | undefined;
+    if (data.typeKey === 'hiking') {
+      keyword = 'hiking';
+    } else if (data.typeKey === 'mountain_trail') {
+      keyword = 'trail';
+    }
+    
+    console.log(`Searching for ${data.name} (${data.typeKey}) -> Google Places type: ${googlePlaceType}${keyword ? ` with keyword: ${keyword}` : ''}`);
+    console.log(`Location: ${this.center.lat}, ${this.center.lng}`);
+    console.log(`Radius: 10000m`);
+    console.log(`Available surroundings:`, this.surroundings);
     
     this.googlePlacesService
-      .getNearbyPlaces(this.center.lat, this.center.lng, googlePlaceType, 5000)
+      .getNearbyPlaces(this.center.lat, this.center.lng, googlePlaceType, 10000, keyword)
       .subscribe({
         next: (places: any[]) => {
           this.isLoading = false;
           console.log(`Found ${places.length} places for ${data.name}`);
-          this.surroundingMakers = places.map((place: any) => ({
-            location: {
-              coordinates: [place.geometry.location.lng, place.geometry.location.lat]
-            },
-            name: place.name,
-            vicinity: place.vicinity,
-            type: data.typeKey,
-            place_id: place.place_id,
-            rating: place.rating || 0,
-            price_level: place.price_level || 0
-          }));
+          
+          // If no results with keyword, try without keyword for hiking/mountain trails
+          if (places.length === 0 && keyword && (data.typeKey === 'hiking' || data.typeKey === 'mountain_trail')) {
+            console.log(`No results with keyword "${keyword}", trying without keyword...`);
+            this.googlePlacesService
+              .getNearbyPlaces(this.center.lat, this.center.lng, googlePlaceType, 10000)
+              .subscribe({
+                next: (fallbackPlaces: any[]) => {
+                  console.log(`Fallback search found ${fallbackPlaces.length} places`);
+                  this.surroundingMakers = fallbackPlaces.map((place: any) => ({
+                    location: {
+                      coordinates: [place.geometry.location.lng, place.geometry.location.lat]
+                    },
+                    name: place.name,
+                    vicinity: place.vicinity,
+                    type: data.typeKey,
+                    place_id: place.place_id,
+                    rating: place.rating || 0,
+                    price_level: place.price_level || 0
+                  }));
+                },
+                error: (fallbackError) => {
+                  console.error('Fallback search also failed:', fallbackError);
+                  this.surroundingMakers = [];
+                }
+              });
+          } else {
+            this.surroundingMakers = places.map((place: any) => ({
+              location: {
+                coordinates: [place.geometry.location.lng, place.geometry.location.lat]
+              },
+              name: place.name,
+              vicinity: place.vicinity,
+              type: data.typeKey,
+              place_id: place.place_id,
+              rating: place.rating || 0,
+              price_level: place.price_level || 0
+            }));
+          }
         },
         error: (error) => {
           console.error('Error fetching surroundings from Google Places:', error);
@@ -415,6 +461,62 @@ export class DestinationComponent implements OnInit, AfterViewInit {
     if (selectedSurrounding) {
       this.getSurrounding(selectedSurrounding);
     }
+  }
+
+  // Debug method to test mountain trail search
+  debugMountainTrailSearch() {
+    console.log('=== DEBUG: Mountain Trail Search ===');
+    console.log('Center location:', this.center);
+    console.log('Available surroundings:', this.surroundings);
+    
+    const mountainTrail = this.surroundings.find((s: any) => s.typeKey === 'mountain_trail');
+    if (mountainTrail) {
+      console.log('Mountain Trail filter found:', mountainTrail);
+      this.getSurrounding(mountainTrail);
+    } else {
+      console.log('No mountain trail filter found in surroundings');
+    }
+  }
+
+  // Test method to check if Google Places API is working
+  testGooglePlacesAPI() {
+    console.log('=== TESTING GOOGLE PLACES API ===');
+    console.log('Center location:', this.center);
+    
+    // Test with restaurants first (should always work)
+    this.googlePlacesService
+      .getNearbyPlaces(this.center.lat, this.center.lng, 'restaurant', 5000)
+      .subscribe({
+        next: (places: any[]) => {
+          console.log(`✅ Google Places API working! Found ${places.length} restaurants`);
+          console.log('Sample restaurant:', places[0]);
+        },
+        error: (error) => {
+          console.error('❌ Google Places API failed:', error);
+        }
+      });
+  }
+
+  // Test different place types to see which ones work
+  testDifferentPlaceTypes() {
+    console.log('=== TESTING DIFFERENT PLACE TYPES ===');
+    const testTypes = ['restaurant', 'store', 'park', 'gas_station', 'atm', 'hospital'];
+    
+    testTypes.forEach(type => {
+      this.googlePlacesService
+        .getNearbyPlaces(this.center.lat, this.center.lng, type, 5000)
+        .subscribe({
+          next: (places: any[]) => {
+            console.log(`✅ ${type}: Found ${places.length} places`);
+            if (places.length > 0) {
+              console.log(`   Sample: ${places[0].name}`);
+            }
+          },
+          error: (error) => {
+            console.error(`❌ ${type}: Failed -`, error);
+          }
+        });
+    });
   }
 
   

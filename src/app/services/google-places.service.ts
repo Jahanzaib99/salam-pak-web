@@ -38,8 +38,8 @@ export class GooglePlacesService {
     }
   }
 
-  // Get nearby places using Google Places API with support for multiple types
-  getNearbyPlaces(lat: number, lng: number, type: string, radius: number = 5000): Observable<PlaceResult[]> {
+  // Get nearby places using Google Places API with support for multiple types and keyword search
+  getNearbyPlaces(lat: number, lng: number, type: string, radius: number = 5000, keyword?: string): Observable<PlaceResult[]> {
     return new Observable(observer => {
       // Set a timeout to prevent hanging requests
       const timeout = setTimeout(() => {
@@ -90,14 +90,22 @@ export class GooglePlacesService {
 
       typesToSearch.forEach(searchType => {
         try {
-          const request = {
+          const request: any = {
             location: new google.maps.LatLng(lat, lng),
             radius: radius,
             type: searchType
           };
 
+          // Add keyword for hiking and mountain trails
+          if (keyword) {
+            request.keyword = keyword;
+          }
+
+          console.log(`Google Places API request:`, request);
+          
           this.placesService.nearbySearch(request, (results: any[], status: any) => {
             completedSearches++;
+            console.log(`Google Places API response for ${searchType}:`, { status, resultsCount: results?.length || 0 });
             
             if (status === google.maps.places.PlacesServiceStatus.OK && results) {
               const places = results.map(place => ({
@@ -116,9 +124,16 @@ export class GooglePlacesService {
               }));
               allResults = allResults.concat(places);
             } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-              // No results for this type, continue
+              console.log(`No results found for type ${searchType} with keyword "${keyword || 'none'}"`);
             } else {
               console.warn(`Places search failed for type ${searchType}:`, status);
+              if (status === google.maps.places.PlacesServiceStatus.INVALID_REQUEST) {
+                console.error('Invalid request - check API key and parameters');
+              } else if (status === google.maps.places.PlacesServiceStatus.OVER_QUERY_LIMIT) {
+                console.error('Query limit exceeded');
+              } else if (status === google.maps.places.PlacesServiceStatus.REQUEST_DENIED) {
+                console.error('Request denied - check API key permissions');
+              }
             }
 
             // When all searches are complete, return results
@@ -242,10 +257,8 @@ export class GooglePlacesService {
       
       // Other
       'bakeries': ['bakery'],
-      'hiking': ['park'],
-      'mountain_trail': ['park'],
-      'family_trip': ['tourist_attraction'],
-      'family_tips': ['tourist_attraction'], // Handle both old and new naming
+      'hiking': ['park', 'campground', 'tourist_attraction'],
+      'mountain_trail': ['park', 'campground', 'tourist_attraction'],
       'group_houses': ['lodging'],
       'cafe_or_dhabba': ['cafe']
     };
@@ -368,8 +381,6 @@ export class GooglePlacesService {
       // Outdoor activities
       'hiking': 'park',
       'mountain_trail': 'park',
-      'family_trip': 'tourist_attraction',
-      'family_tips': 'tourist_attraction', // Handle both old and new naming
       'group_houses': 'lodging',
       'cafe_or_dhabba': 'cafe'
     };

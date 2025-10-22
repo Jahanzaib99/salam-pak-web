@@ -622,6 +622,38 @@
                   >
                     Clear
                   </button>
+                  
+                  <!-- Debug buttons -->
+                  <button
+                    (click)="testGooglePlacesAPI()"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #28a745; 
+                      background: #28a745; 
+                      color: white;
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      font-size: 11px;
+                    "
+                  >
+                    Test API
+                  </button>
+                  <button
+                    (click)="testDifferentPlaceTypes()"
+                    style="
+                      margin: 3px; 
+                      padding: 8px 12px; 
+                      border: 1px solid #ffc107; 
+                      background: #ffc107; 
+                      color: black;
+                      border-radius: 4px; 
+                      cursor: pointer;
+                      font-size: 11px;
+                    "
+                  >
+                    Test Types
+                  </button>
                 </div>
               </div>
             </div>
