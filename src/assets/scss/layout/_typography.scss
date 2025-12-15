@@ -1,5 +1,5 @@
 /*-------------------------
-   Typography
+   Typography - Modern Theme
 --------------------------*/
 h1,
 h2,
@@ -10,40 +10,61 @@ h6 {
   color: $color-heading;
   font-family: $font-heading;
   text-transform: capitalize;
-  font-weight: 600;
-  line-height: 1.1;
-  margin-bottom: 23px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: $spacing-md;
+  letter-spacing: -0.02em; // Tighter letter spacing for modern look
 }
 
 p {
-  font-size: 15px;
-  line-height: 25px;
+  font-size: $body-font-size;
+  line-height: 1.75; // Better line height for readability
   font-weight: 400;
-  margin-bottom: 15px;
+  margin-bottom: $spacing-md;
+  color: $color-body;
 }
 
 h1 {
-  font-size: 52px;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  @media (max-width: 768px) {
+    font-size: 36px;
+  }
 }
 
 h2 {
-  font-size: 42px;
+  font-size: 44px;
+  font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 32px;
+  }
 }
 
 h3 {
-  font-size: 38px;
+  font-size: 36px;
+  font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
 }
 
 h4 {
-  font-size: 32px;
+  font-size: 28px;
+  font-weight: 600;
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 }
 
 h5 {
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 h6 {
   font-size: 18px;
+  font-weight: 600;
 }
 
 .heading__subtitle {
@@ -52,12 +73,18 @@ h6 {
   font-weight: 700;
   color: $color-theme;
   display: inline-block;
-  margin-bottom: 13px;
+  margin-bottom: $spacing-sm;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .heading__title {
-  font-size: 33px;
-  margin-bottom: 15px;
+  font-size: 40px;
+  margin-bottom: $spacing-md;
+  font-weight: 700;
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
 }
 
 .heading__desc {

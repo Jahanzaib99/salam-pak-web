@@ -5,17 +5,28 @@
 .btn {
   text-transform: capitalize;
   position: relative;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
   width: 170px;
   height: 50px;
   line-height: 48px;
-  border-radius: 3px;
+  border-radius: $border-radius-md; // Modern rounded corners
   text-align: center;
   padding: 0;
-  letter-spacing: 0.4px;
-  border-radius: 2px;
-  @include prefix(transition, all 0.3s ease-in-out, webkit moz ms o);
+  letter-spacing: 0.3px;
+  @include prefix(transition, all 0.3s cubic-bezier(0.4, 0, 0.2, 1), webkit moz ms o); // Smooth modern transition
+  box-shadow: $shadow-sm; // Subtle shadow
+  cursor: pointer;
+  
+  &:hover {
+    box-shadow: $shadow-md; // Enhanced shadow on hover
+    @include prefix(transform, translateY(-2px), webkit moz ms o); // Slight lift effect
+  }
+  
+  &:active {
+    @include prefix(transform, translateY(0), webkit moz ms o);
+    box-shadow: $shadow-sm;
+  }
 }
 
 .btn:focus,
@@ -36,13 +47,14 @@
   background-color: $color-theme;
   color: $color-white;
   border: 2px solid $color-theme;
-}
-
-.btn__primary:active,
-.btn__primary:focus,
-.btn__primary:hover {
-  background-color: transparent;
-  color: $color-theme;
+  
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: darken($color-theme, 8%);
+    border-color: darken($color-theme, 8%);
+    color: $color-white;
+  }
 }
 
 .btn__primary.btn__hover2:active,
@@ -109,6 +121,8 @@
 
 .btn__rounded {
   border-radius: 50px;
+  padding: 0 32px;
+  width: auto;
 }
 
 /* Button Link */

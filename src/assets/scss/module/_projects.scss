@@ -4,12 +4,22 @@
 .project-item {
   position: relative;
   margin-bottom: 30px;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: $color-white;
+  box-shadow: $shadow-md;
+  @include prefix(transition, all 0.4s cubic-bezier(0.4, 0, 0.2, 1), webkit moz ms o);
+  
+  &:hover {
+    box-shadow: $shadow-xl;
+    @include prefix(transform, translateY(-8px), webkit moz ms o);
+  }
 
   .project__img {
     position: relative;
     overflow: hidden;
-    border-radius: 3px;
-    @include prefix(transition, all 0.6s linear, webkit moz ms o);
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    @include prefix(transition, all 0.6s cubic-bezier(0.4, 0, 0.2, 1), webkit moz ms o);
 
     &:after {
       content: "";
@@ -66,8 +76,9 @@
   }
 
   .project__content {
-    padding: 30px;
+    padding: $spacing-lg;
     background-color: $color-white;
+    border-radius: 0 0 $border-radius-lg $border-radius-lg;
   }
 
   .project__cat {
@@ -75,9 +86,10 @@
     position: absolute;
     z-index: 2;
     bottom: 0;
-    left: 30px;
-    padding: 4px 7px;
-    border-radius: 3px 3px 0 0;
+    left: $spacing-lg;
+    padding: 8px 14px;
+    border-radius: $border-radius-md $border-radius-md 0 0;
+    box-shadow: $shadow-md;
 
     a {
       position: relative;
@@ -239,7 +251,11 @@
 
 .projects-grid-layout2 {
   .project-item {
-    box-shadow: 0px 5px 83px 0px rgba(40, 40, 40, 0.08);
+    box-shadow: $shadow-lg;
+    
+    &:hover {
+      box-shadow: $shadow-xl;
+    }
   }
 }
 

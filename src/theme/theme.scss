@@ -1,4 +1,152 @@
 /*
  * Global application theme.
  * Framework overrides and customization goes here.
+ * Modern theme inspired by visitnorway.com
  */
+
+// Modern container improvements
+.container {
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+  }
+}
+
+// Modern card improvements
+.card {
+  border-radius: $border-radius-lg;
+  border: none;
+  box-shadow: $shadow-md;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-4px);
+  }
+}
+
+// Modern input fields
+.form-control {
+  border-radius: $border-radius-md;
+  border: 1px solid $color-border;
+  padding: 12px 16px;
+  font-size: $body-font-size;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    border-color: $color-theme;
+    box-shadow: 0 0 0 3px rgba($color-theme, 0.1);
+    outline: none;
+  }
+}
+
+// Modern section spacing
+.section-spacing {
+  padding-top: $spacing-xxl;
+  padding-bottom: $spacing-xxl;
+  
+  @media (max-width: 768px) {
+    padding-top: $spacing-xl;
+    padding-bottom: $spacing-xl;
+  }
+}
+
+// Modern gradient backgrounds
+.gradient-bg {
+  background: linear-gradient(135deg, $color-theme 0%, $color-theme-secondary 100%);
+}
+
+// Smooth scroll behavior
+html {
+  scroll-behavior: smooth;
+}
+
+// Modern focus styles
+*:focus {
+  outline: 2px solid $color-theme;
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid $color-theme;
+  outline-offset: 2px;
+}
+
+// Modern masonry/card grid styling
+.masonry-wrapper {
+  margin-top: $spacing-lg;
+  
+  .masonry-item,
+  .post-item {
+    margin-bottom: $spacing-lg;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    &:hover {
+      transform: translateY(-4px);
+    }
+  }
+}
+
+// Modern post/blog card styling
+.post-item {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  background: $color-white;
+  box-shadow: $shadow-md;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    box-shadow: $shadow-xl;
+    
+    .post__img img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .post__img {
+    overflow: hidden;
+    border-radius: $border-radius-lg $border-radius-lg 0 0;
+    
+    img {
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .post__content {
+    padding: $spacing-lg;
+    
+    .post__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: $color-heading;
+      margin-bottom: $spacing-sm;
+      transition: color 0.3s ease;
+    }
+    
+    .post__desc {
+      color: $color-body;
+      font-size: $body-font-size;
+      line-height: 1.6;
+    }
+  }
+  
+  &:hover .post__title {
+    color: $color-theme;
+  }
+}
+
+// Modern section headings
+.heading {
+  margin-bottom: $spacing-xl;
+  
+  .heading__subtitle {
+    margin-bottom: $spacing-sm;
+  }
+  
+  .heading__title {
+    margin-bottom: $spacing-md;
+  }
+}

@@ -60,6 +60,12 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterContentChecked {
   provinces: any = [];
 
   show: boolean = false;
+  showDropdowns: any = {
+    whereToGo: false,
+    explorePakistan: false,
+    bookings: false,
+    evisa: false
+  };
 
   socialUser: SocialUser;
   addClassFixedNav: boolean = false;
@@ -330,11 +336,29 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterContentChecked {
   };
 
   changeMessage = () => {
-    this.commonService.changeMessage('active');
+    const currentState = this.commonService.messageSource.value;
+    const newState = currentState === 'active' ? 'inActive' : 'active';
+    this.commonService.changeMessage(newState);
   };
 
   toggleSidebar = () => {
     this.show = !this.show;
+    // Prevent body scroll when menu is open
+    if (this.show) {
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
+      // Close all dropdowns when menu closes
+      Object.keys(this.showDropdowns).forEach(key => {
+        this.showDropdowns[key] = false;
+      });
+    }
+  };
+
+  toggleDropdown = (key: string) => {
+    this.showDropdowns[key] = !this.showDropdowns[key];
   };
 
   openAuthModal() {

@@ -70,18 +70,24 @@ body {
 
 a {
   color: $color-theme;
-  @include transition(color 0.3s ease);
+  @include transition(color 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  text-decoration: none;
 
   &:hover {
-    color: darken($color-theme, 20%);
+    color: darken($color-theme, 10%);
     text-decoration: none;
   }
 }
 
 section {
   position: relative;
-  padding-top: 110px;
-  padding-bottom: 110px;
+  padding-top: $spacing-xxl;
+  padding-bottom: $spacing-xxl;
+  
+  @media (max-width: 768px) {
+    padding-top: $spacing-xl;
+    padding-bottom: $spacing-xl;
+  }
 }
 
 img {

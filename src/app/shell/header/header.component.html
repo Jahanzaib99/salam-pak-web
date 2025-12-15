@@ -19,438 +19,51 @@
       >
         <span class="menu-lines"><span></span></span>
       </button>
-      <div
-        class="collapse navbar-collapse"
-        id="mainNavigation"
-        [ngClass]="{ 'menu-opened': show }"
-      >
-        <ul class="navbar-nav ml-auto">
-          <li *ngIf="isLoggedIn" class="nav__item with-dropdown visible-xs">
-            <a
-              href="#"
-              data-toggle="dropdown"
-              class="dropdown-toggle nav__item-link"
-            >
-              <i class="fa fa-user" style="padding-right: 5px"></i
-              >{{ userName | titlecase }}
-            </a>
-          </li>
-          <li class="nav__item with-dropdown">
-            <a
-              [routerLink]="['/']"
-              (click)="toggleSidebar()"
-              [translate]="'HEADERITEM1'"
-              [ngClass]="{ active: router.url === '/' }"
-              class="dropdown-toggle nav__item-link"
-              >Home</a
-            >
-            <!--href="/" active-->
-          </li>
-          <!-- /.nav-item -->
-          <li class="nav__item with-dropdown">
-            <!--  [routerLink]="['/where-to-go']" -->
-            <a
-              [routerLink]="['/where-to-go']"
-              [ngClass]="{ active: router.url.includes('where-to-go') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM2'"
-              >Where to Go</a
-            >
-            <i class="fa fa-angle-right" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
-              <li class="nav__item" *ngFor="let province of provinces">
-                <a
-                  class="nav__item-link"
-                  (click)="toggleSidebar()"
-                  (click)="navigate('/where-to-go/locations', province.slug)"
-                  style="cursor: pointer"
-                  >{{ province.name }}</a
-                >
-              </li>
-              <!-- /.nav-item -->
-            </ul>
-            <!-- /.dropdown-menu -->
-          </li>
-          <!-- /.nav-item -->
-          <!-- /.nav-item -->
-          
-          <li class="nav__item with-dropdown">
-            <!-- [routerLink]="['/what-to-do']" -->
-            <a
-              [routerLink]="['/what-to-do']"
-              (click)="toggleSidebar()"
-              [ngClass]="{ active: router.url.includes('what-to-do') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM3'"
-              >What to Do</a
-            >
-          </li>
-          <!-- /.nav-item -->
-          <!-- <li class="nav__item with-dropdown">
-            <a
-              [routerLink]="['/accomodation']"
-              [ngClass]="{ active: router.url.includes('accomodation') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM4'"
-              >Accommodation</a
-            >
-          </li> -->
-          <!-- /.nav-item -->
-          <li class="nav__item with-dropdown">
-            <a
-              [routerLink]="['/explore-pakistan']"
-              (click)="toggleSidebar()"
-              [ngClass]="{ active: router.url.includes('planning') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM5'"
-              >Explore Pakistan</a
-            >
-            <i class="fa fa-angle-right" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
-              <li class="nav__item">
-                <a [routerLink]="['/planning/tips']" (click)="toggleSidebar()" class="nav__item-link"
-                  >Basic Facts of Pakistan
-                </a>
-              </li>
-              <li class="nav__item">
-                <a
-                (click)="toggleSidebar()"
-                  [routerLink]="['/planning/getting-here']"
-                  class="nav__item-link"
-                  >Getting To Pakistan
-                </a>
-              </li>
-              <li class="nav__item">
-                <a
-                  [routerLink]="['/planning/getting-around']"
-                  (click)="toggleSidebar()"
-                  class="nav__item-link"
-                  >Travel within Pakistan</a
-                >
-              </li>
-              <!-- <li class="nav__item">
-                <a [routerLink]="['/planning/covid']" class="nav__item-link"
-                  >covid restriction</a
-                >
-              </li>
-              <li class="nav__item">
-                <a [routerLink]="['/planning/visa']" class="nav__item-link"
-                  >mountaineering visa</a
-                > 
-              </li>-->
-              <!-- <li class="nav__item">
-                <a [routerLink]="['/planning/travel']" (click)="toggleSidebar()" class="nav__item-link"
-                  >travel guide</a
-                >
-              </li> -->
-              <li class="nav__item">
-                <a [routerLink]="['/planning/tic']" (click)="toggleSidebar()" class="nav__item-link"
-                  >Tourist Information Centers</a
-                >
-              </li>
-            </ul>
-          </li>
-          <!-- <li class="nav__item with-dropdown">
-            <a
-              href="{{ blogUrl }}"
-              target="_blank"
-              [ngClass]="{ active: router.url.includes('blog') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM8'"
-            >
-              Blogs</a
-            >
-          </li> -->
-          <!-- [routerLink]="['/map']" -->
-          
-          <!-- Jahanzaib khan commented code for -->
-
-          <!-- <li class="nav__item with-dropdown pointer">
-            <a
-              [ngClass]="{ active: router.url.includes('map') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM6'"
-              >Map</a
-            >
-            <i class="fa fa-angle-right" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
-              <li class="nav__item">
-                <a [routerLink]="['/map']" class="nav__item-link"
-                  >Geolocational Map</a
-                >
-              </li>
-              <li class="nav__item">
-                <a [routerLink]="['/map/3d-map']" class="nav__item-link"
-                  >3D map</a
-                >
-              </li>
-            </ul>
-          </li> -->
-          <!-- <li class="nav__item with-dropdown pointer">
-            <a  [routerLink]="['/map']" (click)="toggleSidebar()"
-              [ngClass]="{ active: router.url.includes('map') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM6'"
-              >Maps</a
-            > -->
-            <!-- <i class="fa fa-angle-right" data-toggle="dropdown"></i> -->
-            <!-- <ul class="dropdown-menu">
-              <li class="nav__item">
-                <a [routerLink]="['/map']" class="nav__item-link"
-                  >Geolocational Map</a
-                >
-              </li>
-              <li class="nav__item">
-                <a [routerLink]="['/map/3d-map']" class="nav__item-link"
-                  >3D map</a
-                >
-              </li>
-            </ul> -->
-          <!-- </li> -->
-
-          <!-- [routerLink]="['/map']" -->
-          <!-- <li class="nav__item with-dropdown">
-            <a
-              (click)="scrollToBookings()"
-              class="dropdown-toggle nav__item-link pointer"
-              [translate]="'HEADERITEM6'"
-              >Bookings</a
-            >
-          </li> -->
-          <li class="nav__item with-dropdown pointer">
-            <a
-              (click)="scrollToBookings()"
-              [ngClass]="{ active: router.url.includes('bookings') }"
-               target="_blank"class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM6'"
-              >Bookings</a
-            >
-            <i class="fa fa-angle-right" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" [routerLink]="['/booking-accommodation']" class="nav__item-link"
-                  >Accommodations</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" [routerLink]="['/booking-bus']" class="nav__item-link"
-                  >Buses</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://www.google.com/travel/flights" target="_blank" class="nav__item-link"
-                  >Airlines</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://pakrail.gov.pk/" target="_blank" class="nav__item-link"
-                  >Railways</a
-                >
-              </li>
-              
-            </ul>
-          </li>
-
-          <!-- <li class="nav__item">
-            <a
-              [routerLink]="['/bookings']"
-              [ngClass]="{ active: router.url.includes('bookings') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM6'"
-              >Bookings</a
-            >
-          </li> -->
-
-          <li class="nav__item">
-            <!-- [routerLink]="['/what-to-do']" -->
-            <a
-              (click)="toggleSidebar()"
-              [routerLink]="['/publications']"
-              [ngClass]="{ active: router.url.includes('publications') }"
-              class="dropdown-toggle nav__item-link"
-              [translate]="'HEADERITEM3'"
-              >Publications</a
-            >
-          </li>
-          <li class="nav__item with-dropdown">
-            <!-- [routerLink]="['/what-to-do']" -->
-            <a
-              class="dropdown-toggle nav__item-link"
-              >Apply E-Visa</a>
-            <i class="fa fa-angle-right" data-toggle="dropdown"></i>
-            <ul class="dropdown-menu">
-              <li class="nav__item">
-                <a (click)="scrollToVisa()" class="nav__item-link"
-                  >Check Visa Eligibility</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/visa-on-arrival-tourist/" target="_blank" class="nav__item-link"
-                  >Tourist Visa on Arrival</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/tourist-visa/" target="_blank" class="nav__item-link"
-                  >General Tourist Visa</a
-                >
-              </li>
-
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/mountaineering-trekking/" target="_blank" class="nav__item-link"
-                  >Mountaineering & Trekking Visa</a
-                >
-              </li>
-              
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/religious-tourism/" target="_blank" class="nav__item-link"
-                  >Religious Tourism</a
-                >
-              </li>
-              <li class="nav__item">
-                <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/medical-visa/" target="_blank" class="nav__item-link"
-                  >Medical Tourism</a
-                >
-              </li>
-           
-              
-            </ul>
-          </li>
-
-        
-
-          <!-- /.nav-item -->
-          <!-- /.nav-item -->
-          <li *ngIf="isLoggedIn" class="nav__item with-dropdown visible-xs">
-            <a
-              [routerLink]="['/profile']"
-              (click)="toggleSidebar()"
-              data-toggle="dropdown"
-              class="dropdown-toggle nav__item-link"
-              >Profile</a
-            >
-          </li>
-          <!-- <li *ngIf="isLoggedIn" class="nav__item with-dropdown visible-xs">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle nav__item-link">Bookings</a>
-          </li> -->
-          <li *ngIf="isLoggedIn" class="nav__item with-dropdown visible-xs">
-            <a
-              href="#"
-              data-toggle="dropdown"
-              class="dropdown-toggle nav__item-link"
-              >Logout</a
-            >
-          </li>
-        </ul>
-        <!-- /.navbar-nav -->
-      </div>
-      <!-- /.navbar-collapse -->
 
       <!-- /.navbar-modules -->
-      <div class="navbar-modules">
+      <!-- VisitNorway.com Style Header Icons -->
+      <div class="navbar-modules visitnorway-style">
         <ul class="modules__wrapper d-flex align-items-center list-unstyled">
-          <li>
-            <!-- <div id="google_translate_element"></div> -->
-            <!-- <div class="dropdown">
-              <button class="module__btn dropdown-toggle" id="langDrobdown" data-toggle="dropdown">
-                <span [translate]="'HEADERITEM7'"></span>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="langDrobdown">
-                <a class="dropdown-item" (click)="switchLanguage('en')">
-                  <span>En</span>
-                </a>
-                <a class="dropdown-item" (click)="switchLanguage('de')">
-                  <span>German</span>
-                </a>
-                <a class="dropdown-item" (click)="switchLanguage('ur')">
-                  <span>Urdu</span>
-                </a>
-              </div>
-            </div> -->
+          <!-- Offers -->
+          <li class="header-icon-item">
+            <a href="#" class="header-icon-link" (click)="scrollToBookings(); $event.preventDefault()">
+              <i class="fa fa-gift"></i>
+              <span class="icon-label">Offers</span>
+            </a>
           </li>
-          <li>
+          <!-- Favourites -->
+          <li class="header-icon-item">
+            <a [routerLink]="['/user/wishlist']" class="header-icon-link" *ngIf="isLoggedIn">
+              <i class="fa fa-heart"></i>
+              <span class="icon-label">Favourites</span>
+            </a>
+            <a href="#" class="header-icon-link" (click)="openAuthModal(); isLoginModal = true; $event.preventDefault()" *ngIf="!isLoggedIn">
+              <i class="fa fa-heart"></i>
+              <span class="icon-label">Favourites</span>
+            </a>
+          </li>
+          <!-- Search -->
+          <li class="header-icon-item">
             <button
-              class="module__btn module__btn-search"
+              class="header-icon-link"
               (click)="changeMessage()"
+              type="button"
             >
               <i class="fa fa-search"></i>
+              <span class="icon-label">Search</span>
             </button>
           </li>
-          <li class="main-nav">
-            <!-- options for login as vendor and user here -->
-            <div *ngIf="!isLoggedIn" class="dropdown">
-              <a
-                class="dropdown-toggle btn-user__dropdown"
-                style="width: fit-content"
-                type="button"
-                data-toggle="dropdown"
-              >
-                <i class="fa fa-user"></i>
-              </a>
-              <ul
-                class="dropdown-menu align-profile__menu"
-                style="font-size: 15px"
-              >
-                <!-- <li>
-                  <a
-                    href="https://dashboard.salampakistan.gov.pk/"
-                    target="_blank"
-                    >login as vendor</a
-                  >
-                </li> -->
-                <hr />
-                <!-- <li><a href="#">Bookings</a></li> -->
-                <li>
-                  <a (click)="openAuthModal(); isLoginModal = true"
-                    >login as user</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li *ngIf="isLoggedIn" class="hidden-xs">
-            <div *ngIf="isLoggedIn" class="dropdown">
-              <a
-                class="dropdown-toggle btn-user__dropdown"
-                style="width: fit-content"
-                type="button"
-                data-toggle="dropdown"
-              >
-                <i class="fa fa-user"></i> {{ userName | titlecase }}
-              </a>
-              <ul
-                class="dropdown-menu align-profile__menu"
-                style="font-size: 15px"
-              >
-                <li><a [routerLink]="['/user/profile']">Profile</a></li>
-                <hr />
-                <li>
-                  <a [routerLink]="['/planning/listing']">Plan Your Trip</a>
-                </li>
-                <hr />
-                <!-- <li><a href="#">Bookings</a></li> -->
-                <li>
-                  <a [routerLink]="['/user/itinerary']">Travel Itinerary</a>
-                </li>
-                <hr />
-                <li><a [routerLink]="['/user/wishlist']">Wishlist</a></li>
-                <hr />
-                <!-- <li (click)="scrollToBookings()"><a>Bookings</a></li>
-                <hr /> -->
-                <li>
-                  <a [routerLink]="['/user/reviews']">Review & Feedback</a>
-                </li>
-                <hr />
-                <li><a [routerLink]="['/user/my-bookings']">My Bookings</a></li>
-                <hr />
-                <li>
-                  <a [routerLink]="['/user/change-password']"
-                    >change password</a
-                  >
-                </li>
-                <hr />
-                <li><a (click)="logout()">Logout</a></li>
-              </ul>
-            </div>
+          <!-- Menu -->
+          <li class="header-icon-item">
+            <button
+              class="header-icon-link"
+              (click)="toggleSidebar()"
+              type="button"
+              [ngClass]="{ 'active': show }"
+            >
+              <i class="fa fa-bars"></i>
+              <span class="icon-label">Menu</span>
+            </button>
           </li>
         </ul>
         <!-- /.modules-wrapper -->
@@ -461,6 +74,216 @@
   </nav>
   <!-- /.navabr -->
 </header>
+
+<!-- Mobile Menu Backdrop - Outside navbar for proper modal display -->
+<div 
+  class="mobile-menu-backdrop" 
+  [ngClass]="{ 'active': show }"
+  (click)="toggleSidebar()"
+></div>
+
+<!-- Side Navigation Menu - VisitNorway.com Style - Outside navbar for proper modal display -->
+<div
+  class="side-nav-menu"
+  [ngClass]="{ 'menu-opened': show }"
+>
+  <!-- Side Menu Header with Icons -->
+  <div class="side-menu-header">
+    <div class="side-menu-icons">
+      <a href="#" class="side-menu-icon-item" (click)="scrollToBookings(); $event.preventDefault(); toggleSidebar()">
+        <i class="fa fa-gift"></i>
+        <span>Offers</span>
+      </a>
+      <a [routerLink]="['/user/wishlist']" class="side-menu-icon-item" *ngIf="isLoggedIn" (click)="toggleSidebar()">
+        <i class="fa fa-heart"></i>
+        <span>Favourites</span>
+      </a>
+      <a href="#" class="side-menu-icon-item" (click)="changeMessage(); toggleSidebar(); $event.preventDefault()" *ngIf="!isLoggedIn">
+        <i class="fa fa-heart"></i>
+        <span>Favourites</span>
+      </a>
+      <button class="side-menu-icon-item" (click)="changeMessage(); toggleSidebar();" type="button">
+        <i class="fa fa-search"></i>
+        <span>Search</span>
+      </button>
+    </div>
+    <!-- Close Button - Separate Position -->
+    <button class="side-menu-close-btn" (click)="toggleSidebar()" type="button" aria-label="Close menu">
+      <i class="fa fa-times"></i>
+      <span>Close</span>
+    </button>
+  </div>
+  
+  <!-- Main Navigation Items -->
+  <div class="side-menu-content">
+    <ul class="side-menu-nav">
+    <!-- Home -->
+    <li class="side-menu-item">
+      <a
+        [routerLink]="['/']"
+        (click)="toggleSidebar()"
+        [ngClass]="{ active: router.url === '/' }"
+        class="side-menu-link"
+        >Home</a
+      >
+    </li>
+    
+    <!-- Where to Go -->
+    <li class="side-menu-item with-dropdown" [ngClass]="{ 'active': showDropdowns['whereToGo'] }">
+      <a
+        (click)="toggleDropdown('whereToGo'); $event.preventDefault()"
+        [ngClass]="{ active: router.url.includes('where-to-go') }"
+        class="side-menu-link"
+        >Where to Go</a
+      >
+      <ul class="side-menu-submenu">
+        <li *ngFor="let province of provinces">
+          <a
+            class="side-menu-sublink"
+            (click)="toggleSidebar(); navigate('/where-to-go/locations', province.slug)"
+            >{{ province.name }}</a
+          >
+        </li>
+      </ul>
+    </li>
+    
+    <!-- What to Do -->
+    <li class="side-menu-item">
+      <a
+        [routerLink]="['/what-to-do']"
+        (click)="toggleSidebar()"
+        [ngClass]="{ active: router.url.includes('what-to-do') }"
+        class="side-menu-link"
+        >What to Do</a
+      >
+    </li>
+    
+    <!-- Explore Pakistan -->
+    <li class="side-menu-item with-dropdown" [ngClass]="{ 'active': showDropdowns['explorePakistan'] }">
+      <a
+        (click)="toggleDropdown('explorePakistan'); $event.preventDefault()"
+        [ngClass]="{ active: router.url.includes('planning') }"
+        class="side-menu-link"
+        >Explore Pakistan</a
+      >
+      <ul class="side-menu-submenu">
+        <li>
+          <a [routerLink]="['/planning/tips']" (click)="toggleSidebar()" class="side-menu-sublink"
+            >Basic Facts of Pakistan
+          </a>
+        </li>
+        <li>
+          <a
+          (click)="toggleSidebar()"
+            [routerLink]="['/planning/getting-here']"
+            class="side-menu-sublink"
+            >Getting To Pakistan
+          </a>
+        </li>
+        <li>
+          <a
+            [routerLink]="['/planning/getting-around']"
+            (click)="toggleSidebar()"
+            class="side-menu-sublink"
+            >Travel within Pakistan</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['/planning/tic']" (click)="toggleSidebar()" class="side-menu-sublink"
+            >Tourist Information Centers</a
+          >
+        </li>
+      </ul>
+    </li>
+
+    <!-- Bookings -->
+    <li class="side-menu-item with-dropdown" [ngClass]="{ 'active': showDropdowns['bookings'] }">
+      <a
+        (click)="toggleDropdown('bookings'); $event.preventDefault()"
+        [ngClass]="{ active: router.url.includes('bookings') }"
+        class="side-menu-link"
+        >Bookings</a
+      >
+      <ul class="side-menu-submenu">
+        <li>
+          <a (click)="toggleSidebar()" [routerLink]="['/booking-accommodation']" class="side-menu-sublink"
+            >Accommodations</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" [routerLink]="['/booking-bus']" class="side-menu-sublink"
+            >Buses</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://www.google.com/travel/flights" target="_blank" class="side-menu-sublink"
+            >Airlines</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://pakrail.gov.pk/" target="_blank" class="side-menu-sublink"
+            >Railways</a
+          >
+        </li>
+      </ul>
+    </li>
+
+    <!-- Publications -->
+    <li class="side-menu-item">
+      <a
+        (click)="toggleSidebar()"
+        [routerLink]="['/publications']"
+        [ngClass]="{ active: router.url.includes('publications') }"
+        class="side-menu-link"
+        >Publications</a
+      >
+    </li>
+    
+    <!-- Apply E-Visa -->
+    <li class="side-menu-item with-dropdown" [ngClass]="{ 'active': showDropdowns['evisa'] }">
+      <a
+        (click)="toggleDropdown('evisa'); $event.preventDefault()"
+        class="side-menu-link"
+        >Apply E-Visa</a>
+      <ul class="side-menu-submenu">
+        <li>
+          <a (click)="scrollToVisa(); toggleSidebar()" class="side-menu-sublink"
+            >Check Visa Eligibility</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/visa-on-arrival-tourist/" target="_blank" class="side-menu-sublink"
+            >Tourist Visa on Arrival</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/tourist-visa/" target="_blank" class="side-menu-sublink"
+            >General Tourist Visa</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/mountaineering-trekking/" target="_blank" class="side-menu-sublink"
+            >Mountaineering & Trekking Visa</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/religious-tourism/" target="_blank" class="side-menu-sublink"
+            >Religious Tourism</a
+          >
+        </li>
+        <li>
+          <a (click)="toggleSidebar()" href="https://visa.nadra.gov.pk/medical-visa/" target="_blank" class="side-menu-sublink"
+            >Medical Tourism</a
+          >
+        </li>
+      </ul>
+    </li>
+
+    </ul>
+  </div>
+  <!-- /.side-menu-content -->
+</div>
+<!-- /.side-nav-menu -->
 <!-- /.Header -->
 
 <ngx-smart-modal

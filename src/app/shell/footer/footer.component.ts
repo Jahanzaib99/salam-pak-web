@@ -43,7 +43,7 @@ export class FooterComponent implements OnInit {
     private eventService: EventService,
     private readonly router: Router,
     private viewPortScroller: ViewportScroller,
-    private commonService: CommonService,
+    public commonService: CommonService,
     private ngxSmartModalService: NgxSmartModalService
   ) {}
 
@@ -79,6 +79,11 @@ export class FooterComponent implements OnInit {
         this.showUpArrow = false;
       }
     });
+  }
+
+  closeSearch() {
+    this.show = false;
+    this.commonService.changeMessage('inActive');
   }
 
   getFilters() {
