@@ -1,52 +1,32 @@
-<div class="weather-wrapper weather-1">
-  <select
-    (change)="changeWeather($event)"
-    class="switchWidgetOptions"
-    id="switchWidgetOptions"
-  >
-    <option
-      *ngFor="let city of cities"
-      [attr.data-href]="
-        'https://forecast7.com/en/' + city.city_code + '/' + city.name + '/'
-      "
-    >
-      {{ city.alias }}
-    </option>
-
-    <!-- <option data-href="https://forecast7.com/en/33d7373d09/islamabad/">Islamabad</option>
-    <option data-href="https://forecast7.com/en/29d3571d69/bahawalpur/">Bahawalpur</option>
-    <option data-href="https://forecast7.com/en/30d0570d65/d-g-khan/">Dera Ghazi Khan</option>
-    <option data-href="https://forecast7.com/en/31d4273d09/faisalabad/">Faisalabad</option>
-    <option data-href="https://forecast7.com/en/32d1974d19/gujranwala/">Gujranwala</option>
-    <option data-href="https://forecast7.com/en/31d5574d36/lahore/">Lahore</option>
-    <option data-href="https://forecast7.com/en/30d1671d52/multan/">Multan</option>
-    <option data-href="https://forecast7.com/en/33d5773d02/rawalpindi/">Rawalpindi</option>
-    <option data-href="https://forecast7.com/en/30d6773d11/sahiwal/">Sahiwal</option>
-    <option data-href="https://forecast7.com/en/32d0772d69/sargodha/">Sargodha</option>
-    <option data-href="https://forecast7.com/en/29d0566d59/kalat/">Kalat</option>
-    <option data-href="https://forecast7.com/en/26d0163d04/turbat/">Makran</option>
-    <option data-href="https://forecast7.com/en/27d3867d92/nasirabad/">Naseerabad</option>
-    <option data-href="https://forecast7.com/en/30d1866d97/quetta/">Quetta</option>
-    <option data-href="https://forecast7.com/en/29d4867d64/dhadar/">Sibi</option>
-    <option data-href="https://forecast7.com/en/31d3569d47/zhob/">Zhob</option>
-    <option data-href="https://forecast7.com/en/30d1866d97/quetta/">Rakhshan</option>
-    <option data-href="https://forecast7.com/en/32d9970d65/bannu/">Bannu</option>
-    <option data-href="https://forecast7.com/en/31d8670d90/dera-ismail-khan/">Dera Ismail Khan</option>
-    <option data-href="https://forecast7.com/en/32d8074d28/hazara/">Hazara</option>
-    <option data-href="https://forecast7.com/en/33d5971d44/kohat/">Kohat</option>
-    <option data-href="https://forecast7.com/en/34d5071d90/malakand/">Malakand</option>
-    <option data-href="https://forecast7.com/en/34d2072d02/mardan/">Mardan</option>
-    <option data-href="https://forecast7.com/en/34d0271d52/peshawar/">Peshawar</option>
-    <option data-href="https://forecast7.com/en/25d4068d36/hyderabad/">Hyderabad</option>
-    <option data-href="https://forecast7.com/en/24d8667d01/karachi/">Karachi</option>
-    <option data-href="https://forecast7.com/en/27d7268d82/sukkur/">Sukkur</option>
-    <option data-href="https://forecast7.com/en/27d5668d20/larkana/">Larkana</option>
-    <option data-href="https://forecast7.com/en/25d5169d01/mirpur-khas/">Mirpur Khas</option>
-    <option data-href="https://forecast7.com/en/35d9174d37/gilgit/">Gilgit</option>
-    <option data-href="https://forecast7.com/en/33d1073d77/mirpur-azad-kashmir/">Mirpur</option>
-    <option data-href="https://forecast7.com/en/34d3673d48/muzaffarabad/">Muzaffarabad</option>
-    <option data-href="https://forecast7.com/en/33d7774d09/poonch/">Poonch</option> -->
-  </select>
+<div class="weather-section">
+  <div class="container">
+    <div class="weather-bar">
+      <div class="weather-bar-content">
+        <div class="weather-icon-wrapper">
+          <i class="fa fa-cloud-sun"></i>
+          <span class="weather-label">WEATHER</span>
+        </div>
+        <div class="weather-selector-wrapper">
+          <select
+            (change)="changeWeather($event)"
+            class="weather-select"
+            id="switchWidgetOptions"
+          >
+            <option
+              *ngFor="let city of cities"
+              [value]="city.city_code + '/' + city.name"
+              [attr.data-href]="
+                'https://forecast7.com/en/' + city.city_code + '/' + city.name + '/'
+              "
+              [selected]="city.name === 'islamabad'"
+            >
+              {{ city.alias }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <a
@@ -60,4 +40,4 @@
   id="bookingSection"
   >ISLAMABAD WEATHER</a
 >
-<!-- /.slider -->
+<!-- /.weather -->

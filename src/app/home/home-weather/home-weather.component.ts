@@ -311,18 +311,24 @@ export class HomeWeatherComponent implements OnInit {
   }
 
   changeWeather = (event: any) => {
-    // console.log(event);
     let widget = document.querySelector('.weatherwidget-io');
+    if (!widget) return;
+    
     let baseAttr = this.getAttributes(widget);
-    let optionAttr = this.getAttributes(
-      event.target.options[event.target.options.selectedIndex]
-    );
+    let selectedOption = event.target.options[event.target.options.selectedIndex];
+    let optionAttr = this.getAttributes(selectedOption);
     let target = widget.querySelector('iFrame');
-    target['contentWindow'].postMessage(
-      Object.assign({}, baseAttr, optionAttr, { id: target.id }),
-      'https://weatherwidget.io'
-    );
-    if (optionAttr['href']) widget['href'] = optionAttr['href'];
+    
+    if (target && target['contentWindow']) {
+      target['contentWindow'].postMessage(
+        Object.assign({}, baseAttr, optionAttr, { id: target.id }),
+        'https://weatherwidget.io'
+      );
+    }
+    
+    if (optionAttr['href']) {
+      widget['href'] = optionAttr['href'];
+    }
   };
 
   getAttributes(widget: any) {

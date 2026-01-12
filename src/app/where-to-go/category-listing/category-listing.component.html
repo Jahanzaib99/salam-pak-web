@@ -26,6 +26,52 @@
 </section>
 <!-- /.page-title -->
 
+<!-- Top Tourist Destinations Section - Gujarat Tourism Style -->
+<section class="top-destinations-section" *ngIf="topDestinations.length > 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-header">
+          <span class="section-subtitle">Discover</span>
+          <h2 class="section-title">Top Tourist Destinations</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row destinations-grid">
+      <div
+        *ngFor="let destination of topDestinations"
+        class="col-md-4 col-sm-6 destination-card-wrapper"
+      >
+        <a
+          [routerLink]="[
+            '/where-to-go/category',
+            data.slug,
+            'location',
+            destination.slug
+          ]"
+          class="destination-card"
+        >
+          <div class="destination-image">
+            <img
+              [src]="destination.thumbnail"
+              [alt]="destination.alias"
+              onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+            />
+            <div class="destination-overlay"></div>
+          </div>
+          <div class="destination-content">
+            <h3 class="destination-title">{{ destination.alias }}</h3>
+            <p class="destination-description" *ngIf="destination.description">
+              {{ destination.description.substring(0, 80) }}
+              {{ destination.description.length > 80 ? '...' : '' }}
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!--======-->
 <div class="container-fluid seasons">
   <div class="container">

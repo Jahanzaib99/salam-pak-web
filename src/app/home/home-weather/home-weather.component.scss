@@ -1,26 +1,204 @@
-.weather-1 {
-  top: -105px;
+// Weather Section - Modern Design
+.weather-section {
   position: relative;
-  z-index: 1;
-  left: 3%;
-}
-.bg-overlay {
-  background-size: cover;
-}
-.weather-wrapper {
-  background-color: #f1efef00;
-  padding: 3px;
+  z-index: 10;
+  margin-top: -45px;
+  margin-bottom: 40px;
+  
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
 }
 
-.switchWidgetOptions option {
-  color: #000;
+.weather-bar {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 32px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+  }
 }
-.switchWidgetOptions {
-  color: white;
-  border: none;
+
+.weather-bar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
+
+.weather-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  
+  i {
+    font-size: 24px;
+    color: #8cc63e;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  .weather-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #121c45;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+.weather-selector-wrapper {
+  flex: 1;
+  max-width: 300px;
+  margin-left: auto;
+}
+
+.weather-select {
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid #8cc63e;
+  border-radius: 8px;
+  padding: 12px 40px 12px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #121c45;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238cc63e' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px;
+  transition: all 0.3s ease;
+  font-family: "Roboto", sans-serif;
+  
+  &:hover {
+    border-color: #6fa82a;
+    box-shadow: 0 2px 8px rgba(140, 198, 62, 0.2);
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: #6fa82a;
+    box-shadow: 0 0 0 3px rgba(140, 198, 62, 0.2);
+  }
+  
+  option {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #121c45;
+    font-weight: 500;
+    
+    &:hover {
+      background-color: rgba(140, 198, 62, 0.1);
+    }
+  }
+}
+
 .weatherwidget-io {
   margin-bottom: 100px;
   z-index: -100;
-  margin-top: -149px !important;
+}
+
+// Animation
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+// Responsive Design
+@media only screen and (max-width: 991px) {
+  .weather-section {
+    margin-top: -60px;
+    
+    .container {
+      padding: 0 24px;
+    }
+  }
+  
+  .weather-bar {
+    padding: 16px 24px;
+  }
+  
+  .weather-bar-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .weather-icon-wrapper {
+    justify-content: center;
+    
+    i {
+      font-size: 22px;
+    }
+    
+    .weather-label {
+      font-size: 13px;
+    }
+  }
+  
+  .weather-selector-wrapper {
+    max-width: 100%;
+    margin-left: 0;
+    
+    .weather-select {
+      padding: 10px 36px 10px 14px;
+      font-size: 14px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .weather-section {
+    margin-top: -40px;
+    margin-bottom: 30px;
+    
+    .container {
+      padding: 0 20px;
+    }
+  }
+  
+  .weather-bar {
+    padding: 14px 20px;
+    border-radius: 10px;
+  }
+  
+  .weather-bar-content {
+    gap: 12px;
+  }
+  
+  .weather-icon-wrapper {
+    i {
+      font-size: 20px;
+    }
+    
+    .weather-label {
+      font-size: 12px;
+      letter-spacing: 0.8px;
+    }
+  }
+  
+  .weather-selector-wrapper {
+    .weather-select {
+      padding: 10px 32px 10px 12px;
+      font-size: 14px;
+    }
+  }
 }

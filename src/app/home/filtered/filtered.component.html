@@ -1,44 +1,73 @@
-<div class="container">
-  <div class="col-md-12">
-    <span class="heading__subtitle">Find out</span>
-    <h2 class="heading__title">{{ title }}</h2>
-  </div>
-  <div class="masonry-wrapper masonry-style-2">
-    <div class="masonry-container" data-column-width=".col-md-4">
-      <div
-        *ngFor="
-          let single of singleFilter;
-          let image;
-          of: images;
-          let i = index;
-          let firstRecord = first
-        "
-        [ngClass]="{ 'col-md-8 col-sm-6 col-xs-12 firstcard': firstRecord }"
-        class="masonry-item col-md-4 col-sm-6 col-xs-12 web pt-30"
-      >
-        <div
-          class="masonry-image-item item-h-4 hover-zoom"
-          style="cursor: pointer"
-        >
-          <a (click)="navigate(single)" class="ajax-link">
-            <div class="item-image bg-image-holder">
-              <img
-                [src]="single.thumbnail || 'assets/images/home/beaches.webp'"
-                onerror="this.onerror=null;this.src='assets/images/home/beaches.png';"
-                [ngClass]="{ firstOne: firstRecord }"
-                style="background-size: cover; width: 100%; border-radius: 5px"
-                alt=""
-              />
-            </div>
-            <div class="item-overlay overlay-alt"></div>
-            <div class="item-details details-inside">
-              <h4 class="item-title text-white">{{ single.alias }}</h4>
-              <!--{{ single.name }}-->
-            </div>
+<section class="where-to-go-section" [attr.data-section]="title === 'Where To Go' ? 'where-to-go' : (title === 'What To Do' ? 'what-to-do' : '')">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-header-wrapper">
+          <div class="section-header">
+            <span class="heading__subtitle">Pick Your Trail</span>
+            <h2 class="heading__title">{{ title }} - As Per Your Interest</h2>
+          </div>
+          <a 
+            *ngIf="title === 'Where To Go'"
+            [routerLink]="['/where-to-go']"
+            class="view-all-btn"
+          >
+            View All
           </a>
         </div>
       </div>
     </div>
-    <!-- .masonry-container end -->
+    <div class="row">
+      <div class="col-12">
+        <div class="trail-carousel-wrapper" *ngIf="singleFilter && singleFilter.length > 0">
+          <div class="trail-cards-container">
+            <div
+              *ngFor="let single of singleFilter; let i = index"
+              class="trail-card-wrapper"
+              [style.z-index]="isCardVisible(i) ? getCardZIndex(i) : 0"
+              [style.transform]="getCardTransform(i)"
+              [style.opacity]="isCardVisible(i) ? 1 : 0"
+              [style.pointer-events]="isCardVisible(i) ? 'auto' : 'none'"
+            >
+              <div class="trail-card" (click)="navigate(single)">
+                <div class="trail-card-image">
+                  <img
+                    [src]="single.thumbnail || 'assets/images/home/beaches.webp'"
+                    [alt]="single.alias"
+                    onerror="this.onerror=null;this.src='assets/images/home/beaches.png';"
+                  />
+                  <div class="trail-card-overlay"></div>
+                  <div class="trail-card-content">
+                    <h4 class="trail-card-title">{{ single.alias }}</h4>
+                    <button class="trail-explore-btn">EXPLORE</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Navigation Arrows - Chevron Style -->
+          <button 
+            class="trail-nav-btn trail-nav-prev" 
+            (click)="scrollCards('prev')"
+            [disabled]="!canScrollPrev()"
+            aria-label="Previous"
+          >
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="#8cc63e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button 
+            class="trail-nav-btn trail-nav-next" 
+            (click)="scrollCards('next')"
+            [disabled]="!canScrollNext()"
+            aria-label="Next"
+          >
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="#8cc63e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>

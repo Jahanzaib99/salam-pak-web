@@ -1,6 +1,65 @@
 <app-home-slider></app-home-slider>
 <app-home-weather [weatherFlag]="weatherFlag"></app-home-weather>
 
+<!-- Top Tourist Destinations Section - Gujarat Tourism Style -->
+<section class="top-destinations-section" *ngIf="topDestinations.length > 0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section-header">
+          <h2 class="section-title">Discover Top Destinations</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="destinations-carousel-wrapper">
+          <carousel
+            [isAnimated]="true"
+            [showIndicators]="false"
+            [interval]="5000"
+            [noPause]="false"
+            class="destinations-carousel"
+          >
+            <slide *ngFor="let destination of topDestinations; let i = index">
+              <div class="destination-slide-wrapper">
+                <a
+                  [routerLink]="['/where-to-go/location', destination.slug, 'featured']"
+                  [queryParams]="{ parentCategoryId: topTouristDestinationsCategoryId }"
+                  class="destination-card-large"
+                >
+                  <div class="destination-image-large">
+                    <!-- Blurred background image -->
+                    <div 
+                      class="destination-bg-blur"
+                      [style.background-image]="'url(' + (destination.thumbnail || 'assets/images/images/fall/fall1.jpg') + ')'"
+                    ></div>
+                    <!-- Main image -->
+                    <img
+                      class="destination-main-image"
+                      [src]="destination.thumbnail"
+                      [alt]="destination.alias"
+                      onerror="this.onerror=null;this.src='assets/images/images/fall/fall1.jpg';"
+                    />
+                    <div class="destination-overlay-large"></div>
+                    <div class="destination-info-overlay">
+                      <h3 class="destination-name">{{ destination.alias || destination.name }}</h3>
+                      <p class="destination-location" *ngIf="destination.description">
+                        {{ destination.description.substring(0, 50) }}
+                        {{ destination.description.length > 50 ? '...' : '' }}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- generic activities filter -->
 <app-filtered
   [title]="'Where To Go'"

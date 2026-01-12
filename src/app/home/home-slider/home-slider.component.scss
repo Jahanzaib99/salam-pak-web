@@ -1,27 +1,327 @@
-.slider-1 {
-  top: -120px;
-}
-.bg-overlay {
-  background-size: cover;
+// Hero Video Section - Gujarat Tourism Style
+.hero-video-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 780px;
+  overflow: hidden;
+  margin-top: -80px; // Account for header height
+  z-index: 1;
 }
 
-.bg-img {
-  object-fit: cover !important;
+.hero-video-wrapper {
+  position: relative;
+  width: 100%;
   height: 100%;
-  width: 100% !important;
 }
 
-.bg-img > img {
-  object-fit: cover !important;
+.hero-video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  width: 100% !important;
+  z-index: 1;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 767px) {
-  .bg-img {
-    margin-top: 110px !important; /* Adjust the value as needed */
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 28, 69, 0.4) 0%,
+    rgba(18, 28, 69, 0.6) 50%,
+    rgba(18, 28, 69, 0.8) 100%
+  );
+  z-index: 2;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 80px; // Account for header
+  padding-bottom: 120px; // Space from bottom
+}
+
+.hero-content {
+  text-align: center;
+  color: #ffffff;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeInUp 1s ease-out;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 32px;
+  text-transform: capitalize;
+  color: #ffffff;
+  
+  .hero-country {
+    display: inline-block;
+    font-size: 84px;
+    font-weight: 800;
+    color: #ffffff;
+    background: #8cc63e;
+    padding: 16px 32px;
+    border-radius: 8px;
+    margin-top: 0;
+    animation: fadeInUp 1s ease-out 0.3s both;
+    box-shadow: 0 4px 15px rgba(140, 198, 62, 0.3);
   }
-  .bg-overlay {
-    height: 352px !important;
+}
+
+.hero-description {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease-out 0.9s both;
+  align-items: center;
+}
+
+.btn-hero-primary,
+.btn-hero-secondary {
+  padding: 18px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  min-width: 220px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  span {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.btn-hero-primary {
+  background: #8cc63e;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(140, 198, 62, 0.4), 0 2px 8px rgba(140, 198, 62, 0.2);
+  border: 2px solid #8cc63e;
+  
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(140, 198, 62, 0.5), 0 4px 12px rgba(140, 198, 62, 0.3);
+    background: #6fa82a;
+    border-color: #6fa82a;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  &:active {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 6px 20px rgba(140, 198, 62, 0.4);
+  }
+}
+
+.btn-hero-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: #ffffff;
+    color: #ffffff;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 35px rgba(255, 255, 255, 0.25), 0 4px 12px rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+  }
+  
+  &:active {
+    transform: translateY(-2px) scale(1);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  }
+}
+
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+// Responsive Design
+@media only screen and (max-width: 991px) {
+  .hero-video-section {
+    height: 80vh;
+    min-height: 500px;
+  }
+  
+  .hero-title {
+    font-size: 48px;
+    
+    .hero-country {
+      font-size: 56px;
+      padding: 12px 24px;
+    }
+  }
+  
+  .hero-description {
+    font-size: 18px;
+  }
+  
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    padding: 16px 36px;
+    font-size: 15px;
+    min-width: 200px;
+  }
+  
+  .hero-content-wrapper {
+    padding-bottom: 100px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .hero-video-section {
+    height: 70vh;
+    min-height: 400px;
+    margin-top: -80px;
+  }
+  
+  .hero-content-wrapper {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  
+  .hero-content {
+    padding: 0 15px;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+    margin-bottom: 16px;
+    
+    .hero-country {
+      font-size: 42px;
+      padding: 10px 20px;
+      margin-top: 8px;
+    }
+  }
+  
+  .hero-description {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+    padding: 16px 28px;
+    font-size: 14px;
+    min-width: auto;
+    border-radius: 50px;
+  }
+  
+  .hero-content-wrapper {
+    padding-bottom: 60px;
+  }
+  
+}
+
+@media only screen and (max-width: 480px) {
+  .hero-title {
+    font-size: 28px;
+    
+    .hero-country {
+      font-size: 36px;
+      padding: 8px 16px;
+    }
+  }
+  
+  .hero-description {
+    font-size: 14px;
+  }
+  
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    font-size: 13px;
+    padding: 14px 24px;
+    min-width: auto;
+  }
+  
+  .hero-content-wrapper {
+    padding-bottom: 50px;
   }
 }

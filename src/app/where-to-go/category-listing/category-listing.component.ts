@@ -13,7 +13,9 @@ export class CategoryListingComponent implements OnInit {
   data: any;
   locations: any;
   filteredRes: any[];
+  topDestinations: any[] = [];
   p: number = 1;
+  isLoadingTopDestinations: boolean = true;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -30,13 +32,34 @@ export class CategoryListingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    alert('herer');
-
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-    // this.loadScript()
+    
+    // Load top destinations
+    this.loadTopDestinations();
+  }
+
+  loadTopDestinations() {
+    this.isLoadingTopDestinations = true;
+    
+    if (this.route.snapshot.data.category) {
+      // Get top featured destinations for this category
+      this.eventService.getCategoryLocations(this.data._id).then((locs) => {
+        // Filter featured locations and limit to 9
+        const featured = locs.filter((i: any) => i.isFeatured === true);
+        this.topDestinations = featured.slice(0, 9);
+        this.isLoadingTopDestinations = false;
+      });
+    } else {
+      // Get top destinations for this location/province
+      this.eventService.getTrips(this.slug).then((locs) => {
+        const featured = locs.filter((i: any) => i.isFeatured === true);
+        this.topDestinations = featured.slice(0, 9);
+        this.isLoadingTopDestinations = false;
+      });
+    }
   }
 
   getCategoryLocations(id: string) {

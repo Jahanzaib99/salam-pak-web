@@ -1,118 +1,56 @@
-<section id="slider1" class="slider slider-1">
-  <!-- <div
-    class="owl-carousel thumbs-carousel carousel-arrows"
-    data-slider-id="slider1"
-    data-dots="false"
-    data-autoplay="true"
-    data-nav="false"
-    data-transition="fade"
-    data-animate-out="fadeOut"
-    data-animate-in="fadeIn"
-  > -->
-  <ngx-slick-carousel
-    class=""
-    #slickModal="slick-carousel"
-    [config]="slideConfig"
-  >
-    <div ngxSlickItem class="slide-item align-v-h bg-overlay">
-      <div class="bg-img">
-        <!-- <img
-          src="assets/images/home/1.webp"
-          onerror="this.onerror=null;this.src='assets/images/home/1.png';"
-          alt="slide img"
-        /> -->
-        <video
-          #homeslider
-          width="100%"
-          preload="true"
-          loop
-          muted
-          autoplay
-          oncanplay="this.play()"
-          onloadedmetadata="this.muted = true"
-        >
-          <source src="assets/videos/SalamPakistan.mp4" type="video/mp4" />
-          <!-- <source src="assets/videos/Homepage.mp4" type="video/mp4" /> -->
-        </video>
-        <video
-          #homeslider
-          width="100%"
-          preload="true"
-          loop
-          muted
-          autoplay
-          oncanplay="this.play()"
-          onloadedmetadata="this.muted = true"
-        >
-          <!-- <source src="assets/videos/SalamPakistan.mp4" type="video/mp4" /> -->
-          <source src="assets/videos/Homepage.mp4" type="video/mp4" />
-        </video>
-        <!-- <video
-          #homeslider
-          width="100%"
-          preload="true"
-          autoplay
-          onloadedmetadata="this.muted = true"
-          oncanplay="this.play()"
-          loop
-        >
-          <source src="assets/videos/Homepage.mp4" type="video/mp4" />
-        </video> -->
-      </div>
-      <!-- /.container -->
-    </div>
-
-    <!-- <div ngxSlickItem class="slide-item align-v-h bg-overlay">
-    <div class="bg-img"><img src="assets/images/sliders/1.png" alt="slide img" style="max-width: 102%;"/></div>
-  </div> -->
-    <!-- 
-  <div ngxSlickItem class="slide-item align-v-h bg-overlay">
-    <div class="bg-img"><img src="assets/images/sliders/1.png" alt="slide img" style="max-width: 102%;"/></div>
-  </div> -->
-  </ngx-slick-carousel>
-
-  <!-- <div class="container" style="position: absolute; top: 30%; left: 0%; right: 5%">
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-8">
-        <div class="slide__content" id="topSection">
-          <h2 class="slide__title">
-            <div class="verticalFlip">
-              <span>salam</span>
-              <span>bonjour</span>
-              <span>alà</span>
-              <span>namaste</span>
-              <span>jambo</span>
-            </div>
-            <br />pakistan
-          </h2>
-          <p class="slide__desc" [translate]="'HOMESLIDETEXT1'"></p>
-          <a
-            *ngIf="show"
-            href="#visa"
-            class="btn btn__primary btn__hover2 mr-30 slider-btn"
-            [translate]="'APPLYEVISABUTTON'"
-            >apply e-visa</a
-          >
-        </div>
-       
-      </div>
-      
+<section id="slider1" class="slider slider-1 hero-video-section">
+  <div class="hero-video-wrapper">
+    <div class="hero-video-container">
+      <video
+        #homeslider
+        class="hero-video"
+        width="100%"
+        preload="true"
+        loop
+        muted
+        autoplay
+        playsinline
+        oncanplay="this.play()"
+        onloadedmetadata="this.muted = true"
+      >
+        <source src="assets/videos/SalamPakistan4k.mp4" type="video/mp4" />
+        <source src="assets/videos/Homepage.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay"></div>
     </div>
     
-  </div> -->
-  <!--<div class="tcontainer">
-        <div class="ticker-wrap">
-            <div class="ticker-move">
-                <div class="ticker-item">Poor state of poverty alleviation.</div>
-                <div class="ticker-item">Assam flood situation worsens again, death toll rises to 89 .</div>
-                <div class="ticker-item">Health sector rife with mismanagement, corruption.</div>
-                <div class="ticker-item">Regent Hospital chairman Shahed handed over to RAB .</div>
+    <!-- Hero Content Overlay -->
+    <div class="hero-content-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="hero-content">
+              <!-- <h1 class="hero-title">
+                <span class="hero-country">Pakistan</span>
+              </h1>
+              <p class="hero-description" [translate]="'HOMESLIDETEXT1'">
+                Your gateway to a realm of incredible beauty, warm hospitality, exquisite food & endless discovery.
+              </p> -->
+              <div class="hero-actions">
+                <a
+                  *ngIf="show"
+                  href="#visa"
+                  class="btn btn-hero-primary"
+                >
+                  <span>APPLY E-VISA</span>
+                </a>
+                <a
+                  href="#explore"
+                  class="btn btn-hero-secondary"
+                >
+                  <span>EXPLORE PAKISTAN</span>
+                </a>
+              </div>
             </div>
+          </div>
         </div>
-    </div>-->
-
-  <!-- /.slide-item -->
-  <!-- </div> -->
-  <!-- /.carousel -->
+      </div>
+    </div>
+  </div>
 </section>
 <!-- /.slider -->

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { HomeService } from '../services/home.service';
+import { EventService } from '../services/event.service';
+import { Shell } from '../shell/shell.service';
+import axios from 'axios';
+import { environment } from '@env/environment';
 import defaultImage1 from '../../assets/images/wheretogo/mountain.png';
 import defaultImage2 from '../../assets/images/wheretogo/beaches.png';
 import defaultImage3 from '../../assets/images/wheretogo/deserts.png';
@@ -25,6 +29,8 @@ export class HomeComponent implements OnInit {
   locations: any;
   activities: any;
   categories: any;
+  topDestinations: any[] = [];
+  topTouristDestinationsCategoryId: string = ''; // Store the category ID
   images1 = [
     defaultImage1,
     defaultImage2,
@@ -44,7 +50,11 @@ export class HomeComponent implements OnInit {
   isWhereToGo: boolean;
   show: boolean;
   weatherFlag = false;
-  constructor(private homeService: HomeService) {}
+  constructor(
+    private homeService: HomeService,
+    private eventService: EventService,
+    private shellService: Shell
+  ) {}
 
   ngOnInit() {
     window.scrollTo({
@@ -55,10 +65,54 @@ export class HomeComponent implements OnInit {
     this.isLoading = true;
     this.getLocations();
     this.getCategories();
+    this.loadTopDestinations();
     this.loadMainScript();
     //  this.loadWeatherScript();
     this.homeService.countryMessage.subscribe((data: any) => {
       this.show = data.country == 'Pakistan' ? false : true;
+    });
+  }
+
+  loadTopDestinations() {
+    // First, get the 'top-tourist-destinations' category to get its ID
+    this.homeService.getCategories('categoryType=destination&pageSize=0').then((categories: any) => {
+      const topTouristCategory = categories.find((cat: any) => cat.slug === 'top-tourist-destinations');
+      if (topTouristCategory) {
+        this.topTouristDestinationsCategoryId = topTouristCategory._id;
+      }
+      
+      // Get all provinces like Islamabad, Punjab, Sindh, Balochistan, KPK, etc.
+      // Similar to how top-tourist-destinations category page works
+      this.shellService.getProvinces().then((provinces: any) => {
+        // Sort provinces alphabetically
+        const sorted = provinces.sort((a: any, b: any) =>
+          a.name.localeCompare(b.name)
+        );
+        
+        // Show all provinces without filtering or limiting
+        this.topDestinations = sorted;
+      }).catch((error: any) => {
+        console.log('Error loading top destinations (provinces):', error);
+        // Fallback to featured locations if provinces fail
+        axios
+          .get(`${environment.serverUrl}/location?isFeatured=true&pageSize=0`)
+          .then((response: any) => {
+            this.topDestinations = response.data.data || [];
+          })
+          .catch((err: any) => {
+            console.log('Error loading fallback destinations:', err);
+            this.topDestinations = [];
+          });
+      });
+    }).catch((error: any) => {
+      console.log('Error loading category:', error);
+      // Still try to load provinces even if category fetch fails
+      this.shellService.getProvinces().then((provinces: any) => {
+        const sorted = provinces.sort((a: any, b: any) =>
+          a.name.localeCompare(b.name)
+        );
+        this.topDestinations = sorted;
+      });
     });
   }
 

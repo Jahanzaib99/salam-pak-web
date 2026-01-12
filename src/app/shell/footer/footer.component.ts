@@ -127,7 +127,10 @@ export class FooterComponent implements OnInit {
   ngOnDestroy() {}
 
   scrollToTop = () => {
-    this.viewPortScroller.scrollToAnchor('topSection');
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   getBannerNews() {

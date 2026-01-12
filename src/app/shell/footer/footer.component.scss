@@ -130,3 +130,53 @@
 .publications-link {
   margin-top: 30px;
 }
+
+// Footer Logos
+.footer__logos {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer__logo {
+  max-width: 180px;
+  height: auto;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.footer__logo-gov {
+  max-width: 160px;
+}
+
+.footer__logo-ptdc {
+  max-width: 140px;
+}
+
+// Responsive adjustments for logos
+@media (max-width: 767px) {
+  .footer__logos {
+    margin-top: 25px;
+    gap: 15px;
+  }
+  
+  .footer__logo {
+    max-width: 140px;
+  }
+  
+  .footer__logo-gov {
+    max-width: 120px;
+  }
+  
+  .footer__logo-ptdc {
+    max-width: 110px;
+  }
+}

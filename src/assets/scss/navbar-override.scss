@@ -1,16 +1,18 @@
-/* Navbar Override - Modern Clean Style like VisitNorway.com - Professional */
+/* Navbar Override - Modern Clean Style like Gujarat Tourism - Professional */
 /* This file ensures our navbar styles override the compiled CSS */
 
 .navbar.navbar-expand-lg {
   padding: 0 !important;
-  height: 75px !important;
-  max-height: 75px !important;
-  background-color: #ffffff !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  height: 80px !important;
+  max-height: 80px !important;
+  background-color: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: none !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative !important;
   z-index: 1030 !important;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
 }
 
 .navbar.navbar-expand-lg::after {
@@ -25,7 +27,7 @@
 
 .navbar.navbar-expand-lg > .container,
 .navbar.navbar-expand-lg > .container-fluid {
-  height: 75px !important;
+  height: 80px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -38,14 +40,12 @@
 .navbar.navbar-expand-lg .navbar-brand {
   padding: 0 !important;
   margin: 0 !important;
-  line-height: 75px !important;
+  line-height: 80px !important;
   display: flex !important;
   align-items: center !important;
   transition: transform 0.3s ease !important;
-  height: 89px !important;
+  height: 80px !important;
   flex-shrink: 0 !important;
-  min-width: 1000px !important;
-  max-width: 1000px !important;
 }
 
 .navbar.navbar-expand-lg .navbar-brand:hover {
@@ -86,20 +86,24 @@
   }
 }
 
-/* Fixed navbar */
+/* Fixed navbar - Gujarat Tourism Style */
 .navbar.fixed-navbar {
-  height: 75px !important;
-  max-height: 75px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  height: 80px !important;
+  max-height: 80px !important;
+  background-color: rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
 .navbar.fixed-navbar > .container,
 .navbar.fixed-navbar > .container-fluid {
-  height: 75px !important;
+  height: 80px !important;
 }
 
 .navbar.fixed-navbar .navbar-brand {
-  line-height: 75px !important;
+  line-height: 80px !important;
 }
 
 /* Navbar modules - VisitNorway.com Style - Professional */
@@ -118,14 +122,14 @@
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  height: 75px !important;
+  height: 80px !important;
 }
 
 .navbar-modules.visitnorway-style .header-icon-item {
   margin: 0 !important;
   padding: 0 !important;
   list-style: none !important;
-  height: 75px !important;
+  height: 80px !important;
   display: flex !important;
   align-items: center !important;
 }
@@ -154,6 +158,7 @@
   display: block !important;
   transition: transform 0.2s ease !important;
   line-height: 1 !important;
+  color: inherit !important;
 }
 
 .navbar-modules.visitnorway-style .header-icon-link .icon-label {
@@ -161,7 +166,7 @@
   font-weight: 600 !important;
   text-transform: uppercase !important;
   letter-spacing: 0.6px !important;
-  color: #1a1a1a !important;
+  color: inherit !important;
   line-height: 1.2 !important;
   margin-top: 2px !important;
   transition: color 0.2s ease !important;
@@ -189,6 +194,44 @@
 .navbar-modules.visitnorway-style .header-icon-link.active i,
 .navbar-modules.visitnorway-style .header-icon-link.active .icon-label {
   color: #8cc63e !important;
+}
+
+/* Transparent Header - White Icons */
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link {
+  color: #ffffff !important;
+}
+
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link i {
+  color: #ffffff !important;
+}
+
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link .icon-label {
+  color: #ffffff !important;
+}
+
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link:hover {
+  color: #8cc63e !important;
+}
+
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link:hover i {
+  color: #8cc63e !important;
+}
+
+.header-transparent .navbar-modules.visitnorway-style .header-icon-link:hover .icon-label {
+  color: #8cc63e !important;
+}
+
+/* Fixed Navbar - Dark Icons */
+.navbar.fixed-navbar .navbar-modules.visitnorway-style .header-icon-link {
+  color: #1a1a1a !important;
+}
+
+.navbar.fixed-navbar .navbar-modules.visitnorway-style .header-icon-link i {
+  color: #1a1a1a !important;
+}
+
+.navbar.fixed-navbar .navbar-modules.visitnorway-style .header-icon-link .icon-label {
+  color: #1a1a1a !important;
 }
 
 .navbar-modules.visitnorway-style .header-icon-link:active {
