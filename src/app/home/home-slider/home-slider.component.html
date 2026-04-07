@@ -13,7 +13,7 @@
         oncanplay="this.play()"
         onloadedmetadata="this.muted = true"
       >
-        <source src="assets/videos/SalamPakistan4k.mp4" type="video/mp4" />
+        <source src="assets/videos/SalamPakitan.mp4" type="video/mp4" />
         <source src="assets/videos/Homepage.mp4" type="video/mp4" />
       </video>
       <div class="hero-video-overlay"></div>
@@ -40,7 +40,9 @@
                   <span>APPLY E-VISA</span>
                 </a>
                 <a
-                  href="#explore"
+                  [routerLink]="[
+                    '/explore-pakistan'
+                  ]"
                   class="btn btn-hero-secondary"
                 >
                   <span>EXPLORE PAKISTAN</span>

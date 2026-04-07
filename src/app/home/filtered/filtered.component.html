@@ -1,10 +1,16 @@
-<section class="where-to-go-section" [attr.data-section]="title === 'Where To Go' ? 'where-to-go' : (title === 'What To Do' ? 'what-to-do' : '')">
+<section class="where-to-go-section">
+  <!-- Dynamic blurred background that changes with active card -->
+  <div
+    class="section-dynamic-bg"
+    [style.background-image]="'url(' + currentBgImage + ')'"
+  ></div>
+  <div class="section-bg-overlay"></div>
+
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="section-header-wrapper">
           <div class="section-header">
-            <span class="heading__subtitle">Pick Your Trail</span>
             <h2 class="heading__title">{{ title }} - As Per Your Interest</h2>
           </div>
           <a 
@@ -20,10 +26,23 @@
     <div class="row">
       <div class="col-12">
         <div class="trail-carousel-wrapper" *ngIf="singleFilter && singleFilter.length > 0">
+          <!-- Navigation Arrow - Prev -->
+          <button 
+            class="trail-nav-btn trail-nav-prev" 
+            (click)="scrollCards('prev')"
+            [disabled]="!canScrollPrev()"
+            aria-label="Previous"
+          >
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
           <div class="trail-cards-container">
             <div
               *ngFor="let single of singleFilter; let i = index"
               class="trail-card-wrapper"
+              [class.is-active]="i === currentIndex"
               [style.z-index]="isCardVisible(i) ? getCardZIndex(i) : 0"
               [style.transform]="getCardTransform(i)"
               [style.opacity]="isCardVisible(i) ? 1 : 0"
@@ -45,25 +64,16 @@
               </div>
             </div>
           </div>
-          <!-- Navigation Arrows - Chevron Style -->
-          <button 
-            class="trail-nav-btn trail-nav-prev" 
-            (click)="scrollCards('prev')"
-            [disabled]="!canScrollPrev()"
-            aria-label="Previous"
-          >
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="#8cc63e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+
+          <!-- Navigation Arrow - Next -->
           <button 
             class="trail-nav-btn trail-nav-next" 
             (click)="scrollCards('next')"
             [disabled]="!canScrollNext()"
             aria-label="Next"
           >
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 18L15 12L9 6" stroke="#8cc63e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
         </div>
