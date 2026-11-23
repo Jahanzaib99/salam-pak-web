@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #06132a;
+  --color-ink-soft: #46506b;
+  --color-cloud: #f4f6fa;
+  --color-line: #e8eaf0;
+  --color-brand: #0f7a6b;
+  --color-brand-dark: #0b5a4f;
+  --color-leaf: #2f9e7e;
+
+  --font-display: var(--font-poppins);
+  --font-sans: var(--font-roboto);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  /* Prevent any stray element from creating a horizontal scrollbar.
+     `clip` (unlike `hidden`) does not create a scroll container, so
+     position: sticky descendants keep working. */
+  overflow-x: clip;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-roboto), system-ui, sans-serif;
+  overflow-x: clip;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Swiper: keep slides clipped to their track so partial "peek" slides
+   never push the page wider than the viewport. */
+.swiper {
+  overflow: hidden;
+}
+.swiper-slide {
+  height: auto;
+}
+
+/* Google Maps–style pin chrome over the printed red markers */
+@keyframes map-pin-pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.55);
+    opacity: 0.55;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes map-pin-bounce {
+  0% {
+    transform: translate(-50%, -120%) scale(0.85);
+    opacity: 0;
+  }
+  45% {
+    transform: translate(-50%, -42%) scale(1.08);
+    opacity: 1;
+  }
+  65% {
+    transform: translate(-50%, -58%) scale(0.96);
+  }
+  80% {
+    transform: translate(-50%, -48%) scale(1.03);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes map-pin-shadow {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.25);
+    opacity: 0.15;
+  }
+}
+
+.map-pin {
+  position: absolute;
+  z-index: 10;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.map-pin__hit {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+}
+
+.map-pin__pulse,
+.map-pin__pulse-2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  border: 2px solid #e53935;
+  pointer-events: none;
+  opacity: 0;
+  animation: none;
+}
+
+.map-pin:hover .map-pin__pulse,
+.map-pin.is-selected .map-pin__pulse {
+  animation: map-pin-pulse 1.8s ease-out infinite;
+}
+
+.map-pin:hover .map-pin__pulse-2,
+.map-pin.is-selected .map-pin__pulse-2 {
+  animation: map-pin-pulse 1.8s ease-out 0.9s infinite;
+}
+
+.map-pin__shadow {
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 42%;
+  height: 18%;
+  border-radius: 9999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.map-pin:hover .map-pin__shadow,
+.map-pin.is-selected .map-pin__shadow {
+  opacity: 1;
+  animation: map-pin-shadow 1.6s ease-in-out infinite;
+}
+
+.map-pin__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 78%;
+  height: 78%;
+  border-radius: 9999px;
+  border: 3px solid #e53935;
+  box-shadow:
+    0 0 0 4px rgba(229, 57, 53, 0.22),
+    0 6px 14px rgba(0, 0, 0, 0.22);
+  background: rgba(229, 57, 53, 0.16);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.map-pin:hover .map-pin__ring {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.map-pin.is-selected .map-pin__ring {
+  opacity: 1;
+  background: rgba(229, 57, 53, 0.28);
+  animation: map-pin-bounce 0.55s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+.map-pin:focus-visible .map-pin__ring {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow:
+    0 0 0 3px rgba(15, 122, 107, 0.45),
+    0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-pin__pulse,
+  .map-pin__pulse-2,
+  .map-pin__shadow,
+  .map-pin.is-selected .map-pin__ring {
+    animation: none;
+  }
+  .map-pin.is-selected .map-pin__ring {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}

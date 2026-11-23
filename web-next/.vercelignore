@@ -1,0 +1,3 @@
+# Large publication PDFs — keep off the deployment bundle
+public/pdf/**
+tmp-logos/**
