@@ -58,7 +58,9 @@ export const regionTiles: Tile[] = [
   },
 ];
 
-export const destinationTiles: Tile[] = destinations.map(destinationTile);
+export const destinationTiles: Tile[] = destinations.map((d) =>
+  destinationTile(d)
+);
 
 export const eventTiles: Tile[] = [
   { title: "Shandur Polo Festival", subtitle: "July · Chitral", image: `${H}/hunza-4.jpg`, href: "/event" },

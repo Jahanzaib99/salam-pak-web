@@ -39,7 +39,7 @@ type RawPlace = {
   image?: string;
   isFeatured?: boolean;
   regionSlug?: string;
-  order?: number;
+  order?: number | string;
   longDescription?: string;
   gettingThere?: string;
   whatToDo?: string;
@@ -92,7 +92,10 @@ function normalize(raw: RawPlace, fallbackRegion = ""): PlaceSummary | null {
     image: mediaUrl(raw.image || FALLBACK_IMAGE),
     isFeatured: Boolean(raw.isFeatured),
     regionSlug: fromApiProvinceSlug(raw.regionSlug || fallbackRegion),
-    order: typeof raw.order === "number" ? raw.order : 9999,
+    order:
+      typeof raw.order === "number"
+        ? raw.order
+        : Number.parseInt(String(raw.order ?? ""), 10) || 9999,
   };
 }
 
@@ -192,7 +195,8 @@ export async function fetchPlacesByProvince(
   const live = await liveList(
     `/location?parentProvince=${encodeURIComponent(apiSlug)}&pageSize=0`
   );
-  const dump = (placesByProvince as Record<string, RawPlace[]>)[apiSlug] || [];
+  const dump =
+    (placesByProvince as unknown as Record<string, RawPlace[]>)[apiSlug] || [];
   const source = live.length ? live : dump;
   return sortPlaces(
     source
@@ -206,7 +210,9 @@ export async function fetchPlacesByCategory(
 ): Promise<PlaceSummary[]> {
   const id = CATEGORY_IDS[categorySlug];
   const dump =
-    (placesByCategory as Record<string, RawPlace[]>)[categorySlug] || [];
+    (placesByCategory as unknown as Record<string, RawPlace[]>)[
+      categorySlug
+    ] || [];
 
   let live: RawPlace[] = [];
   if (id) {
@@ -286,7 +292,7 @@ export async function fetchPlaceDetail(
     /* fall through to dump */
   }
 
-  const cached = (placeDetails as Record<string, RawPlace>)[slug];
+  const cached = (placeDetails as unknown as Record<string, RawPlace>)[slug];
   return cached ? detailFromRaw(cached) : null;
 }
 
@@ -358,7 +364,9 @@ export async function fetchPlacesByActivity(
 ): Promise<PlaceSummary[]> {
   const activity = await fetchActivity(activitySlug);
   const dump =
-    (placesByActivityDump as Record<string, RawPlace[]>)[activitySlug] || [];
+    (placesByActivityDump as unknown as Record<string, RawPlace[]>)[
+      activitySlug
+    ] || [];
 
   let live: RawPlace[] = [];
   if (activity?.id) {

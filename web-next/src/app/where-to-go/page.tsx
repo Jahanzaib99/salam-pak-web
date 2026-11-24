@@ -22,7 +22,7 @@ export default function WhereToGoPage() {
         d.slug
       )
     )
-    .map(destinationTile);
+    .map((d) => destinationTile(d));
 
   return (
     <main className="bg-white">
