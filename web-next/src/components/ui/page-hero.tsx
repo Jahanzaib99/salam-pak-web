@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import SmartImage from "@/components/ui/smart-image";
 
 export default function PageHero({
   eyebrow,
@@ -34,7 +34,7 @@ export default function PageHero({
       ].join(" ")}
     >
       <motion.div style={{ y: imgY, scale: imgScale }} className="absolute inset-0 z-0">
-        <Image src={image} alt={title} fill priority className="object-cover" sizes="100vw" />
+        <SmartImage src={image} alt={title} fill priority className="object-cover" sizes="100vw" />
       </motion.div>
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-ink/55 via-ink/20 to-ink/80" />
 

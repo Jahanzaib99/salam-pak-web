@@ -2,23 +2,20 @@ import HomeHero from "@/components/home-hero";
 import TileRail from "@/components/tile-rail";
 import { Section, SectionHeading, FeatureCard, CtaBanner, PrimaryButton } from "@/components/ui/primitives";
 import { MountainSnow, Landmark, Compass, FileCheck2 } from "lucide-react";
-import { regionTiles, experienceTiles, eventTiles, destinationTiles } from "@/lib/content";
-import { interestCategories } from "@/lib/destinations";
+import { regionTiles, eventTiles, destinationTiles } from "@/lib/content";
+import { browsableInterestCategories } from "@/lib/destinations";
 import { TileCard } from "@/components/ui/primitives";
+import { fetchActivities, activityTile } from "@/lib/salam-api";
 
-export default function Home() {
-  const interestTiles = interestCategories
-    .filter((c) =>
-      ["top-tourist-destinations", "mountains-and-glaciers", "valleys-and-lakes", "unesco-world-heritage-sites", "heritage-and-archaeology-sites", "beaches-and-islands"].includes(
-        c.slug
-      )
-    )
-    .map((c) => ({
-      title: c.name,
-      subtitle: "Where to go",
-      image: c.image,
-      href: `/where-to-go/category/${c.slug}`,
-    }));
+export default async function Home() {
+  const interestTiles = browsableInterestCategories.map((c) => ({
+    title: c.name,
+    subtitle: "Where to go",
+    image: c.image,
+    href: `/where-to-go/category/${c.slug}`,
+  }));
+
+  const experienceTiles = (await fetchActivities()).map(activityTile);
 
   return (
     <main className="bg-white">
@@ -29,7 +26,6 @@ export default function Home() {
       </Section>
 
       <TileRail
-        kicker="Where to go"
         title="Regions of Pakistan"
         description="Seven regions, each with its own landscapes, cultures and stories."
         items={regionTiles}
@@ -37,7 +33,6 @@ export default function Home() {
       />
 
       <TileRail
-        kicker="Must-see"
         title="Popular destinations"
         description="Iconic valleys, cities and heritage sites."
         items={destinationTiles.slice(0, 8)}
@@ -46,7 +41,6 @@ export default function Home() {
       <div className="bg-cloud">
         <Section>
           <SectionHeading
-            kicker="As per your interest"
             title="Explore by interest"
             description="Mountains, heritage, beaches, valleys and more."
           />
@@ -59,7 +53,6 @@ export default function Home() {
       </div>
 
       <TileRail
-        kicker="What to do"
         title="Unforgettable experiences"
         description="From high-altitude treks to ancient heritage trails and vibrant bazaars."
         items={experienceTiles}
@@ -67,7 +60,6 @@ export default function Home() {
 
       <Section>
         <SectionHeading
-          kicker="Before you travel"
           title="Practical information"
           description="Everything you need to know to explore Pakistan with confidence."
         />
@@ -100,7 +92,6 @@ export default function Home() {
 
       <div className="bg-cloud">
         <TileRail
-          kicker="What's on"
           title="Festivals & events"
           description="Experience Pakistan's vibrant cultural calendar."
           items={eventTiles}

@@ -1,0 +1,50 @@
+[
+    {
+        "slug":  "cultural-tourism",
+        "name":  "Cultural Tourism",
+        "description":  "Cultural Tourism",
+        "image":  "https://api.salampakistan.gov.pk/photo-1710227486016.jpeg",
+        "id":  "61028e5a08208f067f7a4d6f",
+        "isFeatured":  true
+    },
+    {
+        "slug":  "spiritual-tourism",
+        "name":  "Spiritual Tourism",
+        "description":  "Spiritual Tourism",
+        "image":  "https://api.salampakistan.gov.pk/photo-1628144167871.jpeg",
+        "id":  "61028d4b08208f067f7a4d69",
+        "isFeatured":  true
+    },
+    {
+        "slug":  "adventure-and-eco-tourism",
+        "name":  "Adventure and Eco-tourism",
+        "description":  "Adventure and Eco-tourism",
+        "image":  "https://api.salampakistan.gov.pk/photo-1628144251355.jpeg",
+        "id":  "61028cf008208f067f7a4d67",
+        "isFeatured":  true
+    },
+    {
+        "slug":  "art-and-culture",
+        "name":  "Art and Culture",
+        "description":  "art and culture ",
+        "image":  "https://api.salampakistan.gov.pk/photo-1628144317554.jpeg",
+        "id":  "61028bcb08208f067f7a4d64",
+        "isFeatured":  true
+    },
+    {
+        "slug":  "explore-cities",
+        "name":  "Explore Cities",
+        "description":  "Between world-renowned local crafts made by artisans with generations of skill and modern, urban retail â Pakistan has it all.",
+        "image":  "https://api.salampakistan.gov.pk/photo-1646893875731.jpeg",
+        "id":  "5f66bbf7e008c9f9b58dacea",
+        "isFeatured":  true
+    },
+    {
+        "slug":  "traditional-food",
+        "name":  "Traditional  Food",
+        "description":  "Pakistani food is among the very best in the world. Those that disagree will be convinced after following our guide.",
+        "image":  "https://api.salampakistan.gov.pk/photo-1628144444219.jpeg",
+        "id":  "5f66bb70e008c9f9b58dace4",
+        "isFeatured":  true
+    }
+]

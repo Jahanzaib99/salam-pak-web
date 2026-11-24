@@ -1,0 +1,1553 @@
+{
+    "art-and-culture":  [
+                            {
+                                "slug":  "haveli-barood-khana",
+                                "name":  "Haveli Barood Khana",
+                                "description":  "Built in the 18th century by a Sikh commanding general and used as a house. Considering the hot temperature of Lahore, the haveli has high ceilings. The room also has murals of the Sikh general fighting demons.",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630481549941.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "punjab",
+                                "order":  "7"
+                            },
+                            {
+                                "slug":  "national-museum-of-pakistan",
+                                "name":  "National Museum of Pakistan",
+                                "description":  "The National Museum of Pakistan established in Frere Hall on 17 April 1950. In 1950 with a primary duty to counsel the Museum on the issues of enriching its collection through new acquisitions and purchase of antiquities and works of Arts. The Museum was shifted in Burns Garden in 1970.",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630651576622.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "sindh",
+                                "order":  "65"
+                            },
+                            {
+                                "slug":  "haveli-mian-sultan-akbari",
+                                "name":  "Haveli Mian Sultan Akbari",
+                                "description":  "",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1626120819155.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "punjab",
+                                "order":  "6"
+                            },
+                            {
+                                "slug":  "khaliq-dina-hall",
+                                "name":  "Khaliq Dina Hall",
+                                "description":  "Khaliq Dina Hall is a library and hall located in Karachi, Pakistan built in 1906. Currently used for various events, a library, and a room that serves as the office of a local NGO.",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630481521939.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "sindh",
+                                "order":  "54"
+                            },
+                            {
+                                "slug":  "haveli-of-nau-nihal-singh",
+                                "name":  "Haveli of Nau Nihal Singh",
+                                "description":  "The haveli is considered to be one of the finest examples of Sikh architecture in Lahore preserved in its original architecture.",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630565910759.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "punjab",
+                                "order":  "5"
+                            },
+                            {
+                                "slug":  "nigar-khana",
+                                "name":  "Nigar Khana",
+                                "description":  "Nigar Khana known as a House of Art for selling handicrafts, exhibits antiquities, cultural and artistic items for over 45 years. one finds oneself into a world of colors consisted of mosaic art, Naqashi, wooden, glass work etc.",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630566380335.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "punjab",
+                                "order":  "47"
+                            },
+                            {
+                                "slug":  "sethi-street",
+                                "name":  "Sethi street",
+                                "description":  "Made in the nineteenth century Finely assembled 05 places of Sethi family are situated here close by other houses. ",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1630315247385.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "khyber-pakhtunkhwa",
+                                "order":  "22"
+                            },
+                            {
+                                "slug":  "lok-virsa-heritage-museum",
+                                "name":  "Lok Virsa Heritage Museum ",
+                                "description":  "",
+                                "image":  "https://api.salampakistan.gov.pk/photo-1655356382253.jpeg",
+                                "isFeatured":  false,
+                                "regionSlug":  "islamabad",
+                                "order":  "19"
+                            }
+                        ],
+    "explore-cities":  [
+                           {
+                               "slug":  "rawalpindi",
+                               "name":  "Rawalpindi",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626081073707.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "punjab",
+                               "order":  "87"
+                           },
+                           {
+                               "slug":  "tharparkar",
+                               "name":  "Tharparkar",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626123883486.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "sindh",
+                               "order":  "85"
+                           },
+                           {
+                               "slug":  "nagar-parkar",
+                               "name":  "NagarParkar",
+                               "description":  "Nagarparkar, near the PakistanâIndia border, lies at the foot of the Karoonjhar Hills and is known for its desert scenery, granite outcrops, and rich cultural heritage. Home to ancient Jain temples, Hindu shrines, and the historic Bhodesar Mosque, it offers a unique blend of history, spirituality, and Thari cultureâespecially vibrant during the monsoon season.\n",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626247060430.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "sindh",
+                               "order":  "76"
+                           },
+                           {
+                               "slug":  "hyderabad",
+                               "name":  "hyderabad",
+                               "description":  "Hyderabad, the Lion\u0027s City, with its historical architecture, rich history, and scrumptious Sindhi cuisine is one of the best go-to cities in Sindh.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626182017552.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "sindh",
+                               "order":  "72"
+                           },
+                           {
+                               "slug":  "islamabad",
+                               "name":  "Islamabad",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626123110727.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "",
+                               "order":  "7"
+                           },
+                           {
+                               "slug":  "skardu",
+                               "name":  "Skardu",
+                               "description":  "touristâs paradise offering lush, level meadows in the form of the Deosai Plains, a dreamy lakeside resort and high-altitude desert with both sand dunes and snow.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1630566479437.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "gilgit-baltistan",
+                               "order":  "67"
+                           },
+                           {
+                               "slug":  "kasur",
+                               "name":  "Kasur",
+                               "description":  "Kasur also Romanized as QasÅ«r is a city to south of Lahore, in the Pakistani province of Punjab. It is also known for being the burial place of the 17th-century Sufi-poet Bulleh Shah. Kasur derives its name from the Arabic word qasur meaning âpalaces,â or âfortsâ.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626176844850.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "punjab",
+                               "order":  "61"
+                           },
+                           {
+                               "slug":  "thatta",
+                               "name":  "Thatta",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626182735508.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "sindh",
+                               "order":  "59"
+                           },
+                           {
+                               "slug":  "murree",
+                               "name":  "Murree Hills",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1630566190996.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "punjab",
+                               "order":  "5"
+                           },
+                           {
+                               "slug":  "swat",
+                               "name":  "swat",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626349406461.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "khyber-pakhtunkhwa",
+                               "order":  "5"
+                           },
+                           {
+                               "slug":  "sarda-kotli",
+                               "name":  "Sarda Kotli",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1646893931450.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "azad-jamu-khashmir",
+                               "order":  "48"
+                           },
+                           {
+                               "slug":  "haveli-kahuta",
+                               "name":  "Haveli Kahuta",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1646892905150.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "azad-jamu-khashmir",
+                               "order":  "47"
+                           },
+                           {
+                               "slug":  "chikar",
+                               "name":  "Chikar",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1646894695672.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "azad-jamu-khashmir",
+                               "order":  "45"
+                           },
+                           {
+                               "slug":  "pasni",
+                               "name":  "pasni",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1646721138423.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "balochistan",
+                               "order":  "32"
+                           },
+                           {
+                               "slug":  "chitral",
+                               "name":  "Chitral Valley",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626349384926.jpeg",
+                               "isFeatured":  false,
+                               "regionSlug":  "khyber-pakhtunkhwa",
+                               "order":  "3"
+                           },
+                           {
+                               "slug":  "ziarat-valley",
+                               "name":  "Ziarat Valley",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1652513660916.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "balochistan",
+                               "order":  "2"
+                           },
+                           {
+                               "slug":  "multan",
+                               "name":  "Multan",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626123149075.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "punjab",
+                               "order":  "2"
+                           },
+                           {
+                               "slug":  "muzaffarabad",
+                               "name":  "Muzaffarabad",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626124111196.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "azad-jamu-khashmir",
+                               "order":  "1"
+                           },
+                           {
+                               "slug":  "quetta",
+                               "name":  "Quetta",
+                               "description":  " The city is known as the \"Fruit Garden of Pakistan,\" due to the numerous fruit orchards in and around it, and the large variety of fruits and dried fruit products produced there.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1630566403174.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "balochistan",
+                               "order":  "1"
+                           },
+                           {
+                               "slug":  "peshawar",
+                               "name":  "Peshawar",
+                               "description":  "",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626349362931.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "khyber-pakhtunkhwa",
+                               "order":  "1"
+                           },
+                           {
+                               "slug":  "karachi",
+                               "name":  "Karachi: The City of lights",
+                               "description":  "Karachi is the largest city of Pakistan. With its dazzling bazaars, high-end shopping malls, amazing sightseeing options, and a mix of all cultures, it is surely a must-visit.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626123044250.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "sindh",
+                               "order":  "1"
+                           },
+                           {
+                               "slug":  "lahore",
+                               "name":  "Lahore",
+                               "description":  "A city where history, culture, and hospitality come alive. Explore its grand Mughal monuments, vibrant bazaars, rich cuisine, and lively streets that never sleep.",
+                               "image":  "https://api.salampakistan.gov.pk/photo-1626122670917.jpeg",
+                               "isFeatured":  true,
+                               "regionSlug":  "punjab",
+                               "order":  9999
+                           }
+                       ],
+    "traditional-food":  [
+                             {
+                                 "slug":  "pindi-food-street",
+                                 "name":  "Pindi Food Street",
+                                 "description":  "A must visit place for the food lovers, if one is visiting Rawalpindi. There are a variety of restaurants and food to enjoy with family and friends.",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1626182940739.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "punjab",
+                                 "order":  "41"
+                             },
+                             {
+                                 "slug":  "do-darya",
+                                 "name":  "Do Darya",
+                                 "description":  "With a great atmosphere, multiple cuisine options, and beautiful views, restaurants at Do Darya have quickly garnered a reputation and a loyal customers from all over the city. Nothing can top the experience of the Do Darya food scene.",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1626079879599.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "sindh",
+                                 "order":  "111"
+                             },
+                             {
+                                 "slug":  "melody-food-street",
+                                 "name":  "Melody Food Street",
+                                 "description":  "",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1626417184187.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "islamabad",
+                                 "order":  "11"
+                             },
+                             {
+                                 "slug":  "lahore-fort-food-street",
+                                 "name":  "Lahore Fort Food Street",
+                                 "description":  "Travelers from all across the world come to feast on some of the most delicious desi food. Offering enchanting views of Badshahi Mosque and Lahore Fort, the delicious food is bound to make your visit to this food street unforgettable. ",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1626182858976.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "punjab",
+                                 "order":  "102"
+                             },
+                             {
+                                 "slug":  "sindhi-muslim-food-st",
+                                 "name":  "Sindhi Muslim Food St",
+                                 "description":  "A popular spot for all the foodies out there, from BBQ to mouth watering burgers. This food street will make anyone want to visit it over and over again.",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1626182968700.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "sindh",
+                                 "order":  9999
+                             }
+                         ],
+    "spiritual-tourism":  [
+                              {
+                                  "slug":  "bhodesar-mosque",
+                                  "name":  "Bhodesar Mosque",
+                                  "description":  "This mosque with white pillars in Bhodesar is a small marble and limestone structure near the pond embankment is built in 1436 AD. It was built by Mehmood Shah Bin Zaffar Shah, ruler of Gujrat. The mosque is located 5 Km from town Nagarparkar.",
+                                  "image":  "https://api.salampakistan.gov.pk/photo-1630481455930.jpeg",
+                                  "isFeatured":  false,
+                                  "regionSlug":  "sindh",
+                                  "order":  "94"
+                              },
+                              {
+                                  "slug":  "mirza-jani-baig-tarkhans-tomb",
+                                  "name":  "Mirza Jani Baig Tarkhan\u0027s Tomb",
+                                  "description":  "The mausoleum of Mirza Jani Baig Tarkhan presents a picturesque and colourful sight. The brick masonry, in alternate courses of glazed dark-blue and unglazed red bricks, represents a high standard of Sindhi craftsmanship.",
+                                  "image":  "https://api.salampakistan.gov.pk/photo-1630652530411.jpeg",
+                                  "isFeatured":  false,
+                                  "regionSlug":  "sindh",
+                                  "order":  "67"
+                              },
+                              {
+                                  "slug":  "lahoot-lamakan",
+                                  "name":  "Lahoot Lamakan",
+                                  "description":  "Lahoot Lamakan is a cave in Balochistan, Pakistan. The water flows from the external limestone shell of the cave and believers have a tale that first it was milk when people began to sell it, miraculously it became water.",
+                                  "image":  "https://api.salampakistan.gov.pk/photo-1630313216542.jpeg",
+                                  "isFeatured":  false,
+                                  "regionSlug":  "balochistan",
+                                  "order":  "33"
+                              },
+                              {
+                                  "slug":  "sharada-peeth",
+                                  "name":  "Sharada Peeth",
+                                  "description":  "Sharada Peeth is a ruined Hindu temple and ancient centre of learning between 6th and 12th century CE. It played a key role in the development and popularisation of the Sharada script in North India, causing the script to be named after it.",
+                                  "image":  "https://api.salampakistan.gov.pk/photo-1626107736398.jpeg",
+                                  "isFeatured":  false,
+                                  "regionSlug":  "azad-jamu-khashmir",
+                                  "order":  "31"
+                              },
+                              {
+                                  "slug":  "badshahi-mosque",
+                                  "name":  "Badshahi Mosque",
+                                  "description":  "The Badshahi Mosque of Lahore was constructed by the Mughal emperor Aurangzeb between 1671 and 1673 and was the largest mosque in the world from 1673 to 1986. ",
+                                  "image":  "https://api.salampakistan.gov.pk/photo-1626123767614.jpeg",
+                                  "isFeatured":  true,
+                                  "regionSlug":  "punjab",
+                                  "order":  "112"
+                              }
+                          ],
+    "adventure-and-eco-tourism":  [
+                                      {
+                                          "slug":  "kirthar-national-park",
+                                          "name":  "Kirthar National Park",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629180960749.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "90"
+                                      },
+                                      {
+                                          "slug":  "changa-manga-forest",
+                                          "name":  "Changa Manga Forest",
+                                          "description":  "The Changa Manga is a planted forest which includes a wildlife preserve, in the Kasur and Lahore districts of Punjab. The Changa Manga forest was originally planted in 1866 by British foresters. The forest is home to many species of animals.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629115650317.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "89"
+                                      },
+                                      {
+                                          "slug":  "haleji-lake",
+                                          "name":  "haleji lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626112562327.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "88"
+                                      },
+                                      {
+                                          "slug":  "karoonjhar-mountains",
+                                          "name":  "Karoonjhar Mountains",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626245689684.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "86"
+                                      },
+                                      {
+                                          "slug":  "fort-munroe-hill",
+                                          "name":  "Fort Munroe Hill",
+                                          "description":  "Fort Munro named after a British administrator, Col Munroe is located in Southern Punjab at the foothills of the Suleiman Range. It attracts a number of tourists every year, particularly those who wish to escape from the hot plains of southern Punjab.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629113942090.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "85"
+                                      },
+                                      {
+                                          "slug":  "churna-island",
+                                          "name":  "Churna Island",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626182269038.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "75"
+                                      },
+                                      {
+                                          "slug":  "dreamworld-resort",
+                                          "name":  "Dreamworld Resort",
+                                          "description":  "At Dreamworld Resort, you along with your family will be able to keep yourself entertained throughout the stay. Providing a serene and tranquil gateway of quality living for the whole family and to rejuvenate ones mind and body.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626245055918.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "74"
+                                      },
+                                      {
+                                          "slug":  "arang-kel",
+                                          "name":  "Arang kel",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107786626.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "72"
+                                      },
+                                      {
+                                          "slug":  "pir-chinasi",
+                                          "name":  "Pir Chinasi",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106833847.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "71"
+                                      },
+                                      {
+                                          "slug":  "attabad-lake",
+                                          "name":  "Attabad Lake",
+                                          "description":  "Attabad Lake is in Gojal region of Hunza -a mountainous valley in the northern part of the Gilgit-Baltistan formed by the Hunza River, bordering Afghanistan\u0027s Wakhan Corridor to the north and the Xinjiang region of China to the northeast.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630565594598.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "71"
+                                      },
+                                      {
+                                          "slug":  "mubarak-village-beach",
+                                          "name":  "Mubarak Village Beach",
+                                          "description":  "The crystal clear greenish-blue waters and unspoiled coastline have made this spot gain immense popularity in recent years. One can indulge in all sorts of water sports on the trip to Mubarak Village, including boating, beaching, snorkeling, and scuba diving.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629717013447.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "70"
+                                      },
+                                      {
+                                          "slug":  "ratti-gali-lake",
+                                          "name":  "Ratti Gali ",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107191649.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "70"
+                                      },
+                                      {
+                                          "slug":  "chitta-katha-lake",
+                                          "name":  "Chitta Katha Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107378527.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "69"
+                                      },
+                                      {
+                                          "slug":  "toli-pir",
+                                          "name":  "Toli Pir",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107689016.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "66"
+                                      },
+                                      {
+                                          "slug":  "khunjerab",
+                                          "name":  "Khunjerab",
+                                          "description":  "A gateway between two great allies , the incredible altitude makes for a very memorable, albeit chilly, experience, which has captured the imaginations of the local people.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1628856037147.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "64"
+                                      },
+                                      {
+                                          "slug":  "concordia-and-k-2-base-camp",
+                                          "name":  "K2",
+                                          "description":  "The legendary K2 is the second highest mountain in the world. It is located in the north-western Karakoram Mountain Range on the PakistanâChina border ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1652676781676.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "63"
+                                      },
+                                      {
+                                          "slug":  "passu-cones",
+                                          "name":  "Passu Cones",
+                                          "description":  "Breathtaking views of majestic Passu Cones (few pointed cone-like snow covered peaks) are in the Karakorum Range in north of the Gulmit village in Gojal Valley.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1649670681809.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "61"
+                                      },
+                                      {
+                                          "slug":  "rakaposhi",
+                                          "name":  "Rakaposhi",
+                                          "description":  "Part of the Karakoram range, Rakaposhi is the 27th highest mountain in the world. The mountain resides in the middle of the Bagrote valley, danyor and Nagar Valley. ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629451732867.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "60"
+                                      },
+                                      {
+                                          "slug":  "kallar-kahar",
+                                          "name":  "Kallar Kahar",
+                                          "description":  "Alluring scenic beauty, with a calm lake, and breathtaking views, where you can go for cliff-diving, paragliding and many more activities. ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626124172568.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "60"
+                                      },
+                                      {
+                                          "slug":  "bruti-waterfall",
+                                          "name":  "Bruti Waterfall",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629105729826.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "islamabad",
+                                          "order":  "6"
+                                      },
+                                      {
+                                          "slug":  "kumrat",
+                                          "name":  "Kumrat Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626349991804.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "6"
+                                      },
+                                      {
+                                          "slug":  "baboon-valley",
+                                          "name":  "Baboon Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1649140799258.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "59"
+                                      },
+                                      {
+                                          "slug":  "nanga-parbat",
+                                          "name":  "Nanga Parbat",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626123227889.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "59"
+                                      },
+                                      {
+                                          "slug":  "ganga-choti",
+                                          "name":  "Ganga choti",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1631262780249.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "58"
+                                      },
+                                      {
+                                          "slug":  "soon-valley",
+                                          "name":  "Soon Valley",
+                                          "description":  "Soon Valley is a breathtaking vista of natural beauty consisting of lakes and springs, lush green fertile fields. Accessible through Kallar Kahar, Soon Valley extends to almost 100 kilometers.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629114930879.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "58"
+                                      },
+                                      {
+                                          "slug":  "neela-sandh-waterfall",
+                                          "name":  "Neela Sandh Waterfall",
+                                          "description":  "Neela Sandh is a delightful waterfall, situated in Mori Syedan, Rawalpindi, Punjab. It has numerous greenery, tall trees and extensive mountains which are relatively secured with snow constantly. Guests who adore swimming unquestionably visit to enjoy with their families and companions.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629109097024.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "57"
+                                      },
+                                      {
+                                          "slug":  "sheosar",
+                                          "name":  "Sheosar Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630315303320.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "56"
+                                      },
+                                      {
+                                          "slug":  "shandur-lake",
+                                          "name":  "Shandur Lake",
+                                          "description":  "Shandur Lake is located on a high mountain pass, âShandur Passâ. It is also called the âRoof of the Worldâ and is one of the most beautiful lakes of Pakistan. The spot is most well known in view of the Shandur Polo Festival.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629183422744.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "55"
+                                      },
+                                      {
+                                          "slug":  "kai-valley",
+                                          "name":  "Kai Valley",
+                                          "description":  "Kai Valley presents a picturesque panorama on both sides of the road. Kai Valley is one of the rare solitary landscapes which sees the majority of tourists. It gives the impression as if the hills were once underneath sea.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629181155706.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "55"
+                                      },
+                                      {
+                                          "slug":  "kalam-valley",
+                                          "name":  "Kalam Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629022693995.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "55"
+                                      },
+                                      {
+                                          "slug":  "saral-lake",
+                                          "name":  "Saral Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106725108.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "55"
+                                      },
+                                      {
+                                          "slug":  "shandur",
+                                          "name":  "Shandur Pass",
+                                          "description":  "Known as the \u0027Roof of the World\u0027 where the Hindu Kush, Pamir Mountains and Karakorum Range meet, Shandur is located in the Upper Chitral District of the Khyber Pakhtunkhwa province, Pakistan and is location of annual Shandur Polo Festival.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1628856158950.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "54"
+                                      },
+                                      {
+                                          "slug":  "neelum-river",
+                                          "name":  "Neelum River",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107121838.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "54"
+                                      },
+                                      {
+                                          "slug":  "astola-island",
+                                          "name":  "Astola Island",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629022185595.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "53"
+                                      },
+                                      {
+                                          "slug":  "karimabad",
+                                          "name":  "Karimabad",
+                                          "description":  "Karimabad, previously known as Baltit, is named after Prince Karim Aga Khan IV. It is the capital of Hunza District, in the Gilgit-Baltistan area of Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312903591.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "53"
+                                      },
+                                      {
+                                          "slug":  "masherbrum",
+                                          "name":  "Masherbrum",
+                                          "description":  "Masherbrum, formerly known as K1 is located in the Ghanche District, Gilgit Baltistan. At 25,659 feet, it is the 22nd highest mountain in the world.  The mighty Masherbrum Peaks in Pakistan are perfect for every tough mountaineer to prepare themselves for higher altitude peaks.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182537454.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "52"
+                                      },
+                                      {
+                                          "slug":  "kutton",
+                                          "name":  "Kutton",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106864337.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "52"
+                                      },
+                                      {
+                                          "slug":  "manthoka-waterfall",
+                                          "name":  "Manthoka Waterfall",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629716739183.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "51"
+                                      },
+                                      {
+                                          "slug":  "swaik-lake",
+                                          "name":  "Swaik Lake",
+                                          "description":  "Swaik Lake also known as âKhandowa Lakeâ is located in tehsil Kallar Kahar, Punjab. Itâs crystal clear water and serene atmosphere offers adventure lovers just the right mix of thrill with ease of access. It is a popular tourist attraction and offers opportunities for swimming and diving.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629097014636.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "51"
+                                      },
+                                      {
+                                          "slug":  "bagh",
+                                          "name":  "Bagh",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626184357370.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "51"
+                                      },
+                                      {
+                                          "slug":  "malam-jabba",
+                                          "name":  "Malam Jabba",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566143193.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "51"
+                                      },
+                                      {
+                                          "slug":  "khunjerab-national-park",
+                                          "name":  "Khunjerab National Park",
+                                          "description":  "Khunjerab National Park is Pakistan\u0027s third largest national park. The park is adjacent to the Taxkorgan Natural Reserve in China. The primary purpose of setting up this park was to provide protection to the endangered Marco polo sheep, which is only found in this area in Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629183580824.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "50"
+                                      },
+                                      {
+                                          "slug":  "nathia-gali",
+                                          "name":  "Nathia Gali",
+                                          "description":  "Ideal for hiking, trekking and sightseeing, with its crowning jewel, Mushkpuri peak, Nathia Gali is the place to experience nature\u0027s true beauty.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630651434332.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "50"
+                                      },
+                                      {
+                                          "slug":  "pir-ghaib",
+                                          "name":  "Pir Ghaib Waterfalls",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629023946629.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "5"
+                                      },
+                                      {
+                                          "slug":  "khaplu-valley",
+                                          "name":  "Khaplu Valley",
+                                          "description":  "Khaplu is a city that serves as the managerial capital of the Ghanche District of Gilgit-Baltistan, in northern Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630313043860.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "5"
+                                      },
+                                      {
+                                          "slug":  "swat",
+                                          "name":  "swat",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626349406461.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "5"
+                                      },
+                                      {
+                                          "slug":  "pearl-valley",
+                                          "name":  "Pearl Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1646892233870.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "49"
+                                      },
+                                      {
+                                          "slug":  "ayubia-national-park",
+                                          "name":  "Ayubia National Park",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182256047.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "49"
+                                      },
+                                      {
+                                          "slug":  "bolan-pass",
+                                          "name":  "Bolan Pass",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629023203487.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "49"
+                                      },
+                                      {
+                                          "slug":  "karambar",
+                                          "name":  "Karambar Lake",
+                                          "description":  "Karambar Lake, renowned as Qurumbar Lake, is a high height lake situated in the Ishkoman Valley bilanz in Ghizer District, Gilgit Baltistan, Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312720995.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "49"
+                                      },
+                                      {
+                                          "slug":  "naltar",
+                                          "name":  "Naltar Valley",
+                                          "description":  "renowned for its lakes whose waters change colours depending on the time of day. The three lakes are known by several names. According to locals, one of the lakes is called the Pari Lake because of its enchanting, deep blue colour.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566324849.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "48"
+                                      },
+                                      {
+                                          "slug":  "katora-lake-kandel-lake",
+                                          "name":  "Katora Lake/Kandol lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1648621035104.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "47"
+                                      },
+                                      {
+                                          "slug":  "phander",
+                                          "name":  "Phander Valley",
+                                          "description":  "Phander is the name of a settlement and valley in the Gupis-Yasin District of Pakistan\u0027s reliant region of Gilgit-Baltistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630313514492.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "47"
+                                      },
+                                      {
+                                          "slug":  "sehnsa-valley",
+                                          "name":  "Sehnsa Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1646730005026.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "46"
+                                      },
+                                      {
+                                          "slug":  "saiful-muluk",
+                                          "name":  "Saif-ul-Maluk Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630315069970.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "46"
+                                      },
+                                      {
+                                          "slug":  "mahodand-lake",
+                                          "name":  "Mahodand Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629805975018.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "45"
+                                      },
+                                      {
+                                          "slug":  "ormara-beach",
+                                          "name":  "Ormara beach",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626348883146.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "45"
+                                      },
+                                      {
+                                          "slug":  "karakoram-mountains",
+                                          "name":  "Karakoram Mountains",
+                                          "description":  "The Karakoram is a mountain range spanning the borders of China, India, and Pakistan. The mountain range is a great challenge for the mountaineers \u0026 climbers the world over.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629792189432.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "44"
+                                      },
+                                      {
+                                          "slug":  "lulusar-lake",
+                                          "name":  "Lulusar Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629181710999.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "44"
+                                      },
+                                      {
+                                          "slug":  "dudipatsar-trail",
+                                          "name":  "dudipatsar lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106288794.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "43"
+                                      },
+                                      {
+                                          "slug":  "kund-malir",
+                                          "name":  "Kund Malir Beach",
+                                          "description":  "Kund Malir beach with its sparkling cerulean waters, beckons visitors to spend the day picnicking or the night camping on its peaceful shore. Add a to that bonfire as the Milky Way unfolds above and it makes for the perfect weekend getaway.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629179755164.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "43"
+                                      },
+                                      {
+                                          "slug":  "ansoo-lake-trek",
+                                          "name":  "Ansoo lake Trek",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1632127720206.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "41"
+                                      },
+                                      {
+                                          "slug":  "pyala-lake",
+                                          "name":  "Pyala Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630314330328.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "40"
+                                      },
+                                      {
+                                          "slug":  "hushe",
+                                          "name":  "Hushe Valley",
+                                          "description":  "Hushe Valley is a valley in Ghanche District, Gilgit-Baltistan, Pakistan. Created by the Hushe River, the valley runs from Masherbrum Mountain (at 7,821 meters) and close by glaciers south to the Shyok River, inverse Khaplu.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312484224.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "40"
+                                      },
+                                      {
+                                          "slug":  "kaghan",
+                                          "name":  "Kaghan Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1754334751441.jpeg",
+                                          "isFeatured":  true,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "4"
+                                      },
+                                      {
+                                          "slug":  "hingol-national-park",
+                                          "name":  "Hingol National Park,Balochistan",
+                                          "description":  "Hingol National Park is the largest national park in Pakistan and is named after the southern part of the Hangul River which flows along the shores of the Arabian Sea and is home to large numbers of waterfowl and marine life.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629021894602.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "4"
+                                      },
+                                      {
+                                          "slug":  "shigar",
+                                          "name":  "Shigar Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629806217193.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "4"
+                                      },
+                                      {
+                                          "slug":  "baha",
+                                          "name":  "Baha Lake",
+                                          "description":  "Baha Lake is also known as Khukush Langar Lake is a colossal lake lying at the feet of transcending mountains.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630307818737.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "4"
+                                      },
+                                      {
+                                          "slug":  "banjosa-lake",
+                                          "name":  "Banjosa Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626107222807.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "4"
+                                      },
+                                      {
+                                          "slug":  "makra-peak",
+                                          "name":  "Makra Peak",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106235299.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "39"
+                                      },
+                                      {
+                                          "slug":  "katpana-desert",
+                                          "name":  "Katpana Desert",
+                                          "description":  "Katpana desert is one of its kind. Being one of the highest deserts, its temperature varies from 27 Â°C in summers to snow covered sand in winters.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630651049850.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "39"
+                                      },
+                                      {
+                                          "slug":  "astore",
+                                          "name":  "Astore Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630565547453.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "38"
+                                      },
+                                      {
+                                          "slug":  "shogran-forest",
+                                          "name":  "Shogran Valley",
+                                          "description":  "Shogran, one of the most beautiful plateaus in Naran Valley.  From the rolling grassy lawns of the rest house, one can see breathtaking panoramic views of snow covered mountains.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629712258996.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "37"
+                                      },
+                                      {
+                                          "slug":  "siri-paye",
+                                          "name":  "Siri Paye",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629181522062.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "36"
+                                      },
+                                      {
+                                          "slug":  "chandragup-mud-volcano",
+                                          "name":  "Chandragup Mud Volcano",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1628857099152.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "36"
+                                      },
+                                      {
+                                          "slug":  "ishkoman",
+                                          "name":  "Ishkoman",
+                                          "description":  "The Ishkoman valley lies in the north of Ghizer District in Gilgit-Baltistan, Pakistan, lining Afghanistan and the Pamir Wakhan Corridor. ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312546089.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "35"
+                                      },
+                                      {
+                                          "slug":  "jiwani-coastal-wetland",
+                                          "name":  "Jiwani Coastal Wetland",
+                                          "description":  "Jiwani is a town and commercial port that is located along the Gulf of Oman in the Gawadar District of the Balochistan province in Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630480456652.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "34"
+                                      },
+                                      {
+                                          "slug":  "bagrote",
+                                          "name":  "Bagrote",
+                                          "description":  "Bagrote Valley is a valley in the Karakoram Mountain range in the GilgitâBaltistan district of northern Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630307615054.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "34"
+                                      },
+                                      {
+                                          "slug":  "lalazar",
+                                          "name":  "Lalazar Meadows",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1649139330722.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "32"
+                                      },
+                                      {
+                                          "slug":  "samahni-valley",
+                                          "name":  "Samahni Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106693712.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "32"
+                                      },
+                                      {
+                                          "slug":  "nagar",
+                                          "name":  "Nagar",
+                                          "description":  "In an eponymous valley with splendid scenery, Nagar is a small town. A visit during the right season, you can see trees of many different colors with lakes, rivers, and clear skies abound.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566281125.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "32"
+                                      },
+                                      {
+                                          "slug":  "miranjani-track",
+                                          "name":  "Miranjani Track",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1632386088802.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "31"
+                                      },
+                                      {
+                                          "slug":  "diran",
+                                          "name":  "Diran peak",
+                                          "description":  "Standing at the height of 7,266 Meters, Diran is a sight to behold. This pyramid shaped mountain is known as the most dangerous mountain of Pakistan due to large snow caps.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630310012471.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "31"
+                                      },
+                                      {
+                                          "slug":  "broad-peak",
+                                          "name":  "Broad Peak",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182799050.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "30"
+                                      },
+                                      {
+                                          "slug":  "mushkpuri",
+                                          "name":  "Mushkpuri",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566240569.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "30"
+                                      },
+                                      {
+                                          "slug":  "cholistan",
+                                          "name":  "Cholistan",
+                                          "description":  "The Cholistan Desert, locally known as Rohi, stretches across southern Punjab, Pakistan, extending into Sindh and the Indian Thar Desert. Covering over 26,000â¯kmÂ², it was once a fertile plain nourished by the ancient Hakra (Ghaggar) River. Today it\u0027s home to more than 400 Indus Valley Civilization archaeological sites",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1754333689172.jpeg",
+                                          "isFeatured":  true,
+                                          "regionSlug":  "punjab",
+                                          "order":  "3"
+                                      },
+                                      {
+                                          "slug":  "deosai-national-park",
+                                          "name":  "Deosai National Park",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629183771535.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "3"
+                                      },
+                                      {
+                                          "slug":  "leepa-valley",
+                                          "name":  "Leepa Valley",
+                                          "description":  "Leepa Valley is located in Hattian Bala District of Azad Kashmir. With fields of rice apple found all over the valley, its lush green river fields in summer and typical wooden kashmiri houses present a wonderful view to the tourists.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106896327.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "3"
+                                      },
+                                      {
+                                          "slug":  "gwadar",
+                                          "name":  "Gawadar",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630565816777.jpeg",
+                                          "isFeatured":  true,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "3"
+                                      },
+                                      {
+                                          "slug":  "chitral",
+                                          "name":  "Chitral Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626349384926.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "3"
+                                      },
+                                      {
+                                          "slug":  "laila-peak",
+                                          "name":  "Laila Peak",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182936286.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "29"
+                                      },
+                                      {
+                                          "slug":  "turmik",
+                                          "name":  "Turmik valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626345671223.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "28"
+                                      },
+                                      {
+                                          "slug":  "thandiani-top",
+                                          "name":  "Thandiani Top",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182078788.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "27"
+                                      },
+                                      {
+                                          "slug":  "hanna-urak-waterfall",
+                                          "name":  "Hanna-Urak Waterfall",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630311519639.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "27"
+                                      },
+                                      {
+                                          "slug":  "sudhan-gali",
+                                          "name":  "Sudhan gali",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106596060.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "27"
+                                      },
+                                      {
+                                          "slug":  "rupal",
+                                          "name":  "Rupal",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630314975307.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "26"
+                                      },
+                                      {
+                                          "slug":  "taobat",
+                                          "name":  "Taobat",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106793642.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "26"
+                                      },
+                                      {
+                                          "slug":  "hopper",
+                                          "name":  "Hopar Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312447240.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "25"
+                                      },
+                                      {
+                                          "slug":  "umalsat",
+                                          "name":  "Umalsat valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626346328774.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "25"
+                                      },
+                                      {
+                                          "slug":  "kutwal",
+                                          "name":  "Kutwal Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630480557537.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "24"
+                                      },
+                                      {
+                                          "slug":  "zharba-tso",
+                                          "name":  "Zharba Tso/Blind lake",
+                                          "description":  "Zharba Tso or Blind lake is a Panoramic Lake close to Shigar around 170 km away from Skardu in Pakistan. ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630317669572.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "24"
+                                      },
+                                      {
+                                          "slug":  "moola-chotok",
+                                          "name":  "Moola Chotok",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1628857212807.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "24"
+                                      },
+                                      {
+                                          "slug":  "darkot-pass",
+                                          "name":  "Darkot Pass",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1649139961377.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "23"
+                                      },
+                                      {
+                                          "slug":  "burji-la-track",
+                                          "name":  "Burji la track",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1632136713463.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "22"
+                                      },
+                                      {
+                                          "slug":  "margalla-hills",
+                                          "name":  "margalla hills national park.",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629789478400.jpeg",
+                                          "isFeatured":  true,
+                                          "regionSlug":  "islamabad",
+                                          "order":  "21"
+                                      },
+                                      {
+                                          "slug":  "chitral-gol-national-park",
+                                          "name":  "Chitral Gol National Park",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629182390519.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "21"
+                                      },
+                                      {
+                                          "slug":  "wali-tangi-dam-lake",
+                                          "name":  "Wali Tangi Dam Lake",
+                                          "description":  "Wali Tangi Dam is a little dam in the Urak Valley in Balochistan territory of Pakistan. It is arranged around 20 km east of Quetta at a rise of roughly 8,350 ft.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630480406325.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  "21"
+                                      },
+                                      {
+                                          "slug":  "borith",
+                                          "name":  "Borith Lake ",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630308740528.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "21"
+                                      },
+                                      {
+                                          "slug":  "gulmit",
+                                          "name":  "Gulmit",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630311226591.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "20"
+                                      },
+                                      {
+                                          "slug":  "neelum-valley",
+                                          "name":  "Neelum Valley",
+                                          "description":  "The valley is situated in the northeast of Muzaffarabad, running parallel to Kaghan Valley. It is replete with gorgeous scenery, stunning valleys, and magical waterfalls.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626162340055.jpeg",
+                                          "isFeatured":  true,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  "2"
+                                      },
+                                      {
+                                          "slug":  "hunza",
+                                          "name":  "Hunza Valley",
+                                          "description":  "Hunza is a mountainous valley in the northern part of the Gilgit-Baltistan formed by the Hunza River, bordering Afghanistan\u0027s Wakhan Corridor to the north and the Xinjiang region of China to the northeast.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630565960602.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "2"
+                                      },
+                                      {
+                                          "slug":  "shimshal",
+                                          "name":  "Shimshal Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630315444759.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "19"
+                                      },
+                                      {
+                                          "slug":  "tirich-mir",
+                                          "name":  "Tirich Mir",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626348813823.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "18"
+                                      },
+                                      {
+                                          "slug":  "khanpur",
+                                          "name":  "Khanpur Dam",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566010322.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "17"
+                                      },
+                                      {
+                                          "slug":  "kharfaq",
+                                          "name":  "Kharfaq Lake",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630313150123.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "16"
+                                      },
+                                      {
+                                          "slug":  "bhit-khori",
+                                          "name":  "Bhit Khori",
+                                          "description":  "Bhit Khori, one of the finest beaches in Pakistan, asks you to complete a rocky journey before it gifts you with its golden sands and beautiful, cerulean seawater.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626182101957.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "16"
+                                      },
+                                      {
+                                          "slug":  "jarogo-waterfall",
+                                          "name":  "Jarogo Waterfall",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1648629538530.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "15"
+                                      },
+                                      {
+                                          "slug":  "tomb-of-amir-sultan-mohammad",
+                                          "name":  "Keenjhar Lake Resort",
+                                          "description":  "The resort is developed on the bank of Keenjhar lake, which is a favorable and ideal place for winter migratory birds that come from regions of North Asia in the winter season. Located in the center of Thatta district, which has important tourist sites belonging to the near and far past of history.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630481488158.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  "109"
+                                      },
+                                      {
+                                          "slug":  "panjpeer-rocks",
+                                          "name":  "Panjpeer Rocks",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629793190027.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "punjab",
+                                          "order":  "101"
+                                      },
+                                      {
+                                          "slug":  "fairy-meadows",
+                                          "name":  "Fairy Meadows",
+                                          "description":  "Named by some German climbers and locally known as Jaugth, Fairy Meadows is a grassland near one of Nanga Parbat\u0027s base campsites.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626346887810.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  "1"
+                                      },
+                                      {
+                                          "slug":  "dunga-gali",
+                                          "name":  "Dunga Gali",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626123395347.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "khyber-pakhtunkhwa",
+                                          "order":  "1"
+                                      },
+                                      {
+                                          "slug":  "gorakh-hill",
+                                          "name":  "Gorakh Hill",
+                                          "description":  "Gorakh Hill is a hill station of Sindh.  It is situated on one of the highest plateaus of Sindh, spread over 2,500 acres. The hill station is well known for itâs nightlife, especially for itâs bonfires.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1629181340541.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "sindh",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "urak-valley",
+                                          "name":  "Urak Valley",
+                                          "description":  "Urak Valley is a valley encircled by mountains inside the Quetta Area of Balochistan Region, in western Pakistan. Urak Valley is found close to Hana Lake and 28 kilometers (17 mi) from Quetta city.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630317600475.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "hisper",
+                                          "name":  "Hispar",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630480500835.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "khalti",
+                                          "name":  "Khalti Lake",
+                                          "description":  "Khalti Lake is located at Gupis-Yasin District, the westernmost piece of the GilgitâBaltistan locale and northernmost domain of Pakistan.",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630312954015.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "rush",
+                                          "name":  "Rush Lake",
+                                          "description":  "Rush Lake is a high-altitude lake situated in Nagar Valley, Gilgit-Baltistan, Pakistan close to Rush Pari Peak. At 4,694 meters (15,400 ft), Rush is one of the most elevated high lakes on the planet. ",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630315008195.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "gilgit-baltistan",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "jhelum-valley",
+                                          "name":  "Jhelum Valley",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1626106936905.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "azad-jamu-khashmir",
+                                          "order":  9999
+                                      },
+                                      {
+                                          "slug":  "khuzdar",
+                                          "name":  "Khuzdar",
+                                          "description":  "",
+                                          "image":  "https://api.salampakistan.gov.pk/photo-1630566115724.jpeg",
+                                          "isFeatured":  false,
+                                          "regionSlug":  "balochistan",
+                                          "order":  9999
+                                      }
+                                  ],
+    "cultural-tourism":  [
+                             {
+                                 "slug":  "ganda-singh-wala",
+                                 "name":  "Ganda Singh Wala",
+                                 "description":  "Ganda Singh Wala is a village in Kasur, Punjab. A daily 6 p.m Beating Retreat Border Ceremony is jointly held at the border crossing by the military of both nations. The ceremony is attended mostly by local Punjabi\u0027s on either side of the border.",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1629101044711.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "punjab",
+                                 "order":  "67"
+                             },
+                             {
+                                 "slug":  "kalash-valley",
+                                 "name":  "Kalash Valley",
+                                 "description":  "",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1629023473682.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "khyber-pakhtunkhwa",
+                                 "order":  "59"
+                             },
+                             {
+                                 "slug":  "islamabad-museum",
+                                 "name":  "Islamabad Museum",
+                                 "description":  "",
+                                 "image":  "https://api.salampakistan.gov.pk/photo-1720682223843.jpeg",
+                                 "isFeatured":  false,
+                                 "regionSlug":  "islamabad",
+                                 "order":  9999
+                             }
+                         ]
+}

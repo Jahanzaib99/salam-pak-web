@@ -27,7 +27,7 @@ export const mainNav: NavItem[] = [
     href: "/where-to-go",
     children: regions.map((r) => ({
       label: r.name,
-      href: `/where-to-go/location/${r.slug}`,
+      href: `/where-to-go/location/${r.slug}/featured`,
     })),
   },
   { label: "What to Do", href: "/what-to-do" },

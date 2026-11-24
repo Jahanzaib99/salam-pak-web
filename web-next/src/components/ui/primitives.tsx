@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/reveal";
+import SmartImage from "@/components/ui/smart-image";
 
 /* ---------- Section wrapper ---------- */
 export function Section({
@@ -114,7 +115,7 @@ export function TileCard({
         tall ? "aspect-[3/4]" : "aspect-[4/3]"
       }`}
     >
-      <Image
+      <SmartImage
         src={image}
         alt={title}
         fill

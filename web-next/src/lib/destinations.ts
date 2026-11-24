@@ -1,4 +1,6 @@
 const H = "/hero";
+const I = "/hero/interest";
+const S = "/hero/scenic";
 
 export interface InterestCategory {
   slug: string;
@@ -28,12 +30,48 @@ export interface Destination {
   highlights: string[];
 }
 
+/** Live salampakistan.gov.pk interest categories (API order). Cities is footer-only. */
 export const interestCategories: InterestCategory[] = [
+  {
+    slug: "gandhare-heritage",
+    name: "Gandhare Heritage",
+    description: "Buddhist monasteries, stupas and the ancient Gandhara civilisation.",
+    image: `${I}/gandhare-heritage.jpg`,
+    destinationSlugs: ["taxila", "peshawar", "swat-valley", "gilgit"],
+  },
+  {
+    slug: "sufi-tourism",
+    name: "Sufi Tourism",
+    description: "Shrines, qawwali and the spiritual heart of Pakistan.",
+    image: `${I}/sufi-tourism.jpg`,
+    destinationSlugs: ["lahore", "karachi", "multan"],
+  },
+  {
+    slug: "hindu-and-jain-temples",
+    name: "Hindu and Jain Temples",
+    description: "Historic temples and pilgrimage trails.",
+    image: `${I}/hindu-and-jain-temples.jpg`,
+    destinationSlugs: ["karachi", "lahore"],
+  },
+  {
+    slug: "heritage-and-archaeology-sites",
+    name: "Heritage and Archaeology Sites",
+    description: "Forts, ruins and living heritage across the Indus lands.",
+    image: `${I}/heritage-and-archaeology-sites.jpg`,
+    destinationSlugs: ["lahore", "mohenjo-daro", "taxila", "peshawar"],
+  },
+  {
+    slug: "sikh-heritage",
+    name: "Sikh Heritage",
+    description: "Sacred gurdwaras and pilgrimage sites across Punjab and beyond.",
+    image: `${I}/sikh-heritage.jpg`,
+    destinationSlugs: ["lahore", "islamabad"],
+  },
   {
     slug: "top-tourist-destinations",
     name: "Top Tourist Destinations",
     description: "Pakistan's most-loved places — from mountain valleys to historic cities.",
-    image: `${H}/hunza-1.jpg`,
+    image: `${I}/top-tourist-destinations.jpg`,
     destinationSlugs: [
       "hunza",
       "fairy-meadows",
@@ -46,76 +84,46 @@ export const interestCategories: InterestCategory[] = [
     ],
   },
   {
+    slug: "beaches-and-islands",
+    name: "Beaches and Islands",
+    description: "Arabian Sea coastlines, islands and desert shores.",
+    image: `${I}/beaches-and-islands.jpg`,
+    destinationSlugs: ["karachi", "gwadar"],
+  },
+  {
+    slug: "unesco-world-heritage-sites",
+    name: "UNESCO World Heritage Sites",
+    description: "Civilisations and monuments recognised by UNESCO.",
+    image: `${I}/unesco-world-heritage-sites.jpg`,
+    destinationSlugs: ["mohenjo-daro", "lahore", "taxila"],
+  },
+  {
     slug: "mountains-and-glaciers",
     name: "Mountains and Glaciers",
     description: "Home to five of the world's fourteen highest peaks and legendary glaciers.",
-    image: `${H}/hunza-4.jpg`,
+    image: `${I}/mountains-and-glaciers.jpg`,
     destinationSlugs: ["fairy-meadows", "hunza", "skardu", "deosai-national-park", "shigar"],
   },
   {
     slug: "valleys-and-lakes",
     name: "Valleys and Lakes",
     description: "Turquoise alpine lakes, orchard valleys and high meadows.",
-    image: `${H}/hunza-8.jpg`,
+    image: `${I}/valleys-and-lakes.jpg`,
     destinationSlugs: ["hunza", "skardu", "swat-valley", "khaplu-valley", "shigar"],
-  },
-  {
-    slug: "unesco-world-heritage-sites",
-    name: "UNESCO World Heritage Sites",
-    description: "Civilisations and monuments recognised by UNESCO.",
-    image: `${H}/hunza-6.jpg`,
-    destinationSlugs: ["mohenjo-daro", "lahore", "taxila"],
-  },
-  {
-    slug: "heritage-and-archaeology-sites",
-    name: "Heritage and Archaeology Sites",
-    description: "Forts, ruins and living heritage across the Indus lands.",
-    image: `${H}/hunza-5.jpg`,
-    destinationSlugs: ["lahore", "mohenjo-daro", "taxila", "peshawar"],
-  },
-  {
-    slug: "gandhare-heritage",
-    name: "Gandhara Heritage",
-    description: "Buddhist monasteries, stupas and the ancient Gandhara civilisation.",
-    image: `${H}/hunza-2.jpg`,
-    destinationSlugs: ["taxila", "peshawar", "swat-valley"],
-  },
-  {
-    slug: "sikh-heritage",
-    name: "Sikh Heritage",
-    description: "Sacred gurdwaras and pilgrimage sites across Punjab and beyond.",
-    image: `${H}/hunza-7.jpg`,
-    destinationSlugs: ["lahore", "islamabad"],
-  },
-  {
-    slug: "sufi-tourism",
-    name: "Sufi Tourism",
-    description: "Shrines, qawwali and the spiritual heart of Pakistan.",
-    image: `${H}/hunza-10.jpg`,
-    destinationSlugs: ["lahore", "karachi", "multan"],
-  },
-  {
-    slug: "hindu-and-jain-temples",
-    name: "Hindu and Jain Temples",
-    description: "Historic temples and pilgrimage trails.",
-    image: `${H}/hunza-9.jpg`,
-    destinationSlugs: ["karachi", "lahore"],
-  },
-  {
-    slug: "beaches-and-islands",
-    name: "Beaches and Islands",
-    description: "Arabian Sea coastlines, islands and desert shores.",
-    image: `${H}/hunza-7.jpg`,
-    destinationSlugs: ["karachi", "gwadar"],
   },
   {
     slug: "cities",
     name: "Cities",
     description: "Pakistan's great cities — culture, food and urban energy.",
-    image: `${H}/hunza-5.jpg`,
+    image: `${S}/reg-islamabad-dusk.jpg`,
     destinationSlugs: ["islamabad", "lahore", "karachi", "peshawar", "gilgit", "quetta"],
   },
 ];
+
+/** Categories shown in “As per your interest” (matches live Where to Go; excludes Cities). */
+export const browsableInterestCategories = interestCategories.filter(
+  (c) => c.slug !== "cities"
+);
 
 export const destinations: Destination[] = [
   {
@@ -675,15 +683,17 @@ export function getDestinationsForCategory(slug: string) {
     .filter((d): d is Destination => Boolean(d));
 }
 
-export function destinationHref(d: Destination) {
-  return `/where-to-go/category/${d.regionSlug}/location/${d.slug}`;
+/** Live URLs use interest category (or region / cities) as the category segment. */
+export function destinationHref(d: Destination, categorySlug?: string) {
+  const category = categorySlug || d.regionSlug;
+  return `/where-to-go/category/${category}/location/${d.slug}`;
 }
 
-export function destinationTile(d: Destination) {
+export function destinationTile(d: Destination, categorySlug?: string) {
   return {
     title: d.name,
     subtitle: d.regionName,
     image: d.image,
-    href: destinationHref(d),
+    href: destinationHref(d, categorySlug),
   };
 }

@@ -4,7 +4,7 @@ import { Section, SectionHeading, TileCard } from "@/components/ui/primitives";
 import TileRail from "@/components/tile-rail";
 import { regionTiles } from "@/lib/content";
 import {
-  interestCategories,
+  browsableInterestCategories,
   destinations,
   destinationTile,
 } from "@/lib/destinations";
@@ -40,17 +40,15 @@ export default function WhereToGoPage() {
           description="Heritage trails, mountains, beaches, cities and more."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {interestCategories
-            .filter((c) => c.slug !== "cities")
-            .map((c) => (
-              <TileCard
-                key={c.slug}
-                title={c.name}
-                subtitle="Category"
-                image={c.image}
-                href={`/where-to-go/category/${c.slug}`}
-              />
-            ))}
+          {browsableInterestCategories.map((c) => (
+            <TileCard
+              key={c.slug}
+              title={c.name}
+              subtitle="Category"
+              image={c.image}
+              href={`/where-to-go/category/${c.slug}`}
+            />
+          ))}
         </div>
       </Section>
 
