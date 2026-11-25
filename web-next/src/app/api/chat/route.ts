@@ -12,13 +12,13 @@ import { offlineRehbarReply } from "@/lib/chat/offline-reply";
 
 export const maxDuration = 60;
 
+/** Only call the LLM when an explicit key is set.
+ *  Do not treat `VERCEL=1` as enough — AI Gateway can 403 without billing,
+ *  and those stream errors surface as client "Something went wrong".
+ */
 function hasAiCredentials() {
-  // Local: needs AI_GATEWAY_API_KEY (or OPENAI_API_KEY).
-  // On Vercel: AI Gateway can authenticate via OIDC without a manual key.
   return Boolean(
-    process.env.AI_GATEWAY_API_KEY ||
-      process.env.OPENAI_API_KEY ||
-      process.env.VERCEL
+    process.env.AI_GATEWAY_API_KEY?.trim() || process.env.OPENAI_API_KEY?.trim()
   );
 }
 
@@ -42,7 +42,14 @@ function offlineStreamResponse(text: string) {
     execute: ({ writer }) => {
       const id = `text_${Date.now()}`;
       writer.write({ type: "text-start", id });
-      writer.write({ type: "text-delta", id, delta: text });
+      const chunkSize = 64;
+      for (let i = 0; i < text.length; i += chunkSize) {
+        writer.write({
+          type: "text-delta",
+          id,
+          delta: text.slice(i, i + chunkSize),
+        });
+      }
       writer.write({ type: "text-end", id });
     },
   });
@@ -56,10 +63,10 @@ function offlineStreamResponse(text: string) {
 export async function POST(req: Request) {
   const body = await req.json();
   const messages = (body.messages ?? []) as UIMessage[];
-  const userText = lastUserText(messages);
+  const userText = lastUserText(messages) || "hello";
 
   if (!hasAiCredentials()) {
-    return offlineStreamResponse(offlineRehbarReply(userText || "hello"));
+    return offlineStreamResponse(offlineRehbarReply(userText));
   }
 
   try {
@@ -73,15 +80,14 @@ export async function POST(req: Request) {
     });
 
     return result.toUIMessageStreamResponse({
-      headers: {
-        "x-rehbar-mode": "ai",
+      headers: { "x-rehbar-mode": "ai" },
+      onError: (err) => {
+        console.error("[rehbar/chat] stream", err);
+        return offlineRehbarReply(userText);
       },
     });
   } catch (err) {
     console.error("[rehbar/chat]", err);
-    return offlineStreamResponse(
-      offlineRehbarReply(userText || "hello") +
-        "\n\n_(AI gateway briefly unavailable — answered from the local Salam Pakistan knowledge base.)_"
-    );
+    return offlineStreamResponse(offlineRehbarReply(userText));
   }
 }

@@ -196,7 +196,7 @@ export default function RehbarChat() {
 
               {error && (
                 <p className="rounded-lg bg-red-50 px-3 py-2 text-[12.5px] text-red-700">
-                  Something went wrong. Please try again.
+                  Connection hiccup — tap a suggestion or try again.
                 </p>
               )}
             </div>
