@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import {
   Compass,
@@ -33,27 +33,141 @@ function messageText(parts: { type: string; text?: string }[] | undefined) {
     .join("");
 }
 
-function renderRichText(text: string) {
+/** Match http(s) URLs and in-app paths like /map/3d-map */
+const LINK_RE =
+  /(https?:\/\/[^\s<>"')\]]+|\/(?:where-to-go|what-to-do|map|planning|booking|bookings|publications|trip|explore-pakistan|about|user|cabs|login|event)[^\s<>"'.,;:!?]*)/gi;
+
+function isInternalPath(href: string) {
+  return href.startsWith("/") && !href.startsWith("//");
+}
+
+function trimTrailingPunctuation(raw: string) {
+  return raw.replace(/[.,;:!?)]+$/g, "");
+}
+
+function renderInline(
+  text: string,
+  keyPrefix: string,
+  onNavigate?: () => void
+): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  // Split on bold / code first, then linkify plain segments.
+  const tokenRe = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+  const chunks = text.split(tokenRe);
+
+  chunks.forEach((chunk, ci) => {
+    if (!chunk) return;
+    const key = `${keyPrefix}-${ci}`;
+
+    if (chunk.startsWith("**") && chunk.endsWith("**")) {
+      nodes.push(
+        <strong key={key} className="font-semibold text-ink">
+          {chunk.slice(2, -2)}
+        </strong>
+      );
+      return;
+    }
+
+    if (chunk.startsWith("`") && chunk.endsWith("`")) {
+      const code = chunk.slice(1, -1);
+      if (isInternalPath(code) || /^https?:\/\//i.test(code)) {
+        nodes.push(
+          <ChatLink key={key} href={code} onNavigate={onNavigate}>
+            {code}
+          </ChatLink>
+        );
+      } else {
+        nodes.push(
+          <code
+            key={key}
+            className="rounded bg-cloud px-1 py-0.5 text-[12px]"
+          >
+            {code}
+          </code>
+        );
+      }
+      return;
+    }
+
+    let last = 0;
+    const re = new RegExp(LINK_RE.source, LINK_RE.flags);
+    let match: RegExpExecArray | null;
+    while ((match = re.exec(chunk)) !== null) {
+      const raw = match[0];
+      const href = trimTrailingPunctuation(raw);
+      const start = match.index;
+      if (start > last) {
+        nodes.push(chunk.slice(last, start));
+      }
+      nodes.push(
+        <ChatLink key={`${key}-l${start}`} href={href} onNavigate={onNavigate}>
+          {href}
+        </ChatLink>
+      );
+      last = start + raw.length;
+      // If we trimmed punctuation, keep it as plain text after the link.
+      if (raw.length > href.length) {
+        nodes.push(raw.slice(href.length));
+        last = start + raw.length;
+      }
+    }
+    if (last < chunk.length) nodes.push(chunk.slice(last));
+  });
+
+  return nodes;
+}
+
+function ChatLink({
+  href,
+  children,
+  onNavigate,
+}: {
+  href: string;
+  children: ReactNode;
+  onNavigate?: () => void;
+}) {
+  const className =
+    "font-medium text-brand underline decoration-brand/35 underline-offset-2 break-all hover:text-brand-dark";
+
+  if (isInternalPath(href)) {
+    return (
+      <Link
+        href={href}
+        className={className}
+        onClick={() => onNavigate?.()}
+      >
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={className}
+      onClick={() => onNavigate?.()}
+    >
+      {children}
+    </a>
+  );
+}
+
+function renderRichText(text: string, onNavigate?: () => void) {
   const blocks = text.split(/\n{2,}/);
   return blocks.map((block, bi) => {
     const lines = block.split("\n");
     return (
       <div key={bi} className="space-y-1.5">
-        {lines.map((line, li) => {
-          const html = line
-            .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-            .replace(
-              /`([^`]+)`/g,
-              "<code class='rounded bg-cloud px-1 py-0.5 text-[12px]'>$1</code>"
-            );
-          return (
-            <p
-              key={li}
-              className="text-[13.5px] leading-relaxed text-ink/90 whitespace-pre-wrap"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          );
-        })}
+        {lines.map((line, li) => (
+          <p
+            key={li}
+            className="text-[13.5px] leading-relaxed text-ink/90 whitespace-pre-wrap"
+          >
+            {renderInline(line, `${bi}-${li}`, onNavigate)}
+          </p>
+        ))}
       </div>
     );
   });
@@ -181,7 +295,9 @@ export default function RehbarChat() {
                         {text}
                       </p>
                     ) : (
-                      <div className="space-y-2">{renderRichText(text)}</div>
+                      <div className="space-y-2">
+                        {renderRichText(text, () => setOpen(false))}
+                      </div>
                     )}
                   </div>
                 );
@@ -254,7 +370,11 @@ export default function RehbarChat() {
                 >
                   Clear chat
                 </button>
-                <Link href="/map/3d-map" className="hover:text-brand">
+                <Link
+                  href="/map/3d-map"
+                  className="hover:text-brand"
+                  onClick={() => setOpen(false)}
+                >
                   Open 3D map
                 </Link>
               </div>
