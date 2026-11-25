@@ -68,6 +68,15 @@ export default function SiteHeader() {
             </span>
           </div>
           <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(new Event("rehbar:open"))
+              }
+              className="hover:text-white"
+            >
+              Ask Rehbar
+            </button>
             <Link href="/about" className="hover:text-white">
               Traveller support
             </Link>

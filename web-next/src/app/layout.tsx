@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import RehbarChat from "@/components/rehbar-chat";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -42,6 +43,7 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteFooter />
+          <RehbarChat />
         </SmoothScroll>
       </body>
     </html>

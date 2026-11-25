@@ -40,6 +40,7 @@ export const mainNav: NavItem[] = [
       { label: "Travel within Pakistan", href: "/planning/getting-around" },
       { label: "Tourist Information Centers", href: "/planning/tic" },
       { label: "Interactive Map", href: "/map/3d-map" },
+      { label: "Ask Rehbar (AI planner)", href: "/#rehbar" },
     ],
   },
   {
