@@ -19,24 +19,27 @@ export type DestSummary = {
   href: string;
 };
 
+type PlaceDetailKb = {
+  slug: string;
+  name: string;
+  regionSlug: string;
+  description: string;
+  longDescription: string;
+  gettingThere: string;
+  whatToDo: string;
+  whenToVisit: string;
+  whereToStay: string;
+  additionalInfo: string;
+  gettingThereBullets?: string[];
+  whatToDoBullets?: string[];
+  whenToVisitBullets?: string[];
+  whereToStayBullets?: string[];
+};
+
 type KnowledgeFile = {
   destinationCount: number;
   destinations: DestSummary[];
-  details: Record<
-    string,
-    {
-      slug: string;
-      name: string;
-      regionSlug: string;
-      description: string;
-      longDescription: string;
-      gettingThere: string;
-      whatToDo: string;
-      whenToVisit: string;
-      whereToStay: string;
-      additionalInfo: string;
-    }
-  >;
+  details: Record<string, PlaceDetailKb>;
   activities: {
     slug: string;
     name: string;
@@ -118,9 +121,26 @@ export function getDestinationBrief(slugOrName: string) {
   const detail = kb.details[slug];
   const curated = curatedDestinations.find((d) => d.slug === slug);
 
+  const gettingThereBullets =
+    detail?.gettingThereBullets?.length
+      ? detail.gettingThereBullets
+      : curated?.gettingThere || [];
+  const whatToDoBullets =
+    detail?.whatToDoBullets?.length
+      ? detail.whatToDoBullets
+      : curated?.whatToDo || curated?.highlights || [];
+  const whenToVisitBullets =
+    detail?.whenToVisitBullets?.length
+      ? detail.whenToVisitBullets
+      : curated?.whenToVisit || [];
+  const whereToStayBullets =
+    detail?.whereToStayBullets?.length
+      ? detail.whereToStayBullets
+      : curated?.whereToStay || [];
+
   return {
     slug,
-    name: detail?.name || curated?.name || summary?.name || slug,
+    name: (detail?.name || curated?.name || summary?.name || slug).trim(),
     regionSlug:
       detail?.regionSlug || curated?.regionSlug || summary?.regionSlug || "",
     regionName: curated?.regionName || summary?.regionName || "",
@@ -138,25 +158,28 @@ export function getDestinationBrief(slugOrName: string) {
       detail?.longDescription || curated?.description || "",
     gettingThere:
       detail?.gettingThere ||
-      (curated?.gettingThere || []).join(" ") ||
+      gettingThereBullets.join(" ") ||
       "",
     whatToDo:
       detail?.whatToDo ||
-      (curated?.whatToDo || []).join(" ") ||
-      (curated?.highlights || []).join("; ") ||
+      whatToDoBullets.join(" ") ||
       "",
     whenToVisit:
       detail?.whenToVisit ||
-      (curated?.whenToVisit || []).join(" ") ||
+      whenToVisitBullets.join(" ") ||
       "",
     whereToStay:
       detail?.whereToStay ||
-      (curated?.whereToStay || []).join(" ") ||
+      whereToStayBullets.join(" ") ||
       "",
     additionalInfo:
       detail?.additionalInfo ||
       (curated?.additionalInfo || []).join(" ") ||
       "",
+    gettingThereBullets,
+    whatToDoBullets,
+    whenToVisitBullets,
+    whereToStayBullets,
     categories: summary?.categories || [],
     tagline: curated?.tagline || "",
   };
@@ -167,22 +190,32 @@ export function formatDestinationKnowledge(slugOrName: string): string {
   const d = getDestinationBrief(slugOrName);
   if (!d) return `No destination matched "${slugOrName}".`;
 
+  const bulletBlock = (label: string, bullets: string[], prose: string) => {
+    if (bullets.length) {
+      return `**${label}**\n${bullets.map((b) => `• ${b}`).join("\n")}`;
+    }
+    if (prose) return `**${label}**\n${prose}`;
+    return "";
+  };
+
   const parts = [
-    `# ${d.name}`,
-    d.tagline ? `Tagline: ${d.tagline}` : "",
+    `**${d.name}**`,
+    d.tagline ? `*${d.tagline}*` : "",
     `Region: ${d.regionName || d.regionSlug || "Pakistan"}`,
     d.categories.length ? `Themes: ${d.categories.join(", ")}` : "",
     d.description ? `Overview: ${d.description}` : "",
-    d.longDescription ? `Details: ${d.longDescription}` : "",
-    d.gettingThere ? `Getting there: ${d.gettingThere}` : "",
-    d.whatToDo ? `What to do: ${d.whatToDo}` : "",
-    d.whenToVisit ? `When to visit: ${d.whenToVisit}` : "",
-    d.whereToStay ? `Where to stay: ${d.whereToStay}` : "",
-    d.additionalInfo ? `Extra: ${d.additionalInfo}` : "",
+    d.longDescription && d.longDescription !== d.description
+      ? `Details: ${d.longDescription.slice(0, 600)}`
+      : "",
+    bulletBlock("Getting there", d.gettingThereBullets, d.gettingThere),
+    bulletBlock("What to do", d.whatToDoBullets, d.whatToDo),
+    bulletBlock("When to visit", d.whenToVisitBullets, d.whenToVisit),
+    bulletBlock("Where to stay", d.whereToStayBullets, d.whereToStay),
+    d.additionalInfo ? `**Extra tips**\n${d.additionalInfo}` : "",
     `Page: ${d.href}`,
   ].filter(Boolean);
 
-  return parts.join("\n");
+  return parts.join("\n\n");
 }
 
 export function planTripFromKnowledge(opts: {
@@ -211,26 +244,156 @@ export function planTripFromKnowledge(opts: {
     href: dest.href,
   };
 
-  const plan = buildItinerary(pin, origin);
+  let plan = enrichPlanWithDestination(buildItinerary(pin, origin), dest, origin);
 
   // Soft-trim if user asked for fewer/more days — keep structure honest.
   if (opts.days && opts.days > 0 && plan.steps.length > opts.days + 1) {
-    return {
-      destination: dest,
-      origin,
-      plan: {
-        ...plan,
-        durationLabel: `${opts.days} days (condensed from ${plan.durationLabel})`,
-        steps: plan.steps.slice(0, Math.max(opts.days, 2)),
-        tips: [
-          ...plan.tips,
-          `You asked for about ${opts.days} days — this is a condensed cut of the fuller circuit.`,
-        ],
-      },
+    plan = {
+      ...plan,
+      durationLabel: `${opts.days} days (condensed from ${plan.durationLabel})`,
+      steps: plan.steps.slice(0, Math.max(opts.days, 2)),
+      tips: [
+        ...plan.tips,
+        `You asked for about ${opts.days} days — this is a condensed cut of the fuller circuit.`,
+      ],
     };
   }
 
   return { destination: dest, origin, plan };
+}
+
+type DestBrief = NonNullable<ReturnType<typeof getDestinationBrief>>;
+
+/** Merge live/catalog travel fields into the structural route plan. */
+function enrichPlanWithDestination(
+  plan: ItineraryPlan,
+  dest: DestBrief,
+  origin: OriginCityId
+): ItineraryPlan {
+  const travel = dest.gettingThereBullets.length
+    ? dest.gettingThereBullets
+    : dest.gettingThere
+      ? [dest.gettingThere.slice(0, 220)]
+      : [];
+  const activities = dest.whatToDoBullets.length
+    ? dest.whatToDoBullets
+    : dest.whatToDo
+      ? dest.whatToDo
+          .split(/[.•\n]/)
+          .map((s) => s.trim())
+          .filter((s) => s.length > 16)
+          .slice(0, 8)
+      : [];
+  const seasons = dest.whenToVisitBullets.length
+    ? dest.whenToVisitBullets
+    : dest.whenToVisit
+      ? [dest.whenToVisit.slice(0, 180)]
+      : [];
+  const stays = dest.whereToStayBullets.length
+    ? dest.whereToStayBullets
+    : dest.whereToStay
+      ? [dest.whereToStay.slice(0, 160)]
+      : [];
+  const extras = dest.additionalInfo
+    ? dest.additionalInfo
+        .split(/[.•\n]/)
+        .map((s) => s.trim())
+        .filter((s) => s.length > 20)
+        .slice(0, 4)
+    : [];
+
+  const transportOptions = [...plan.transportOptions];
+  if (travel.length) {
+    transportOptions.unshift({
+      mode: "road",
+      label: `How to reach ${dest.name}`,
+      duration: "See official guide",
+      note: travel.slice(0, 3).join(" · "),
+    });
+  }
+
+  let activityCursor = 0;
+  const steps = plan.steps.map((step) => {
+    const next = { ...step, activities: [...(step.activities || [])] };
+    const isExplore =
+      step.mode === "explore" ||
+      /explore|discover|welcome|sight|in\s+/i.test(`${step.title} ${step.note}`) ||
+      step.title.toLowerCase().includes(dest.name.toLowerCase());
+
+    if (isExplore && activities.length) {
+      const chunk = activities.slice(activityCursor, activityCursor + 3);
+      activityCursor += 3;
+      if (chunk.length) {
+        const merged = [...chunk, ...next.activities];
+        next.activities = merged.filter(
+          (a, i, arr) =>
+            arr.findIndex((x) => x.toLowerCase() === a.toLowerCase()) === i
+        );
+      }
+      if (!next.note || next.note.length < 40) {
+        next.note =
+          dest.description.slice(0, 220) ||
+          `Explore ${dest.name} using local guides and the official place page.`;
+      }
+    }
+
+    if (
+      !next.overnight &&
+      stays[0] &&
+      (isExplore || /arrive|check/i.test(step.title))
+    ) {
+      next.overnight = stays[0].slice(0, 80);
+    }
+
+    // Attach official travel note to the first outbound travel day
+    if (
+      (step.mode === "flight" || step.mode === "road" || step.mode === "bus") &&
+      travel[0] &&
+      /depart|→|to\s+|from\s+/i.test(step.title) &&
+      !/return/i.test(step.title)
+    ) {
+      next.note = `${step.note}\nOfficial access: ${travel[0]}`.trim();
+    }
+
+    return next;
+  });
+
+  // If the structural plan never absorbed activities, append an explore day.
+  if (activities.length && activityCursor === 0) {
+    const insertAt = Math.max(1, steps.length - 1);
+    steps.splice(insertAt, 0, {
+      day: `Day ${insertAt + 1}`,
+      title: `Explore ${dest.name}`,
+      note:
+        dest.description.slice(0, 220) ||
+        `Focus on the highlights of ${dest.name}.`,
+      mode: "explore",
+      activities: activities.slice(0, 5),
+      overnight: stays[0]?.slice(0, 80) || `Near ${dest.name}`,
+    });
+  }
+
+  const tips = [
+    ...plan.tips,
+    ...extras,
+    stays[1] ? `Stay tip: ${stays[1]}` : "",
+    `Full guide: ${dest.href}`,
+    `Helpline 1422 · Depart from ${ORIGIN_CITIES.find((c) => c.id === origin)?.name || origin}`,
+  ].filter(Boolean);
+
+  return {
+    ...plan,
+    summary:
+      dest.description ||
+      plan.summary ||
+      `Suggested route from ${origin} to ${dest.name}.`,
+    bestSeason: seasons[0] || plan.bestSeason,
+    transportOptions,
+    steps,
+    tips: tips.filter(
+      (t, i, arr) => arr.findIndex((x) => x.toLowerCase() === t.toLowerCase()) === i
+    ),
+  };
 }
 
 export function catalogPreview(limit = 12): DestSummary[] {

@@ -210,3 +210,133 @@ body {
     opacity: 1;
   }
 }
+
+/* Classic Google Maps teardrop pins (MapLibre DOM markers) */
+.gm-pin {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  transform-origin: 50% 100%;
+  transition: transform 0.15s ease;
+}
+.gm-pin--dest {
+  width: 34px;
+  height: 48px;
+  z-index: 2;
+}
+.gm-pin--poi {
+  width: 24px;
+  height: 34px;
+  z-index: 1;
+}
+.gm-pin:hover,
+.gm-pin.is-active {
+  transform: scale(1.12);
+  z-index: 3;
+}
+.gm-pin svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+@keyframes gm-pin-drop {
+  0% {
+    transform: translateY(-18px) scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(2px) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+.gm-pin--animate {
+  animation: gm-pin-drop 0.45s cubic-bezier(0.22, 1.2, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gm-pin--animate {
+    animation: none;
+  }
+  .gm-pin:hover,
+  .gm-pin.is-active {
+    transform: none;
+  }
+}
+
+/* Rehbar AI chatbot attention */
+@keyframes rehbar-pulse-ring {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+@keyframes rehbar-fab-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes rehbar-nudge-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes rehbar-dot-blink {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+.rehbar-pulse {
+  animation: rehbar-pulse-ring 2.2s ease-out infinite;
+}
+.rehbar-fab--attention {
+  animation: rehbar-fab-bob 2.4s ease-in-out infinite;
+}
+.rehbar-nudge {
+  animation: rehbar-nudge-in 0.35s ease-out both;
+}
+.rehbar-dot {
+  animation: rehbar-dot-blink 1.4s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rehbar-pulse,
+  .rehbar-fab--attention,
+  .rehbar-nudge,
+  .rehbar-dot {
+    animation: none;
+  }
+}

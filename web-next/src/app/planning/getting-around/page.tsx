@@ -26,16 +26,24 @@ export default function GettingAroundPage() {
           description="From domestic flights to scenic rail journeys and comfortable coaches."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          <FeatureCard icon={Plane} title="Domestic flights">
+          <FeatureCard
+            icon={Plane}
+            title="Domestic flights"
+            href="/booking-flight"
+          >
             Fastest way to reach the north and connect major cities.
           </FeatureCard>
-          <FeatureCard icon={TrainFront} title="Railways">
+          <FeatureCard
+            icon={TrainFront}
+            title="Railways"
+            href="/booking-railway"
+          >
             Scenic and affordable long-distance travel across the plains.
           </FeatureCard>
-          <FeatureCard icon={Bus} title="Intercity buses">
+          <FeatureCard icon={Bus} title="Intercity buses" href="/booking-bus">
             Modern, comfortable coaches connect virtually every city.
           </FeatureCard>
-          <FeatureCard icon={Car} title="Cabs & car hire">
+          <FeatureCard icon={Car} title="Cabs & car hire" href="/cabs">
             Ride-hailing in cities and private cars with drivers for the hills.
           </FeatureCard>
         </div>

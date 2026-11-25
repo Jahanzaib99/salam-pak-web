@@ -6,7 +6,7 @@ import {
   searchDestinations,
 } from "./destination-kb";
 import { FAQS, searchFaqs } from "./faq-kb";
-import type { OriginCityId } from "@/lib/map-itinerary";
+import { ORIGIN_CITIES, type OriginCityId } from "@/lib/map-itinerary";
 
 function detectOrigin(text: string): OriginCityId {
   const t = text.toLowerCase();
@@ -14,6 +14,56 @@ function detectOrigin(text: string): OriginCityId {
   if (/from\s+karachi|karachi\s*→|starting\s+(in\s+)?karachi/.test(t))
     return "karachi";
   return "islamabad";
+}
+
+const KNOWN_DEST_RE =
+  /\b(fairy\s+meadows|deosai|naran|kaghan|hunza|skardu|swat|kalam|malam\s+jabba|lahore|karachi|islamabad|gwadar|multan|peshawar|taxila|murree|nathia\s+gali|muzaffarabad|quetta|chitral|gilgit|passu|attabad|khunjerab)\b/i;
+
+/** Prefer explicit place names over accidental captures like "a" before "5-day". */
+function extractTripDestination(raw: string): string | null {
+  const origin = detectOrigin(raw);
+
+  // "5-day Hunza trip" / "7 days in Skardu"
+  const dayPlace = raw.match(
+    /(\d+)\s*-?\s*days?\s+(?:in\s+|to\s+)?([A-Za-z][A-Za-z\s'-]{2,40}?)(?:\s+trip|\s+from|\s+for|[.!?,]|$)/i
+  );
+  if (dayPlace?.[2]) {
+    const candidate = dayPlace[2].replace(/\s+trip$/i, "").trim();
+    if (candidate && !/^(a|an|the|my|our)$/i.test(candidate)) return candidate;
+  }
+
+  const patterned = raw.match(
+    /(?:trip\s+to|visit(?:ing)?|days?\s+in|itinerary\s+(?:for|to)|honeymoon\s+(?:in|to))\s+([A-Za-z][A-Za-z\s'-]{2,40}?)(?:\s+from|\s+for|\s+trip|\s+\d|[.!?,]|$)/i
+  );
+  if (patterned?.[1]) {
+    const candidate = patterned[1].replace(/\s+trip$/i, "").trim();
+    if (candidate && !/^(a|an|the|my|our)$/i.test(candidate)) return candidate;
+  }
+
+  // Known place names, skipping the origin city when phrased as "from X"
+  const allKnown = [
+    ...raw.matchAll(new RegExp(KNOWN_DEST_RE.source, "gi")),
+  ].map((m) => m[1].trim());
+  for (const name of allKnown) {
+    const key = name.toLowerCase().replace(/\s+/g, "");
+    if (key === origin) continue;
+    return name;
+  }
+
+  // Catalogue search on remaining words
+  const cleaned = raw
+    .replace(
+      /\b(plan|a|an|the|day|days|trip|from|lahore|karachi|islamabad|itinerary|visit|to|for|honeymoon)\b/gi,
+      " "
+    )
+    .replace(/\d+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (cleaned.length >= 3) {
+    const hit = searchDestinations(cleaned, 1)[0];
+    if (hit) return hit.slug;
+  }
+  return null;
 }
 
 function detectDays(text: string): number | undefined {
@@ -35,6 +85,8 @@ function formatPlan(text: string, destinationHint: string) {
   }
 
   const { plan, destination, origin } = result;
+  const originName =
+    ORIGIN_CITIES.find((c) => c.id === origin)?.name || origin;
   const steps = plan.steps
     .map((s) => {
       const acts = (s.activities || []).map((a) => `  - ${a}`).join("\n");
@@ -47,7 +99,7 @@ function formatPlan(text: string, destinationHint: string) {
     .join("\n");
 
   return [
-    `Here's a **${plan.durationLabel}** plan to **${destination.name}** from **${origin}**.`,
+    `Here's a **${plan.durationLabel}** plan to **${destination.name}** from **${originName}**.`,
     plan.summary,
     `Best season: ${plan.bestSeason}`,
     "",
@@ -85,11 +137,7 @@ export function offlineRehbarReply(userText: string): string {
       m
     )
   ) {
-    const destMatch =
-      raw.match(
-        /(?:plan|itinerary|trip|visit|to)\s+(?:to\s+)?([A-Za-z][A-Za-z\s-]{2,40}?)(?:\s+from|\s+for|\s+\d|$)/i
-      ) || raw.match(/\b(hunza|skardu|swat|naran|lahore|karachi|islamabad|gwadar|fairy meadows|deosai|multan|peshawar|taxila)\b/i);
-    const dest = (destMatch?.[1] || "Hunza").trim();
+    const dest = extractTripDestination(raw) || "Hunza";
     return formatPlan(raw, dest);
   }
 

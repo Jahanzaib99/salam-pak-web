@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Check, MapPin } from "lucide-react";
 import PageHero from "@/components/ui/page-hero";
 import DestinationTabs from "@/components/destination-tabs";
+import DestinationSurroundingsMap from "@/components/destination-surroundings-map";
 import { Section, SectionHeading } from "@/components/ui/primitives";
 import TileRail from "@/components/tile-rail";
 import SmartImage from "@/components/ui/smart-image";
@@ -16,6 +17,7 @@ import {
   mediaUrl,
   stripHtml,
 } from "@/lib/salam-api";
+import { earthPins } from "@/lib/earth-destinations";
 import { regions } from "@/lib/nav";
 
 export const dynamicParams = true;
@@ -43,14 +45,14 @@ export default async function ActivityLocationPage({
   const { activity: activitySlug, slug } = await params;
   const activity = await fetchActivity(activitySlug);
   const local = getDestination(slug);
-  const remote = local ? null : await fetchPlaceDetail(slug);
+  const remote = await fetchPlaceDetail(slug);
   if (!local && !remote) notFound();
 
   const name = local?.name ?? remote!.name;
   const description = stripHtml(
     local?.description ?? (remote!.longDescription || remote!.description)
   );
-  const image = mediaUrl(local?.image ?? remote!.image);
+  const image = mediaUrl(remote?.image || local?.image);
   const regionSlug = local?.regionSlug || remote?.regionSlug || "";
   const regionName =
     local?.regionName ||
@@ -75,14 +77,26 @@ export default async function ActivityLocationPage({
         additionalInfo: remote!.additionalInfo,
       };
 
-  const gallery = local
-    ? [local.image]
-    : remote!.photos.slice(0, 6).map(mediaUrl);
+  const gallery =
+    remote?.photos?.length
+      ? remote.photos.slice(0, 6).map(mediaUrl)
+      : local
+        ? [mediaUrl(local.image)]
+        : [];
 
   const nearby = (await fetchPlacesByActivity(activitySlug))
     .filter((p) => p.slug !== slug)
     .slice(0, 8)
     .map((p) => activityPlaceTile(p, activitySlug));
+
+  const pinFallback = earthPins.find((p) => p.slug === slug);
+  const mapLat = remote?.lat ?? pinFallback?.lat;
+  const mapLng = remote?.lng ?? pinFallback?.lng;
+  const hasMap =
+    typeof mapLat === "number" &&
+    typeof mapLng === "number" &&
+    Number.isFinite(mapLat) &&
+    Number.isFinite(mapLng);
 
   return (
     <main className="bg-white">
@@ -139,6 +153,17 @@ export default async function ActivityLocationPage({
           </div>
         ) : null}
       </Section>
+
+      {hasMap && (
+        <Section className="pt-0">
+          <DestinationSurroundingsMap
+            name={name}
+            slug={slug}
+            lat={mapLat}
+            lng={mapLng}
+          />
+        </Section>
+      )}
 
       {gallery.length > 0 && (
         <Section className="pt-0">

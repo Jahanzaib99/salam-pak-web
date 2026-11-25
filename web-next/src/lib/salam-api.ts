@@ -48,6 +48,10 @@ type RawPlace = {
   additionalInformation?: string;
   photos?: string[];
   thumbnails?: string[];
+  /** GeoJSON Point — Salam API uses [lng, lat]. */
+  location?: { type?: string; coordinates?: number[] };
+  lat?: number;
+  lng?: number;
 };
 
 export type PlaceSummary = {
@@ -69,7 +73,22 @@ export type PlaceDetail = PlaceSummary & {
   whereToStay: string[];
   additionalInfo: string[];
   photos: string[];
+  lat?: number;
+  lng?: number;
 };
+
+function coordsFromRaw(raw: RawPlace): { lat?: number; lng?: number } {
+  const c = raw.location?.coordinates;
+  if (Array.isArray(c) && c.length >= 2) {
+    const lng = Number(c[0]);
+    const lat = Number(c[1]);
+    if (Number.isFinite(lat) && Number.isFinite(lng)) return { lat, lng };
+  }
+  const lat = Number(raw.lat);
+  const lng = Number(raw.lng);
+  if (Number.isFinite(lat) && Number.isFinite(lng)) return { lat, lng };
+  return {};
+}
 
 export function toApiProvinceSlug(slug: string) {
   if (slug === "azad-kashmir") return "azad-jamu-khashmir";
@@ -238,6 +257,7 @@ function detailFromRaw(raw: RawPlace): PlaceDetail | null {
   if (!welcome.length && raw.description?.trim()) {
     welcome.push(raw.description.trim());
   }
+  const { lat, lng } = coordsFromRaw(raw);
   return {
     ...summary,
     longDescription: stripHtml(raw.longDescription || raw.description || ""),
@@ -248,6 +268,8 @@ function detailFromRaw(raw: RawPlace): PlaceDetail | null {
     whereToStay: proseToBullets(raw.whereToStay),
     additionalInfo: proseToBullets(raw.additionalInformation),
     photos: photos.length ? photos : [summary.image],
+    lat,
+    lng,
   };
 }
 
@@ -260,6 +282,9 @@ export async function fetchPlaceDetail(
     )) as { data?: Record<string, unknown> };
     const x = json?.data;
     if (x?.slug) {
+      const loc = x.location as
+        | { type?: string; coordinates?: number[] }
+        | undefined;
       const raw: RawPlace = {
         slug: String(x.slug),
         name: String(x.alias || x.name || x.slug),
@@ -283,6 +308,9 @@ export async function fetchPlaceDetail(
         thumbnails: Array.isArray(x.thumbnails)
           ? (x.thumbnails as string[])
           : [],
+        location: loc,
+        lat: typeof x.lat === "number" ? x.lat : undefined,
+        lng: typeof x.lng === "number" ? x.lng : undefined,
       };
       const detail = detailFromRaw(raw);
       return detail;
@@ -395,7 +423,6 @@ export function activityPlaceTile(place: PlaceSummary, activitySlug: string) {
 export function activityTile(activity: Activity) {
   return {
     title: activity.name,
-    subtitle: "What to do",
     image: activity.image,
     href: `/what-to-do/activity/${activity.slug}`,
   };

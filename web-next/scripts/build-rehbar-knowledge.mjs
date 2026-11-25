@@ -21,13 +21,42 @@ const activities = JSON.parse(
 function strip(html = "") {
   return String(html)
     .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<li[^>]*>/gi, "• ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/g, " ")
     .replace(/&amp;/g, "&")
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
-    .replace(/\s+/g, " ")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    // Fix common UTF-8 mojibake from older dumps
+    .replace(/â€”|â€“/g, "—")
+    .replace(/â€˜|â€™/g, "'")
+    .replace(/â€œ|â€/g, '"')
+    .replace(/Ã¢Â€Â”|Ã¢Â€Â“/g, "—")
+    .replace(/Ã¢Â†Â’/g, "→")
+    .replace(/Ã¢Â—Â\x8F|Ã¢Â€Â¢|â€¢/g, "•")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .replace(/[ \t]{2,}/g, " ")
     .trim();
+}
+
+/** Split prose / bullet text into clean activity lines. */
+function toBullets(text = "", limit = 8) {
+  const cleaned = strip(text);
+  if (!cleaned) return [];
+  const parts = cleaned
+    .split(/\n+|•|▪|●|(?:^|\s)[-–—]\s+/)
+    .map((s) => s.replace(/^[\d.)\s]+/, "").trim())
+    .filter((s) => s.length > 12);
+  const unique = [];
+  for (const p of parts) {
+    if (!unique.some((u) => u.toLowerCase() === p.toLowerCase())) unique.push(p);
+    if (unique.length >= limit) break;
+  }
+  return unique;
 }
 
 function normalizeRegion(slug = "") {
@@ -98,18 +127,39 @@ const catalog = [...map.values()]
 
 const detailBrief = {};
 for (const [slug, raw] of Object.entries(details)) {
+  const gettingThere = strip(raw.gettingThere || "").slice(0, 1200);
+  const whatToDo = strip(raw.whatToDo || "").slice(0, 1200);
+  const whenToVisit = strip(raw.timeToVisit || "").slice(0, 900);
+  const whereToStay = strip(raw.whereToStay || "").slice(0, 900);
+  const additionalInfo = strip(raw.additionalInformation || "").slice(0, 900);
+  // Prefer list description from catalog when detail description empty
+  const desc =
+    strip(raw.description || "").slice(0, 500) ||
+    map.get(slug)?.description ||
+    "";
   detailBrief[slug] = {
     slug,
-    name: raw.name || slug,
-    regionSlug: normalizeRegion(raw.regionSlug || ""),
-    description: strip(raw.description || "").slice(0, 500),
-    longDescription: strip(raw.longDescription || "").slice(0, 1200),
-    gettingThere: strip(raw.gettingThere || "").slice(0, 900),
-    whatToDo: strip(raw.whatToDo || "").slice(0, 900),
-    whenToVisit: strip(raw.timeToVisit || "").slice(0, 700),
-    whereToStay: strip(raw.whereToStay || "").slice(0, 700),
-    additionalInfo: strip(raw.additionalInformation || "").slice(0, 700),
+    name: raw.name || map.get(slug)?.name || slug,
+    regionSlug: normalizeRegion(raw.regionSlug || map.get(slug)?.regionSlug || ""),
+    description: desc,
+    longDescription: strip(raw.longDescription || "").slice(0, 1400),
+    gettingThere,
+    whatToDo,
+    whenToVisit,
+    whereToStay,
+    additionalInfo,
+    gettingThereBullets: toBullets(raw.gettingThere || "", 6),
+    whatToDoBullets: toBullets(raw.whatToDo || "", 10),
+    whenToVisitBullets: toBullets(raw.timeToVisit || "", 6),
+    whereToStayBullets: toBullets(raw.whereToStay || "", 5),
   };
+}
+
+// Enrich catalog rows with short descriptions from details when missing
+for (const d of catalog) {
+  if (!d.description && detailBrief[d.slug]?.description) {
+    d.description = detailBrief[d.slug].description;
+  }
 }
 
 const act = (Array.isArray(activities) ? activities : []).map((a) => ({

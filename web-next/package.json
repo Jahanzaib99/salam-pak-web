@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "fetch:place-details": "node scripts/fetch-place-details.mjs",
     "build:rehbar-kb": "node scripts/build-rehbar-knowledge.mjs",
+    "refresh:rehbar": "node scripts/fetch-place-details.mjs && node scripts/build-rehbar-knowledge.mjs",
     "build:earth-pins": "node scripts/build-earth-pins.mjs"
   },
   "dependencies": {

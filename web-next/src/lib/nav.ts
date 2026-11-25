@@ -80,6 +80,7 @@ export const mainNav: NavItem[] = [
   },
 ];
 
+/** Matches live salampakistan.gov.pk footer city paths. */
 export const footerCities: NavChild[] = [
   { label: "Islamabad", href: "/where-to-go/category/cities/location/islamabad" },
   { label: "Lahore", href: "/where-to-go/category/cities/location/lahore" },
@@ -87,6 +88,33 @@ export const footerCities: NavChild[] = [
   { label: "Peshawar", href: "/where-to-go/category/cities/location/peshawar" },
   { label: "Gilgit", href: "/where-to-go/category/cities/location/gilgit" },
   { label: "Quetta", href: "/where-to-go/category/cities/location/quetta" },
+];
+
+/** Official provincial / regional tourism department sites (from salampakistan.gov.pk). */
+export const footerProvincialDepts: NavChild[] = [
+  { label: "PTDC, Islamabad", href: "https://tourism.gov.pk/", external: true },
+  { label: "TDCP, Punjab", href: "https://tdcp.gop.pk/", external: true },
+  { label: "STDC, Sindh", href: "https://stdc.gos.pk/", external: true },
+  {
+    label: "KPCTA, Khyber Pakhtunkhwa",
+    href: "https://kptourism.com/",
+    external: true,
+  },
+  {
+    label: "Directorate of Tourism, Balochistan",
+    href: "http://tourismbalochistan.gob.pk/",
+    external: true,
+  },
+  {
+    label: "Tourism & Culture Dept, Gilgit-Baltistan",
+    href: "https://visitgilgitbaltistan.gov.pk/",
+    external: true,
+  },
+  {
+    label: "Tourism & Archaeology Dept, Azad Jammu & Kashmir",
+    href: "https://ajktourism.gov.pk/",
+    external: true,
+  },
 ];
 
 export const footerNav: { title: string; links: NavChild[] }[] = [
@@ -123,6 +151,10 @@ export const footerNav: { title: string; links: NavChild[] }[] = [
       { label: "Railways", href: "/booking-railway" },
       { label: "Cabs", href: "/cabs" },
     ],
+  },
+  {
+    title: "Provincial/Regional Tourism Departments",
+    links: footerProvincialDepts,
   },
   {
     title: "About",

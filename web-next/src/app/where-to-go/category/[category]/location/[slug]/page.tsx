@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Check, MapPin } from "lucide-react";
 import PageHero from "@/components/ui/page-hero";
 import DestinationTabs from "@/components/destination-tabs";
+import DestinationSurroundingsMap from "@/components/destination-surroundings-map";
 import { Section, SectionHeading } from "@/components/ui/primitives";
 import TileRail from "@/components/tile-rail";
 import SmartImage from "@/components/ui/smart-image";
@@ -22,6 +23,7 @@ import {
   fetchPlacesByCategory,
   placeTile,
 } from "@/lib/salam-api";
+import { earthPins } from "@/lib/earth-destinations";
 import { regions } from "@/lib/nav";
 
 const citySlugs = new Set([
@@ -74,14 +76,15 @@ export default async function DestinationDetailPage({
 }) {
   const { category, slug } = await params;
   const local = getDestination(slug);
-  const remote = local ? null : await fetchPlaceDetail(slug);
+  // Always hit the API so hero/gallery photos stay dynamic (not curated placeholders).
+  const remote = await fetchPlaceDetail(slug);
   if (!local && !remote) notFound();
 
   const name = local?.name ?? remote!.name;
   const description =
     local?.description ??
     (remote!.longDescription || remote!.description);
-  const image = mediaUrl(local?.image ?? remote!.image);
+  const image = mediaUrl(remote?.image || local?.image);
   const regionSlug = local?.regionSlug || remote?.regionSlug || category;
   const regionMeta = regions.find((r) => r.slug === regionSlug);
   const regionName =
@@ -107,9 +110,12 @@ export default async function DestinationDetailPage({
       };
 
   const highlights = local?.highlights ?? [];
-  const gallery = local
-    ? [local.image, "/hero/hunza-3.jpg", "/hero/hunza-8.jpg"]
-    : remote!.photos.slice(0, 6);
+  const gallery =
+    remote?.photos?.length
+      ? remote.photos.slice(0, 6)
+      : local
+        ? [local.image]
+        : [];
 
   const nearbyLocal = getDestinationsByRegion(regionSlug)
     .filter((d) => d.slug !== slug)
@@ -131,6 +137,15 @@ export default async function DestinationDetailPage({
     categoryMeta && category !== regionSlug
       ? `/where-to-go/category/${category}`
       : null;
+
+  const pinFallback = earthPins.find((p) => p.slug === slug);
+  const mapLat = remote?.lat ?? pinFallback?.lat;
+  const mapLng = remote?.lng ?? pinFallback?.lng;
+  const hasMap =
+    typeof mapLat === "number" &&
+    typeof mapLng === "number" &&
+    Number.isFinite(mapLat) &&
+    Number.isFinite(mapLng);
 
   return (
     <main className="bg-white">
@@ -185,6 +200,17 @@ export default async function DestinationDetailPage({
           </div>
         )}
       </Section>
+
+      {hasMap && (
+        <Section className="pt-0">
+          <DestinationSurroundingsMap
+            name={name}
+            slug={slug}
+            lat={mapLat}
+            lng={mapLng}
+          />
+        </Section>
+      )}
 
       {gallery.length > 0 && (
         <Section className="pt-0">

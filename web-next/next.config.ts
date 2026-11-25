@@ -15,7 +15,10 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
     rules: {
+      // Tailwind on all app CSS — but skip node_modules (`foreign`).
+      // Applying the loader to MapLibre/Swiper CSS caused an HMR reload loop.
       "*.css": {
+        condition: { not: "foreign" },
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },

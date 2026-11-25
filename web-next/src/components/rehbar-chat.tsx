@@ -173,9 +173,19 @@ function renderRichText(text: string, onNavigate?: () => void) {
   });
 }
 
+const NUDGE_LINES = [
+  "Need a trip plan?",
+  "Ask me about Hunza…",
+  "Visa or safety FAQs?",
+  "I’m Rehbar — your AI guide",
+];
+
 export default function RehbarChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [noticed, setNoticed] = useState(false);
+  const [nudgeIdx, setNudgeIdx] = useState(0);
+  const [showNudge, setShowNudge] = useState(true);
   const scroller = useRef<HTMLDivElement>(null);
   const { messages, sendMessage, status, error, setMessages } = useChat();
 
@@ -187,7 +197,30 @@ export default function RehbarChat() {
   }, [messages, busy, open]);
 
   useEffect(() => {
-    const openBot = () => setOpen(true);
+    try {
+      setNoticed(sessionStorage.getItem("rehbar-noticed") === "1");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    if (open || noticed) {
+      setShowNudge(false);
+      return;
+    }
+    setShowNudge(true);
+    const rotate = window.setInterval(() => {
+      setNudgeIdx((i) => (i + 1) % NUDGE_LINES.length);
+    }, 4200);
+    return () => window.clearInterval(rotate);
+  }, [open, noticed]);
+
+  useEffect(() => {
+    const openBot = () => {
+      setOpen(true);
+      markNoticed();
+    };
     window.addEventListener("rehbar:open", openBot);
     window.addEventListener("karwan:open", openBot);
     if (window.location.hash === "#rehbar") openBot();
@@ -201,6 +234,16 @@ export default function RehbarChat() {
       window.removeEventListener("hashchange", onHash);
     };
   }, []);
+
+  function markNoticed() {
+    setNoticed(true);
+    setShowNudge(false);
+    try {
+      sessionStorage.setItem("rehbar-noticed", "1");
+    } catch {
+      /* ignore */
+    }
+  }
 
   function submit(text?: string) {
     const value = (text ?? input).trim();
@@ -382,30 +425,62 @@ export default function RehbarChat() {
           </section>
         )}
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className={[
-            "group inline-flex items-center gap-2 rounded-full px-4 py-3 font-display text-sm font-semibold text-white shadow-[0_14px_40px_-12px_rgba(15,122,107,0.75)] transition",
-            open
-              ? "bg-ink hover:bg-ink/90"
-              : "bg-brand hover:bg-brand-dark",
-          ].join(" ")}
-          aria-expanded={open}
-          aria-label={open ? "Close Rehbar" : "Open Rehbar AI assistant"}
-        >
-          {open ? (
-            <X className="h-4.5 w-4.5" />
-          ) : (
-            <MessageCircle className="h-4.5 w-4.5" />
+        <div className="relative flex flex-col items-end gap-2">
+          {!open && showNudge && (
+            <div
+              key={nudgeIdx}
+              className="rehbar-nudge pointer-events-none mr-1 max-w-[220px] rounded-2xl rounded-br-md border border-brand/15 bg-white px-3 py-2 text-[12.5px] font-medium text-ink shadow-[0_12px_30px_-14px_rgba(6,19,42,0.45)]"
+              role="status"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 shrink-0 text-brand" />
+                {NUDGE_LINES[nudgeIdx]}
+              </span>
+            </div>
           )}
-          <span>{open ? "Close" : "Ask Rehbar"}</span>
-          {!open && (
-            <span className="hidden rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium tracking-wide text-white/90 sm:inline">
-              AI
-            </span>
+
+          {!open && !noticed && (
+            <span
+              className="rehbar-pulse pointer-events-none absolute -inset-1.5 rounded-full bg-brand/35"
+              aria-hidden
+            />
           )}
-        </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setOpen((v) => {
+                const next = !v;
+                if (next) markNoticed();
+                return next;
+              });
+            }}
+            className={[
+              "rehbar-fab group relative inline-flex items-center gap-2 rounded-full px-4 py-3 font-display text-sm font-semibold text-white shadow-[0_14px_40px_-12px_rgba(15,122,107,0.75)] transition",
+              open
+                ? "bg-ink hover:bg-ink/90"
+                : "bg-brand hover:bg-brand-dark",
+              !open && !noticed ? "rehbar-fab--attention" : "",
+            ].join(" ")}
+            aria-expanded={open}
+            aria-label={open ? "Close Rehbar" : "Open Rehbar AI assistant"}
+          >
+            {open ? (
+              <X className="h-4.5 w-4.5" />
+            ) : (
+              <span className="relative grid place-items-center">
+                <MessageCircle className="h-4.5 w-4.5" />
+                <span className="rehbar-dot absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-amber-300 ring-2 ring-brand" />
+              </span>
+            )}
+            <span>{open ? "Close" : "Ask Rehbar"}</span>
+            {!open && (
+              <span className="hidden rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-medium tracking-wide text-white/90 sm:inline">
+                AI
+              </span>
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

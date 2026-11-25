@@ -1,16 +1,15 @@
 import HomeHero from "@/components/home-hero";
+import HomeEarthSection from "@/components/home-earth-section";
 import TileRail from "@/components/tile-rail";
-import { Section, SectionHeading, FeatureCard, CtaBanner, PrimaryButton } from "@/components/ui/primitives";
+import { Section, SectionHeading, FeatureCard, PrimaryButton, TileCard } from "@/components/ui/primitives";
 import { MountainSnow, Landmark, Compass, FileCheck2 } from "lucide-react";
 import { regionTiles, eventTiles, destinationTiles } from "@/lib/content";
 import { browsableInterestCategories } from "@/lib/destinations";
-import { TileCard } from "@/components/ui/primitives";
 import { fetchActivities, activityTile } from "@/lib/salam-api";
 
 export default async function Home() {
   const interestTiles = browsableInterestCategories.map((c) => ({
     title: c.name,
-    subtitle: "Where to go",
     image: c.image,
     href: `/where-to-go/category/${c.slug}`,
   }));
@@ -82,13 +81,7 @@ export default async function Home() {
         </div>
       </Section>
 
-      <CtaBanner
-        title="Discover where to go next"
-        text="Browse destinations across every region — from Hunza to Mohenjo-daro."
-        buttonLabel="Where to go"
-        href="/where-to-go"
-        image="/hero/hunza-6.jpg"
-      />
+      <HomeEarthSection />
 
       <div className="bg-cloud">
         <TileRail

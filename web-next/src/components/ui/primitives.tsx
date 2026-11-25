@@ -144,21 +144,38 @@ export function TileCard({
 export function FeatureCard({
   icon: Icon,
   title,
+  href,
   children,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   title: string;
+  href?: string;
   children: React.ReactNode;
 }) {
-  return (
-    <div className="rounded-2xl border border-line bg-white p-6 transition-shadow hover:shadow-lg">
+  const className =
+    "rounded-2xl border border-line bg-white p-6 transition hover:border-brand/30 hover:shadow-lg";
+  const body = (
+    <>
       <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand/10 text-brand">
         <Icon className="h-6 w-6" />
       </span>
       <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-ink-soft">{children}</p>
-    </div>
+    </>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className={`group block ${className}`}>
+        {body}
+        <span className="mt-4 inline-flex items-center text-[13px] font-semibold text-brand opacity-80 transition group-hover:opacity-100">
+          Book now →
+        </span>
+      </Link>
+    );
+  }
+
+  return <div className={className}>{body}</div>;
 }
 
 /* ---------- Split section: text + image ---------- */
