@@ -247,12 +247,33 @@ export async function fetchPlacesByCategory(
   );
 }
 
+/** Prefer full photos; fall back to thumbnails. Never list the same URL twice
+ *  (API often returns identical arrays in both fields). */
+function uniquePlacePhotos(raw: RawPlace): string[] {
+  const sources =
+    raw.photos?.length
+      ? raw.photos
+      : raw.thumbnails?.length
+        ? raw.thumbnails
+        : raw.image
+          ? [raw.image]
+          : [];
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const src of sources) {
+    if (!src) continue;
+    const key = String(src).split("?")[0].trim().toLowerCase();
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(mediaUrl(src));
+  }
+  return out;
+}
+
 function detailFromRaw(raw: RawPlace): PlaceDetail | null {
   const summary = normalize(raw);
   if (!summary) return null;
-  const photos = [...(raw.photos || []), ...(raw.thumbnails || [])]
-    .filter(Boolean)
-    .map((p) => mediaUrl(p));
+  const photos = uniquePlacePhotos(raw);
   const welcome = proseToBullets(raw.longDescription || raw.description, 6);
   if (!welcome.length && raw.description?.trim()) {
     welcome.push(raw.description.trim());

@@ -79,7 +79,7 @@ export default async function ActivityLocationPage({
 
   const gallery =
     remote?.photos?.length
-      ? remote.photos.slice(0, 6).map(mediaUrl)
+      ? remote.photos.slice(0, 6)
       : local
         ? [mediaUrl(local.image)]
         : [];
