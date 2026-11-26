@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/reveal";
 import SmartImage from "@/components/ui/smart-image";
@@ -216,7 +215,13 @@ export function SplitSection({
         </Reveal>
         <Reveal delay={0.05}>
           <div className="relative aspect-[4/3] overflow-hidden rounded-[24px]">
-            <Image src={image} alt={title} fill sizes="(max-width:1024px) 90vw, 45vw" className="object-cover" />
+            <SmartImage
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width:1024px) 90vw, 45vw"
+              className="object-cover"
+            />
           </div>
         </Reveal>
       </div>
@@ -254,7 +259,13 @@ export function CtaBanner({
 }) {
   return (
     <section className="relative overflow-hidden py-28 text-white">
-      <Image src={image} alt="" fill sizes="100vw" className="absolute inset-0 z-0 object-cover" />
+      <SmartImage
+        src={image}
+        alt=""
+        fill
+        sizes="100vw"
+        className="absolute inset-0 z-0 object-cover"
+      />
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-ink/80 via-ink/45 to-ink/10" />
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <Reveal className="max-w-xl">
