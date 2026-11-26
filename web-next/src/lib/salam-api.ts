@@ -142,6 +142,24 @@ export function stripHtml(text?: string) {
     .trim();
 }
 
+/** Short clean line for hero subtitles (avoids wall-of-text under the nav). */
+export function heroBlurb(text?: string, max = 190) {
+  const clean = stripHtml(text)
+    .replace(/[●•▪◦]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!clean) return "";
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max);
+  const stop = Math.max(
+    cut.lastIndexOf(". "),
+    cut.lastIndexOf("! "),
+    cut.lastIndexOf("? ")
+  );
+  if (stop > 70) return cut.slice(0, stop + 1).trim();
+  return `${cut.replace(/\s+\S*$/, "").trim()}…`;
+}
+
 /** Split API prose blobs into readable bullet lines. */
 export function proseToBullets(text?: string, max = 8): string[] {
   const clean = stripHtml(text);
@@ -345,10 +363,27 @@ export async function fetchPlaceDetail(
   return cached ? detailFromRaw(cached) : null;
 }
 
+/** Resolve a place image from the province dump (real API photo when present). */
+export function placeImageFromDump(slug: string): string | null {
+  const byProv = placesByProvince as unknown as Record<string, RawPlace[]>;
+  for (const list of Object.values(byProv)) {
+    const hit = list?.find((p) => p.slug === slug);
+    if (hit?.image) return mediaUrl(hit.image);
+  }
+  const details = placeDetails as unknown as Record<string, RawPlace>;
+  const detail = details[slug];
+  const fromDetail =
+    detail?.photos?.[0] || detail?.thumbnails?.[0] || detail?.image;
+  return fromDetail ? mediaUrl(fromDetail) : null;
+}
+
 export function placeTile(place: PlaceSummary, categorySlug: string) {
+  const regionLabel = fromApiProvinceSlug(place.regionSlug)
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
   return {
     title: place.name,
-    subtitle: place.isFeatured ? "Featured" : "Destination",
+    subtitle: regionLabel || (place.isFeatured ? "Featured" : "Destination"),
     image: place.image || FALLBACK_IMAGE,
     href: `/where-to-go/category/${categorySlug}/location/${place.slug}`,
   };
@@ -447,4 +482,206 @@ export function activityTile(activity: Activity) {
     image: activity.image,
     href: `/what-to-do/activity/${activity.slug}`,
   };
+}
+
+/** Annual cultural festivals — images resolved from real place photos. */
+const ANNUAL_FESTIVALS: Array<{
+  title: string;
+  month: number;
+  placeLabel: string;
+  placeSlug: string;
+  categorySlug: string;
+}> = [
+  {
+    title: "Basant / Spring Festival",
+    month: 2,
+    placeLabel: "Lahore",
+    placeSlug: "lahore",
+    categorySlug: "top-tourist-destinations",
+  },
+  {
+    title: "Chilam Joshi Festival",
+    month: 5,
+    placeLabel: "Kalash Valley",
+    placeSlug: "kalash-valley",
+    categorySlug: "valleys-and-lakes",
+  },
+  {
+    title: "Shandur Polo Festival",
+    month: 7,
+    placeLabel: "Chitral",
+    placeSlug: "shandur-lake",
+    categorySlug: "valleys-and-lakes",
+  },
+  {
+    title: "Silk Route Festival",
+    month: 8,
+    placeLabel: "Gilgit",
+    placeSlug: "karimabad",
+    categorySlug: "valleys-and-lakes",
+  },
+  {
+    title: "Tagham Festival",
+    month: 8,
+    placeLabel: "Shimshal",
+    placeSlug: "shimshal",
+    categorySlug: "valleys-and-lakes",
+  },
+  {
+    title: "Lok Mela",
+    month: 11,
+    placeLabel: "Islamabad",
+    placeSlug: "lok-virsa-heritage-museum",
+    categorySlug: "top-tourist-destinations",
+  },
+];
+
+const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+function nextFestivalDate(month: number, now = new Date()) {
+  const year = now.getFullYear();
+  const currentMonth = now.getMonth() + 1;
+  // Still in the festival month → treat as current; otherwise next occurrence.
+  if (month === currentMonth) {
+    return new Date(year, month - 1, now.getDate());
+  }
+  if (month > currentMonth) {
+    return new Date(year, month - 1, 15);
+  }
+  return new Date(year + 1, month - 1, 15);
+}
+
+type RawTrip = {
+  title?: string;
+  slug?: string;
+  date?: number;
+  status?: string;
+  thumbnails?: string[];
+  thumbnail?: string;
+  startLocation?: { alias?: string; name?: string; slug?: string };
+};
+
+function tripImage(trip: RawTrip) {
+  const raw =
+    trip.thumbnail ||
+    (Array.isArray(trip.thumbnails) ? trip.thumbnails[0] : "") ||
+    "";
+  return mediaUrl(raw || null);
+}
+
+function placeHref(categorySlug: string, placeSlug: string) {
+  return `/where-to-go/category/${categorySlug}/location/${placeSlug}`;
+}
+
+/** Upcoming festivals & live trips — real API photos, sorted from today. */
+export async function fetchFestivalTiles(limit = 6): Promise<
+  Array<{ title: string; subtitle?: string; image: string; href: string }>
+> {
+  const now = new Date();
+  const startOfToday = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  ).getTime();
+
+  type Ranked = {
+    title: string;
+    subtitle: string;
+    image: string;
+    href: string;
+    at: number;
+    key: string;
+  };
+
+  const ranked: Ranked[] = [];
+
+  // Live published trips with a future (or today) date.
+  try {
+    const json = (await insecureGetJson(
+      `${API}/trip?pageSize=0&status=published`,
+      5000
+    )) as { data?: RawTrip[] };
+    const trips = Array.isArray(json?.data) ? json.data : [];
+    for (const trip of trips) {
+      if (!trip?.title || !trip.slug) continue;
+      const at = typeof trip.date === "number" ? trip.date : NaN;
+      if (!Number.isFinite(at) || at < startOfToday) continue;
+      const loc =
+        trip.startLocation?.alias ||
+        trip.startLocation?.name ||
+        "";
+      const when = new Date(at);
+      const monthLabel = MONTH_NAMES[when.getMonth()]?.toUpperCase() || "";
+      ranked.push({
+        title: trip.title,
+        subtitle: loc
+          ? `${monthLabel} · ${loc}`
+          : `${monthLabel} ${when.getFullYear()}`,
+        image: tripImage(trip),
+        href: trip.startLocation?.slug
+          ? placeHref(
+              "top-tourist-destinations",
+              trip.startLocation.slug
+            )
+          : "/event",
+        at,
+        key: `trip:${trip.slug}`,
+      });
+    }
+  } catch {
+    /* annual calendar still fills the rail */
+  }
+
+  // Recurring cultural calendar with real place photos from the dump/API.
+  for (const fest of ANNUAL_FESTIVALS) {
+    const at = nextFestivalDate(fest.month, now).getTime();
+    const image =
+      placeImageFromDump(fest.placeSlug) || FALLBACK_IMAGE;
+    ranked.push({
+      title: fest.title,
+      subtitle: `${MONTH_NAMES[fest.month - 1].toUpperCase()} · ${fest.placeLabel}`,
+      image,
+      href: placeHref(fest.categorySlug, fest.placeSlug),
+      at,
+      key: `fest:${fest.title}`,
+    });
+  }
+
+  ranked.sort((a, b) => a.at - b.at || a.title.localeCompare(b.title));
+
+  const seen = new Set<string>();
+  const tiles: Array<{
+    title: string;
+    subtitle?: string;
+    image: string;
+    href: string;
+  }> = [];
+
+  for (const item of ranked) {
+    const dedupe = item.title.toLowerCase().replace(/\s+/g, " ");
+    if (seen.has(dedupe)) continue;
+    seen.add(dedupe);
+    tiles.push({
+      title: item.title,
+      subtitle: item.subtitle,
+      image: item.image,
+      href: item.href,
+    });
+    if (tiles.length >= limit) break;
+  }
+
+  return tiles;
 }

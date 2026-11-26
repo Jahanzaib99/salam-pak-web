@@ -8,7 +8,6 @@ import DestinationSurroundingsMap from "@/components/destination-surroundings-ma
 import { Section, SectionHeading } from "@/components/ui/primitives";
 import TileRail from "@/components/tile-rail";
 import SmartImage from "@/components/ui/smart-image";
-import { mediaUrl } from "@/lib/salam-api";
 import {
   destinations,
   interestCategories,
@@ -21,6 +20,9 @@ import {
   fetchPlaceDetail,
   fetchPlacesByProvince,
   fetchPlacesByCategory,
+  heroBlurb,
+  mediaUrl,
+  placeImageFromDump,
   placeTile,
 } from "@/lib/salam-api";
 import { earthPins } from "@/lib/earth-destinations";
@@ -117,19 +119,26 @@ export default async function DestinationDetailPage({
         ? [local.image]
         : [];
 
-  const nearbyLocal = getDestinationsByRegion(regionSlug)
-    .filter((d) => d.slug !== slug)
-    .map((d) => destinationTile(d, category));
+  // Prefer API places so nearby cards use real destination photos, not
+  // curated stock images (e.g. Hunza photos labeled as Lahore/Multan).
+  const fromApi = interestCategories.some((c) => c.slug === category)
+    ? await fetchPlacesByCategory(category)
+    : await fetchPlacesByProvince(regionSlug);
+  let nearby = fromApi
+    .filter((p) => p.slug !== slug && Boolean(p.image))
+    .slice(0, 8)
+    .map((p) => placeTile(p, category));
 
-  let nearby = nearbyLocal;
   if (nearby.length < 3) {
-    const fromApi = interestCategories.some((c) => c.slug === category)
-      ? await fetchPlacesByCategory(category)
-      : await fetchPlacesByProvince(regionSlug);
-    nearby = fromApi
-      .filter((p) => p.slug !== slug)
-      .slice(0, 8)
-      .map((p) => placeTile(p, category));
+    const seen = new Set(
+      nearby.map((t) => t.href.split("/").pop()).filter(Boolean)
+    );
+    const extras = getDestinationsByRegion(regionSlug)
+      .filter((d) => d.slug !== slug && !seen.has(d.slug))
+      .map((d) =>
+        destinationTile(d, category, placeImageFromDump(d.slug))
+      );
+    nearby = [...nearby, ...extras].slice(0, 8);
   }
 
   const regionHref = `/where-to-go/location/${regionSlug}`;
@@ -152,7 +161,7 @@ export default async function DestinationDetailPage({
       <PageHero
         eyebrow={categoryMeta?.name ?? regionName}
         title={name}
-        subtitle={description}
+        subtitle={heroBlurb(description)}
         image={image}
       />
 

@@ -14,6 +14,7 @@ import {
   fetchPlaceDetail,
   fetchPlacesByActivity,
   activityPlaceTile,
+  heroBlurb,
   mediaUrl,
   stripHtml,
 } from "@/lib/salam-api";
@@ -103,7 +104,7 @@ export default async function ActivityLocationPage({
       <PageHero
         eyebrow={activity?.name ?? "What to do"}
         title={name}
-        subtitle={description}
+        subtitle={heroBlurb(description)}
         image={image}
       />
 

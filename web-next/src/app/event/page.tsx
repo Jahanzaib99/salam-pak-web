@@ -2,21 +2,39 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/page-hero";
 import { Section, SectionHeading, FactGrid, CtaBanner } from "@/components/ui/primitives";
 import TileRail from "@/components/tile-rail";
-import { eventTiles } from "@/lib/content";
+import {
+  fetchFestivalTiles,
+  placeImageFromDump,
+  mediaUrl,
+} from "@/lib/salam-api";
 
 export const metadata: Metadata = {
-  title: "Shandur Polo Festival",
-  description: "Experience the legendary Shandur Polo Festival in Chitral.",
+  title: "Festivals & events",
+  description:
+    "Experience Pakistan's cultural calendar — polo, melas and mountain festivals.",
 };
 
-export default function EventPage() {
+export const revalidate = 3600;
+
+export default async function EventPage() {
+  const festivalTiles = await fetchFestivalTiles(8);
+  const featured = festivalTiles[0];
+  const heroImage =
+    featured?.image ||
+    placeImageFromDump("shandur-lake") ||
+    mediaUrl(null);
+
   return (
     <main className="bg-white">
       <PageHero
-        eyebrow="Festival · July"
-        title="Shandur Polo Festival"
-        subtitle="Free-style polo on the world's highest polo ground at 3,700 metres."
-        image="/hero/hunza-4.jpg"
+        eyebrow="Festivals & events"
+        title={featured?.title || "Shandur Polo Festival"}
+        subtitle={
+          featured?.subtitle
+            ? `Next up · ${featured.subtitle}`
+            : "Free-style polo on the world's highest polo ground at 3,700 metres."
+        }
+        image={heroImage}
         compact
       />
 
@@ -24,12 +42,10 @@ export default function EventPage() {
         <SectionHeading kicker="At a glance" title="Event details" />
         <FactGrid
           items={[
-            { label: "When", value: "Early July" },
-            { label: "Where", value: "Shandur Pass" },
-            { label: "Region", value: "Chitral / Gilgit" },
-            { label: "Altitude", value: "3,700 m" },
-            { label: "Duration", value: "3 days" },
-            { label: "Entry", value: "Free" },
+            { label: "When", value: featured?.subtitle?.split("·")[0]?.trim() || "Seasonal" },
+            { label: "Where", value: featured?.subtitle?.split("·")[1]?.trim() || "Pakistan" },
+            { label: "Region", value: "Across Pakistan" },
+            { label: "Calendar", value: "Updated live" },
           ]}
         />
       </Section>
@@ -37,26 +53,26 @@ export default function EventPage() {
       <Section className="pt-0">
         <div className="max-w-2xl space-y-4 text-base leading-relaxed text-ink-soft">
           <p>
-            Every July, teams from Chitral and Gilgit meet on the roof of the
-            world for a fierce, free-style form of polo played without rules on
-            the highest polo ground on earth.
-          </p>
-          <p>
-            Alongside the matches, the festival comes alive with folk music,
-            dance, a tent village and traditional food — an unforgettable
-            celebration of mountain culture.
+            From mountain polo on the roof of the world to folk melas in the
+            capital, Pakistan&apos;s festival calendar moves with the seasons.
+            The events below are ordered from today — upcoming first, with real
+            photos from each host destination.
           </p>
         </div>
       </Section>
 
-      <TileRail kicker="More festivals" title="Other events to explore" items={eventTiles} />
+      <TileRail
+        kicker="Coming up"
+        title="Festivals & events"
+        items={festivalTiles}
+      />
 
       <CtaBanner
         title="Explore destinations nearby"
         text="Discover the regions and places that host Pakistan's festivals."
         buttonLabel="Where to go"
         href="/where-to-go"
-        image="/hero/hunza-7.jpg"
+        image={placeImageFromDump("hunza") || heroImage}
       />
     </main>
   );

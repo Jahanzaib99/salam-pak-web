@@ -689,14 +689,18 @@ export function destinationHref(d: Destination, categorySlug?: string) {
   return `/where-to-go/category/${category}/location/${d.slug}`;
 }
 
-export function destinationTile(d: Destination, categorySlug?: string) {
+export function destinationTile(
+  d: Destination,
+  categorySlug?: string,
+  imageOverride?: string | null
+) {
   // categorySlug must not be the Array.map index — callers pass it explicitly.
   const category =
     typeof categorySlug === "string" ? categorySlug : undefined;
   return {
     title: d.name,
     subtitle: d.regionName,
-    image: d.image,
+    image: imageOverride || d.image,
     href: destinationHref(d, category),
   };
 }

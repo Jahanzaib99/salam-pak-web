@@ -3,9 +3,15 @@ import HomeEarthSection from "@/components/home-earth-section";
 import TileRail from "@/components/tile-rail";
 import { Section, SectionHeading, FeatureCard, PrimaryButton, TileCard } from "@/components/ui/primitives";
 import { MountainSnow, Landmark, Compass, FileCheck2 } from "lucide-react";
-import { regionTiles, eventTiles, destinationTiles } from "@/lib/content";
+import { regionTiles, destinationTiles } from "@/lib/content";
 import { browsableInterestCategories } from "@/lib/destinations";
-import { fetchActivities, activityTile } from "@/lib/salam-api";
+import {
+  fetchActivities,
+  activityTile,
+  fetchFestivalTiles,
+} from "@/lib/salam-api";
+
+export const revalidate = 3600;
 
 export default async function Home() {
   const interestTiles = browsableInterestCategories.map((c) => ({
@@ -14,7 +20,10 @@ export default async function Home() {
     href: `/where-to-go/category/${c.slug}`,
   }));
 
-  const experienceTiles = (await fetchActivities()).map(activityTile);
+  const [experienceTiles, festivalTiles] = await Promise.all([
+    fetchActivities().then((list) => list.map(activityTile)),
+    fetchFestivalTiles(6),
+  ]);
 
   return (
     <main className="bg-white">
@@ -87,7 +96,7 @@ export default async function Home() {
         <TileRail
           title="Festivals & events"
           description="Experience Pakistan's vibrant cultural calendar."
-          items={eventTiles}
+          items={festivalTiles}
         />
       </div>
     </main>

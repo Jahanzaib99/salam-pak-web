@@ -61,10 +61,3 @@ export const regionTiles: Tile[] = [
 export const destinationTiles: Tile[] = destinations.map((d) =>
   destinationTile(d)
 );
-
-export const eventTiles: Tile[] = [
-  { title: "Shandur Polo Festival", subtitle: "July · Chitral", image: `${H}/hunza-4.jpg`, href: "/event" },
-  { title: "Silk Route Festival", subtitle: "August · Gilgit", image: `${H}/hunza-7.jpg`, href: "/event" },
-  { title: "Lok Mela", subtitle: "November · Islamabad", image: `${H}/hunza-10.jpg`, href: "/event" },
-  { title: "Basant / Spring Festival", subtitle: "February · Punjab", image: `${H}/hunza-8.jpg`, href: "/event" },
-];
